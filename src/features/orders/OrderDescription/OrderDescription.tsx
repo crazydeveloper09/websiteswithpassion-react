@@ -10,7 +10,7 @@ import Alert, { ALERT_TYPES } from '../../../components/common/Alert/Alert';
 
 const OrderDescription: React.FC = () => {
     const { currentUser } = useAppSelector((state) => state.user);
-    let [searchParams, setSearchParams] = useSearchParams();
+    let [searchParams] = useSearchParams();
     const success = searchParams.get("success");
     return (
         <section className='website-orders'>

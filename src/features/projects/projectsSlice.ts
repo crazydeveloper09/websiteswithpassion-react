@@ -34,6 +34,7 @@ const sliceOptions = {
         editProject: (state: ProjectState, action: PayloadAction<Project>) => {
             let foundedProject = state.all.find(project => project._id === action.payload._id);
             foundedProject = action.payload;
+            console.log(foundedProject)
         },
         deleteProject: (state: ProjectState, action: PayloadAction<Project>) => {
             state.all = state.all.filter(project => project._id !== action.payload._id);

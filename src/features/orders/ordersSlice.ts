@@ -40,7 +40,8 @@ const sliceOptions = {
         },
         editOrder: (state: OrdersState, action: PayloadAction<Order>) => {
             let foundedOrder = state.all.find(order => order._id === action.payload._id);
-            foundedOrder = action.payload
+            foundedOrder = action.payload;
+            console.log(foundedOrder)
         },
         addOrder: (state: OrdersState, action: PayloadAction<Order>) => {
             state.all.push(action.payload);

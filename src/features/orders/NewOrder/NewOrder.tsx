@@ -49,7 +49,7 @@ const NewOrder: React.FC = () => {
                 <Field>
                     <input type="text" {...register("websiteTitle")} className="form-control" placeholder="Nazwa strony" />
                 </Field>
-                { type === "Aktualizacja" || type === "update" && <Field>
+                { (type === "Aktualizacja" || type === "update") && <Field>
                     <input type="text" {...register("previousWebsite")} className="form-control" placeholder="Link do aktualnej wersji" />
                 </Field>}
                 
