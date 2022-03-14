@@ -1,0 +1,10 @@
+@import '../../../index.scss';
+
+.orders {
+    padding: $section-padding;
+}
+
+.orders-cards {
+    @include flex-justify-wrap(space-between, center, wrap);
+}
+

@@ -1,0 +1,23 @@
+@import '../../../../index.scss';
+
+.order-card {
+    width: 33%;
+    background-color: $secondary;
+    border: 1px solid $nav-link-color;
+    border-radius: 8px;
+    &--info {
+        padding: 15px;
+    }
+    &__title {
+        font-family: $pt-serif;
+        color: $nav-link-color;
+        font-weight: 700;
+        font-size: 27px;
+        margin-bottom: 15px;
+    }
+    &__description {
+        color: $headers-color;
+        font-size: 20px;
+        font-family: $inter;
+    }
+}

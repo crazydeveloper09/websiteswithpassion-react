@@ -1,0 +1,51 @@
+@import '_palette.scss';
+
+$pt-serif: 'PT Serif', serif;
+$inter: 'Inter', sans-serif;
+$box-shadow-blue: 1px 2px 16px 2px $nav-link-color;
+$section-padding: 64px;
+
+@mixin flex-justify-wrap($justify, $align, $wrap){
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: $primary;
+  display: flex;
+  flex-direction: column;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.about,
+.achievements {
+  padding: $section-padding;
+}
+
+.achievement-div {
+  @include flex-justify-wrap(space-between, center, wrap)
+}

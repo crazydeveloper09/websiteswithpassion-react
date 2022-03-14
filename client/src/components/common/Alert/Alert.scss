@@ -1,0 +1,12 @@
+@import '../../../index.scss';
+
+.alert {
+    &__info {
+        background-color: #C3DDFD;
+        color: $nav-link-color;
+        border: 1px solid $nav-link-color;
+        padding: 8px;
+        font-family: $inter;
+        border-radius: 8px;
+    }
+}

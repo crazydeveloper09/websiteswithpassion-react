@@ -1,0 +1,10 @@
+@import '../../../index.scss';
+
+.projects {
+    padding: $section-padding;
+}
+
+.projects-cards {
+    @include flex-justify-wrap(flex-start, none, wrap);
+    gap: 30px;
+}

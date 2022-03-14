@@ -1,0 +1,46 @@
+@import '../../../index.scss';
+
+.project-card {
+    width: 23%;
+    background-color: $secondary;
+    border-radius: 8px;
+    animation: appear .5s ease;
+    &__img {
+        width: 100%;
+        border-radius: 8px 8px 0px 0px;
+    }
+    &--body {
+        padding: 15px;
+    }
+    &__title {
+        font-family: $pt-serif;
+        font-size: 28px;
+        font-weight: 700;
+        & a {
+            text-decoration: none;
+        }
+        & a:hover {
+            color: $headers-color;
+        }
+    }
+    &__additionalInfos {
+        font-family: $inter;
+        margin: 10px 0;
+    }
+    &:hover {
+      box-shadow: $box-shadow-blue;
+    }
+}
+
+
+  @media (max-width: 992px){
+    .project-card {
+      width: 48%;
+    }
+  }
+  
+  @media (max-width: 576px){
+    .project-card {
+      width: 98%;
+    }
+  }

@@ -1,0 +1,8 @@
+@import '../../index.scss';
+
+.whatIdo {
+    padding: $section-padding;
+    &__cards {
+        @include flex-justify-wrap(space-between, none, wrap);
+    }
+}

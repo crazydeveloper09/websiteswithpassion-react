@@ -1,0 +1,13 @@
+@import '../../../../palette';
+
+.advantage {
+    margin-bottom: 15px;
+    &::before {
+        content: '✓';
+        font-size: 22px;
+        font-weight: 700;
+        display: inline;
+        color: $nav-link-color;
+        margin-right: 10px;
+    }
+}

@@ -1,0 +1,46 @@
+@import '../../../../index.scss';
+
+.project-show {
+    @include flex-justify-wrap(space-between, none, wrap);
+    padding: $section-padding;
+    &--photo,
+    &--informations,
+    &--gallery,
+    &--reviews {
+        width: 48%;
+    }
+    &__img {
+        width: 100%;
+    }
+    & h3 {
+        font-size: 30px;
+        color: $nav-link-color;
+        font-family: $pt-serif;
+        font-weight: 700;
+    }
+    & h4 {
+        color: $nav-link-color;
+        font-family: $pt-serif;
+    }
+    &__additionalInfos {
+        font-size: 18px;
+        color: $headers-color;
+        font-family: $inter;
+        font-weight: 500;
+        & div {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        & div i {
+            color: $yellow;
+        }
+    }
+}
+
+.pictures {
+    @include flex-justify-wrap(space-between, none, wrap);
+    & img {
+        width: 48%;
+        margin: 15px 0;
+    }
+}
