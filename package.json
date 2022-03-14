@@ -1,10 +1,9 @@
 {
   "name": "portfolio",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "My portfolio",
   "main": "app.js",
   "scripts": {
-    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/app.js"
   },
