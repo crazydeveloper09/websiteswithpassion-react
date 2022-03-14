@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchOrders } from "../../api";
-import { Order } from '../../../../server/src/models/orders';
+import { Order } from '../../interfaces';
 import { RootState } from "../../store";
 import { AxiosError } from "axios";
 

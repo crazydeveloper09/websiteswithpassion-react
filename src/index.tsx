@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 
 import { store } from './store';
 
-export const API_URL = 'http://localhost:5000';
+export const API_URL = 'https://api.websiteswithpassion.pl';
 
 ReactDOM.render(
   <Provider store={store}>

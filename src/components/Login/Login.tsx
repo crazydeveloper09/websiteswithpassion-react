@@ -3,7 +3,7 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { API_URL } from "../..";
-import { User } from "../../../../server/src/models/user";
+import { User } from "../../interfaces";
 import { logInUser } from "../../features/user/userSlice";
 import { useAppDispatch } from "../../hooks";
 import HeaderForm from "../common/HeaderForm/HeaderForm";

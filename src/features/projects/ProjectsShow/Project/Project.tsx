@@ -4,9 +4,7 @@ import Description from "../../../../components/common/Description/Description";
 import Icon from "../../../../components/common/Icon/Icon";
 import Review from "../Review/Review";
 import "./Project.scss";
-import { Project as IProject } from "../../../../../../server/src/models/project";
-import { Category } from "../../../../../../server/src/models/category";
-import { Comment } from "../../../../../../server/src/models/comment";
+import { Project as IProject, Category, Comment} from "../../../../interfaces";
 import Alert, { ALERT_TYPES } from "../../../../components/common/Alert/Alert";
 
 const Project: React.FC<{ project: IProject }> = ({ project }) => {
@@ -79,9 +77,7 @@ const Project: React.FC<{ project: IProject }> = ({ project }) => {
           <div style={{ height: "400px", overflowY: "scroll" }}>
             {(project.reviews as Comment[]).map((review) => (
               <Review
-                author={review.author}
-                text={review.text}
-                date={review.written}
+                review={review}
               />
             ))}
           </div>

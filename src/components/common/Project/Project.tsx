@@ -4,8 +4,7 @@ import Description from "../Description/Description";
 import Icon from "../Icon/Icon";
 import Button from "../Button/Button";
 import "./Project.scss";
-import { Project as IProject } from "../../../../../server/src/models/project";
-import { Category } from "../../../../../server/src/models/category";
+import { Project as IProject, Category } from "../../../interfaces";
 
 const Project: React.FC<{ project: IProject }> = ({ project }) => {
   const link = `/projects/${project.subpageLink}`;

@@ -1,5 +1,5 @@
 import React from "react"
-import { Order as IOrder } from "../../../../../../server/src/models/orders";
+import { Order as IOrder } from "../../../../interfaces";
 import Button from "../../../../components/common/Button/Button";
 import './Order.scss';
 

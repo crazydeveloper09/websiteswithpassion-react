@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { API_URL } from "../../..";
-import { Order } from "../../../../../server/src/models/orders";
+import { Order } from "../../../interfaces";
 import Field from "../../../components/common/Field/Field";
 import HeaderForm from "../../../components/common/HeaderForm/HeaderForm";
 import { useAppDispatch } from "../../../hooks";

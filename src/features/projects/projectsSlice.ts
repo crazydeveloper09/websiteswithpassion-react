@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchProjects } from '../../api';
-import { Project } from '../../../../server/src/models/project';
+import { Project } from '.././../interfaces';
 import { RootState } from '../../store';
 
 export const getAll = createAsyncThunk(

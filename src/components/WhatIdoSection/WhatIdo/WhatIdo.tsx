@@ -1,5 +1,5 @@
 import React from "react";
-import { Service } from "../../../../../server/src/models/service";
+import { Service } from "../../../interfaces";
 import Description from "../../common/Description/Description";
 import Icon from "../../common/Icon/Icon";
 import './WhatIdo.scss';

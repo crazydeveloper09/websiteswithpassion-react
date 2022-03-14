@@ -1,5 +1,5 @@
 import React from "react";
-import { Service } from "../../../../server/src/models/service";
+import { Service } from "../../interfaces";
 import SectionHeader from "../common/SectionHeader/SectionHeader";
 import WhatIdo from "./WhatIdo/WhatIdo";
 import './WhatIDoSection.scss';

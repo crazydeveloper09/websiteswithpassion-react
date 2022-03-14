@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchUserInfo } from '../../api';
-import { User } from '../../../../server/src/models/user';
+import { User } from '../../interfaces';
 import { RootState } from '../../store';
 import { AxiosError } from 'axios';
 

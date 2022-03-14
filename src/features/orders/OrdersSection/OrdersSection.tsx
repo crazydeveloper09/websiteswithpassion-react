@@ -8,10 +8,9 @@ import Loading from '../../../components/common/Loading/Loading';
 import { useAppSelector, useAppDispatch } from "../../../hooks";
 import './OrdersSection.scss';
 import Alert, { ALERT_TYPES } from "../../../components/common/Alert/Alert";
-import { Order as IOrder } from "../../../../../server/src/models/orders";
+import { Order as IOrder } from "../../../interfaces";
 import axios from "axios";
 import { API_URL } from "../../..";
-import { useSearchParams } from "react-router-dom";
 
 const OrdersSection: React.FC = () => {
     const dispatch = useAppDispatch();
