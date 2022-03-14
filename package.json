@@ -4,7 +4,7 @@
   "description": "My portfolio",
   "main": "app.js",
   "scripts": {
-    "build": "tsc -w",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/app.js"
   },

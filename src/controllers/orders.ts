@@ -16,7 +16,7 @@ async function sendEmail(
 ) {
   const DOMAIN = "websiteswithpassion.pl";
   const mg = mailgun({
-    apiKey: process.env!.API_KEY,
+    apiKey: process.env!.API_KEY!,
     domain: DOMAIN,
     host: "api.eu.mailgun.net",
   });
@@ -55,7 +55,7 @@ export const createOrder: RequestHandler<unknown, unknown, Order> = (
     previousWebsite: req.body.previousWebsite,
     status: "Zamówienie wysłane do mnie",
     statusEn: "Order has been sent to me",
-    type: req.body.typeU,
+    type: req.body.type,
     websiteTitle: req.body.websiteTitle,
     budget: req.body.budget,
   });

@@ -4,7 +4,7 @@ import UserModel, { User } from "../models/user";
 import cloudinary from "cloudinary";
 import { CallbackError } from "mongoose";
 
-cloudinary.config({
+cloudinary.v2.config({
   cloud_name: "syberiancats",
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,

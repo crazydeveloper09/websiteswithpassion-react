@@ -23,7 +23,7 @@ const app = express();
 require('dotenv').config();
 
 // Connecting to database
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true});
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@websites-with-passion.x2c9m.mongodb.net/portfolio?retryWrites=true&w=majority`, {useNewUrlParser: true});
 
 // App configuration
 app.use(express.urlencoded({ extended: true }));
