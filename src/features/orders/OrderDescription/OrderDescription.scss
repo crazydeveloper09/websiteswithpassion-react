@@ -1,7 +1,7 @@
 @import '../../../index.scss';
 
 .website-orders {
-    padding: $section-padding;
+    @include section_padding();
     & h2 {
         color: $headers-color;
         font-family: $inter;

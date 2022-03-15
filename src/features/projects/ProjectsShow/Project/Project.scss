@@ -2,7 +2,7 @@
 
 .project-show {
     @include flex-justify-wrap(space-between, none, wrap);
-    padding: $section-padding;
+    @include section_padding();
     &--photo,
     &--informations,
     &--gallery,

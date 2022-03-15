@@ -2,7 +2,7 @@
 
 .footer {
     background: $nav-link-color;
-    padding: $section-padding;
+    @include section_padding();
     font-family: $pt-serif;
     color: $primary;
     flex-shrink: 0;

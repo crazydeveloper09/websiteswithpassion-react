@@ -1,7 +1,7 @@
 @import '../../../index.scss';
 
 .orders {
-    padding: $section-padding;
+    @include section_padding();
 }
 
 .orders-cards {

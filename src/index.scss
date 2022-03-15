@@ -3,7 +3,16 @@
 $pt-serif: 'PT Serif', serif;
 $inter: 'Inter', sans-serif;
 $box-shadow-blue: 1px 2px 16px 2px $nav-link-color;
-$section-padding: 64px;
+
+
+@mixin section_padding(){
+  @media (min-width: 992px) {
+    padding: 64px;
+  }
+  @media (max-width: 992px) {
+    padding: 64px 15px;
+  }
+}
 
 @mixin flex-justify-wrap($justify, $align, $wrap){
   display: flex;
@@ -43,7 +52,7 @@ main {
 
 .about,
 .achievements {
-  padding: $section-padding;
+  @include section_padding();
 }
 
 .achievement-div {
