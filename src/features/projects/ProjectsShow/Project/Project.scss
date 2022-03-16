@@ -44,3 +44,14 @@
         margin: 15px 0;
     }
 }
+
+@media (max-width: 572px) {
+    .project-show {
+        &--photo,
+        &--informations,
+        &--gallery,
+        &--reviews {
+            width: 100%;
+        }
+    }
+}
