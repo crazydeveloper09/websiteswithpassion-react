@@ -32,7 +32,7 @@ app.use(express.json())
 app.use(helmet({
     crossOriginResourcePolicy: false
 }))
-app.use(cors({ origin: ['http://localhost:3000', 'https://622f89adae57790008ac0237--silly-wiles-dbbbf9.netlify.app'], credentials: true }));
+app.use(cors({ origin: process.env.NODE_ENV === 'development' ? 'http://localhost:3000': 'https://silly-wiles-dbbbf9.netlify.app/', credentials: true }));
 i18n.configure({
     locales: ["en", "de", "pl"],
    	register: global,
