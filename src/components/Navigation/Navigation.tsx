@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { DOMElement, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { logOutUser, selectLoggedInUser } from "../../features/user/userSlice";
