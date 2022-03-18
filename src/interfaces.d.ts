@@ -10,6 +10,7 @@ export interface Announcement {
 }
 
 export interface Category {
+    _id: string,
     title: string,
     titleEn: string,
     color: string,
@@ -50,7 +51,7 @@ export interface Project {
     subpageLink: string,
     pictures: string[],
     reviews: Comment[],
-    categories: Category[],
+    categories: Category[] & string,
     added: Date,
     edited?: Date | number,
 	en: string,

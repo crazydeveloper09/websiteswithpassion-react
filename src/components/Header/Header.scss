@@ -3,22 +3,48 @@
    
     height: 100vh;
     width: 100vw;
-    background-image: url('../../../public/main.jpg');
-    background-repeat: no-repeat;
-    background-color: rgba(0, 0, 0, 0.7);
-    background-size: cover;
+    background: linear-gradient(to bottom, $secondary, $headers-color);
+    text-align: center;
+    border-bottom: 15px solid $nav-link-color;
+    
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
     &__info {
-        padding: 20% 50px;
+        @include section_padding();
     }
     & h1 {
-        color: $primary;
-        font-family: $pt-serif;
-        font-size: 50px;
+        color: $nav-link-color;
+        font-family: $handwriting;
+        font-size: 80px;
+        padding-bottom: 64px;
+        font-weight: 700;
+        text-shadow: 5px 5px 8px $yellow;
+    }
+    & p {
+        font-size: 25px;
+        color: $nav-link-color;
+        font-family: $inter;
+        padding-bottom: 34px;
     }
     &__links {
+        text-align: center;
         margin-top: 20px;
     }
     & a:not(:last-child) {
         margin-right: 10px;
     }
+    & a {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 576px){
+    .header {
+        height: auto;
+        & a {
+            display: block;
+            width: 100%;
+        }
+    }
+       
 }

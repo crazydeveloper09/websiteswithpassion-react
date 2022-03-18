@@ -26,3 +26,10 @@ export const fetchOrders = async () => {
 
     return json;
 }
+
+export const fetchCategories = async () => {
+    const categories = await fetch(`${API_URL}/projects/category`);
+    const json = categories.json();
+
+    return json;
+}

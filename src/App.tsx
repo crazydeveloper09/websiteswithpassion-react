@@ -9,6 +9,7 @@ import Footer from './components/Footer/Footer';
 import OrdersSection from './features/orders/OrdersSection/OrdersSection';
 import Login from './components/Login/Login';
 import NewOrder from './features/orders/NewOrder/NewOrder';
+import CategoryShow from './features/categories/CategoryShow';
 
 
 
@@ -25,6 +26,7 @@ const App: React.FC = () => {
               <Route path="/" element={<IndexView />} />
               <Route path="/projects" element={<ProjectsIndex />} />
               <Route path="/projects/:projectLink" element={<ProjectsShow />} />
+              <Route path='/projects/category/:category_link' element={<CategoryShow />} />
               <Route path="/website-orders/description" element={<OrderDescription />} />
               <Route path="/website-orders" element={<OrdersSection />} />
               <Route path='/website-orders/new' element={<NewOrder />} />

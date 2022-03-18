@@ -6,9 +6,9 @@ import Button from "../Button/Button";
 import "./Project.scss";
 import { Project as IProject, Category } from "../../../interfaces";
 
-const Project: React.FC<{ project: IProject }> = ({ project }) => {
+const Project: React.FC<{ project: IProject, category: Category }> = ({ project, category }) => {
   const link = `/projects/${project.subpageLink}`;
-  const categoryLink = `/projects/category/${(project.categories[0] as Category)?.link}`;
+  const categoryLink = `/projects/category/${category.link}`;
 
   return (
     <div className="project-card">
@@ -26,15 +26,15 @@ const Project: React.FC<{ project: IProject }> = ({ project }) => {
           <Link
             to={categoryLink}
             style={{
-              color: (project.categories[0] as Category).color,
+              color: category.color,
               textDecoration: "none",
             }}
           >
             <Icon
               class="fas fa-tag icon-project"
-              styles={{ color: (project.categories[0] as Category).color }}
+              styles={{ color: category.color }}
             />
-            {(project.categories[0] as Category).title}
+            {category.title}
           </Link>
         </div>
 
