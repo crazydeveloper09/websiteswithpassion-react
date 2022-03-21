@@ -1,8 +1,8 @@
-@import '../../../palette';
+@import '../../../index.scss';
 
 .section-header {
-    color: $nav-link-color;
+    color: $headers-color;
     font-size: 35px;
-    font-family: 'PT Serif', serif;
+    font-family: $poppins;
     margin-bottom: 25px;
 }

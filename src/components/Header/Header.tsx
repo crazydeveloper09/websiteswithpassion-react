@@ -12,10 +12,10 @@ const Header: React.FC = () => {
                     <a href="#whatIdo" className="button button-blue">
                         Poznaj mnie bliżej
                     </a>
-                    <Link to={'/projects'} className="button button-blue">
+                    <Link to={'/projects'} className="button button-yellow">
                         Zobacz projekty
                     </Link>
-                    <Link to={'/website-orders/description'} className="button button-blue">
+                    <Link to={'/website-orders/description'} className="button button-grey">
                         Zobacz ofertę
                     </Link>
                 </div>

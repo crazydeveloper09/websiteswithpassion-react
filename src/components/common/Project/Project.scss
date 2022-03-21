@@ -7,21 +7,25 @@
     animation: appear .5s ease;
     &__img {
         width: 100%;
-        border-radius: 8px 8px 0px 0px;
     }
     &--body {
         padding: 15px;
     }
     &__title {
-        font-family: $pt-serif;
+        font-family: $montserrat;
         font-size: 28px;
         font-weight: 700;
+        
         & a {
             text-decoration: none;
+            color: $yellow;
         }
         & a:hover {
             color: $headers-color;
         }
+    }
+    & p {
+      color: $nav-link-color;
     }
     &__additionalInfos {
         font-family: $inter;

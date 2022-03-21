@@ -42,13 +42,7 @@ const Project: React.FC<{ project: IProject, category: Category }> = ({ project,
           {`${project.description.substring(0, 200)}...`}
         </Description>
 
-        <Button
-          type="link"
-          class="button button-blue"
-          redirect={link}
-        >
-          Zobacz więcej
-        </Button>
+        
       </div>
       
     </div>

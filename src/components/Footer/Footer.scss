@@ -1,14 +1,14 @@
 @import '../../index.scss';
 
 .footer {
-    background: $nav-link-color;
+    background: $headers-color;
     @include section_padding();
-    font-family: $pt-serif;
-    color: $primary;
+    font-family: $inter;
+    color: $nav-link-color;
     flex-shrink: 0;
     
     & h2 {
-        color: $primary;
+        color: $nav-link-color;
         margin-bottom: 6px;
     }
 
@@ -24,9 +24,9 @@
     }
     &__panel {
         text-decoration: none;
-        color: $primary;
+        color: $nav-link-color;
         &:hover {
-            color: $primary;
+            color: $nav-link-color;
         }
     }
 }

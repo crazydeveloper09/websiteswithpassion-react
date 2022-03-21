@@ -1,6 +1,8 @@
 @import '../../../../index.scss';
 
 .project-show {
+    background-color: $secondary;
+    box-shadow: $box-shadow-blue;
     @include flex-justify-wrap(space-between, none, wrap);
     @include section_padding();
     &--photo,
@@ -15,17 +17,20 @@
     }
     & h3 {
         font-size: 30px;
-        color: $nav-link-color;
-        font-family: $pt-serif;
+        color: $yellow;
+        font-family: $montserrat;
         font-weight: 700;
     }
     & h4 {
         color: $nav-link-color;
-        font-family: $pt-serif;
+        font-family: $poppins;
+    }
+    & p {
+        color: $nav-link-color;
     }
     &__additionalInfos {
         font-size: 18px;
-        color: $headers-color;
+        color: $nav-link-color;
         font-family: $inter;
         font-weight: 500;
         & div {

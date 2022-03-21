@@ -25,8 +25,8 @@ const OrderDescription: React.FC = () => {
                 { advantages.map(advantage => <Advantage text={advantage} />) }
             </ul>
             <strong><Description class="description">Każdy projekt traktuję indywidualnie dlatego cena jest dostosowana do wymagań klienta.</Description></strong>
-            <Button redirect="/projects" class='button button-blue' type='link'> Zobacz projekty</Button>
-            <Button redirect="/website-orders/new" class='button button-yellow' type='link'>Złoż zamówienie</Button>
+            <Button redirect="/projects" class='button button-yellow' type='link'> Zobacz projekty</Button>
+            <Button redirect="/website-orders/new" class='button button-grey' type='link'>Złoż zamówienie</Button>
         </section>
        
     )

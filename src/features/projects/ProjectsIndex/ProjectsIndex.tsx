@@ -24,15 +24,18 @@ const ProjectsIndex = () => {
   return (
     <section className="projects">
       <SubpageTitle>Moje projekty</SubpageTitle>
-      <div className="projects-cards">
-        {projects.map((project) => (
-          <Project
-            project={project}
-            key={project._id}
-            category={project.categories[0]}
-          />
-        ))}
+      <div className="projects-info">
+        <div className="projects-cards">
+          {projects.map((project) => (
+            <Project
+              project={project}
+              key={project._id}
+              category={project.categories[0]}
+            />
+          ))}
+        </div>
       </div>
+      
     </section>
   );
 };

@@ -3,6 +3,7 @@
 nav {
   @include flex-justify-wrap(space-between, baseline, nowrap);
   padding: 10px 64px;
+  background: $secondary;
   & .nav-links {
     list-style-type: none;
     & li {
@@ -19,8 +20,8 @@ nav {
       }
       &.active {
         font-weight: 700;
-        color: $primary;
-        background-color: $nav-link-color;
+        color: $secondary;
+        background-color: $yellow;
         border-radius: 5px;
       }
     }
@@ -28,7 +29,7 @@ nav {
   & #nav-icon4 {
     display: none;
     width: 60px;
-    height: 25px;
+    height: 15px;
     position: absolute;
     right: 15px;
     top:13px;
@@ -99,7 +100,7 @@ nav {
 	height: 58px;
 }
 #mainNav {
-    background: $primary;
+    background: $secondary;
 
 }
 

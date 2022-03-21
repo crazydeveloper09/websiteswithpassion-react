@@ -1,9 +1,12 @@
 @import '../../../index.scss';
 
-.projects {
+.projects h1 {
+    padding: 64px 64px 30px;
+}
+.projects-info {
+    background: $secondary;
     @include section_padding();
 }
-
 .projects-cards {
     @include flex-justify-wrap(flex-start, none, wrap);
     gap: 30px;

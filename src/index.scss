@@ -2,8 +2,9 @@
 
 $pt-serif: 'PT Serif', serif;
 $inter: 'Inter', sans-serif;
-$handwriting: 'Dekko', cursive;
-$box-shadow-blue: 1px 2px 16px 2px $nav-link-color;
+$montserrat: 'Montserrat', sans-serif;
+$poppins: 'Poppins', sans-serif;
+$box-shadow-blue: 1px 2px 16px 2px $yellow;
 
 
 @mixin section_padding(){
@@ -37,7 +38,7 @@ html, body {
 
 body {
   margin: 0;
-  background: $primary;
+  background: $nav-link-color;
   display: flex;
   flex-direction: column;
 }

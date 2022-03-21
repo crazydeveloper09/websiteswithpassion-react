@@ -3,7 +3,8 @@
    
     height: 100vh;
     width: 100vw;
-    background: linear-gradient(to bottom, $secondary, $headers-color);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url(../../../public/main.jpg);
+    background-size: cover;
     text-align: center;
     border-bottom: 15px solid $nav-link-color;
     
@@ -13,18 +14,19 @@
         @include section_padding();
     }
     & h1 {
-        color: $nav-link-color;
-        font-family: $handwriting;
+        color: $secondary;
+        font-family: $montserrat;
         font-size: 80px;
         padding-bottom: 64px;
         font-weight: 700;
         text-shadow: 5px 5px 8px $yellow;
     }
     & p {
-        font-size: 25px;
-        color: $nav-link-color;
+        font-size: 30px;
+        color: $secondary;
         font-family: $inter;
         padding-bottom: 34px;
+        font-weight: 700;
     }
     &__links {
         text-align: center;
