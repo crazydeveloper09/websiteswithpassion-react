@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Description from "../Description/Description";
 import Icon from "../Icon/Icon";
-import Button from "../Button/Button";
 import "./Project.scss";
 import { Project as IProject, Category } from "../../../interfaces";
 
