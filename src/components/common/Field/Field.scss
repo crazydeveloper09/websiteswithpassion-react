@@ -1,3 +1,21 @@
-.field {
+@import '../../../index.scss';
+
+.form-floating {
     margin-bottom: 20px;
+    & label {
+        font-family: $poppins;
+        color: $headers-color;
+        font-weight: 700;
+        font-size: 18px;
+    }
+}
+
+.form-control,
+.form-select {
+    font-family: $inter;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border: 3px solid $yellow;
 }

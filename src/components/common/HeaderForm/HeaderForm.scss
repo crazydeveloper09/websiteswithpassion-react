@@ -19,10 +19,11 @@
         &--form {
             width: 40%;
             & h1 {
-                font-family: $pt-serif;
+                font-family: $montserrat;
                 color: $nav-link-color;
                 font-weight: 700;
-                font-size: 45px;
+                font-size: 44px;
+                margin-bottom: 30px;
             }
             & input[type=submit] {
                 width: 100%;
@@ -33,10 +34,13 @@
 
 @media (max-width: 992px) {
     .header-form {
-        padding: 20px;
+        padding: 10px;
         height: 100%;
+        
+        
         &__info {
             padding: 20px;
+            
             &--logo,
             &--form {
                 width: 100%;

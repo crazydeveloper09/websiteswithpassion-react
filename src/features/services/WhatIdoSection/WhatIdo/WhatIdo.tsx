@@ -1,7 +1,8 @@
 import React from "react";
-import { Service } from "../../../interfaces";
-import Description from "../../common/Description/Description";
-import Icon from "../../common/Icon/Icon";
+import { Link } from "react-router-dom";
+import { Service } from "../../../../interfaces";
+import Description from "../../../../components/common/Description/Description";
+import Icon from "../../../../components/common/Icon/Icon";
 import './WhatIdo.scss';
 
 interface WhatIDoProps {
@@ -20,7 +21,7 @@ const WhatIdo: React.FC<WhatIDoProps> = ({ service }) => {
                         {service.title}
                     </h3>
                     <Description class="description whatIdo-card__description">{service.description}</Description>
-                                                   
+                    <Link to={`/website-orders/new?service=${service.title}`}>Zamów usługę 	&#8594;</Link>                              
                 </div>
             );
         

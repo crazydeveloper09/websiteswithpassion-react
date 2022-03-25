@@ -55,7 +55,7 @@ const Navigation: React.FC = () => {
 
         <li>
           <NavLink className="nav-link" to="/projects">
-            Moje projekty
+            Projekty
           </NavLink>
         </li>
 

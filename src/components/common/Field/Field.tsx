@@ -1,11 +1,18 @@
 import React from "react";
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import './Field.scss';
 
-const Field: React.FC = (props) => {
+interface FieldProps {
+    children?: React.ReactNode,
+    label: string
+}
+
+
+const Field: React.FC<FieldProps> = ({label, children}) => {
     return (
-        <div className="field">
-            {props.children}
-        </div>
+        <FloatingLabel label={label}>
+            {children}
+        </FloatingLabel>
     )
 }
 

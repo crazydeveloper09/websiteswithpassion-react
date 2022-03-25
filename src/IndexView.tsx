@@ -8,8 +8,8 @@ import { loadUser } from './features/user/userSlice';
 import Achievement from './components/Achievement/Achievement';
 import Loading from "./components/common/Loading/Loading";
 import { useAppSelector, useAppDispatch } from "./hooks";
-import WhatIDoSection from "./components/WhatIdoSection/WhatIDoSection";
-import TechnologySection from "./components/TechnologySection/TechnologySection";
+import WhatIDoSection from "./features/services/WhatIdoSection/WhatIDoSection";
+import TechnologySection from "./features/technologies/TechnologySection/TechnologySection";
 import Header from "./components/Header/Header";
 import Alert, { ALERT_TYPES } from "./components/common/Alert/Alert";
 
@@ -54,7 +54,7 @@ const IndexView: React.FC = () => {
                 </div>
                 
               </section>
-              <TechnologySection />
+              <TechnologySection technologies={user && user.technologies} />
         </main>
        </>
         

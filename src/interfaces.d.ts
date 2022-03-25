@@ -22,7 +22,6 @@ export interface Comment {
     author: string,
     text: string,
     written: Date,
-    project: Project,
     stars: number
 }
 
@@ -75,6 +74,7 @@ export interface Technology {
 
 
 export interface User {
+    _id: string,
     username: string,
     password: string,
     about: string,

@@ -8,6 +8,7 @@ import { logInUser } from "../../features/user/userSlice";
 import { useAppDispatch } from "../../hooks";
 import HeaderForm from "../common/HeaderForm/HeaderForm";
 import './Login.scss';
+import Field from "../common/Field/Field";
 
 type LoginValues = {
     username: string,
@@ -34,28 +35,27 @@ const Login: React.FC = () => {
     return (
       <HeaderForm title="Logowanie do panelu">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="field">
+          <Field label="Nazwa użytkownika">
             <input
               type="text"
               {...register("username")}
               className="form-control"
               placeholder="Nazwa użytkownika"
             />
-          </div>
-          <br />
-          <div className="field">
+          </Field>
+          <Field label="Hasło">
             <input
               type="password"
               {...register("password")}
               className="form-control"
               placeholder="Hasło"
             />
-          </div>
-          <br />
+          </Field>
+        
           <input
             type="submit"
             value="Zaloguj się"
-            className="button button-blue"
+            className="button button-grey"
           />
         </form>
       </HeaderForm>

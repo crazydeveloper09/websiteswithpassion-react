@@ -1,4 +1,4 @@
-@import '../../../index.scss';
+@import '../../../../index.scss';
 
 .whatIdo-card {
     width: 23%;
@@ -20,9 +20,19 @@
     &__description {
       color: $nav-link-color;
       font-family: $inter;
+      margin-bottom: 20px;
     }
     &:hover {
       box-shadow: $box-shadow-blue;
+    }
+    & a {
+      font-family: $montserrat;
+      font-size: 19px;
+      color: $yellow;
+      text-decoration: none;
+      &:hover {
+        text-decoration: double;
+      }
     }
 }
 

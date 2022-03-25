@@ -1,6 +1,6 @@
 import React from "react";
-import { Service } from "../../interfaces";
-import SectionHeader from "../common/SectionHeader/SectionHeader";
+import { Service } from "../../../interfaces";
+import SectionHeader from "../../../components/common/SectionHeader/SectionHeader";
 import WhatIdo from "./WhatIdo/WhatIdo";
 import './WhatIDoSection.scss';
 
@@ -9,7 +9,7 @@ const WhatIDoSection: React.FC<{services: Service[]}> = ({ services }) => {
         <section className="whatIdo" id="whatIdo">
             <SectionHeader style={{ display: 'block' }}>Zobacz czym się zajmuję</SectionHeader>
             <div className="whatIdo__cards">
-                {services && services.length > 0 && services.map(service => <WhatIdo service={service} />)}
+                {services && services.length > 0 && services.map(service => <WhatIdo service={service}  key={service._id}/>)}
             </div>
         </section>
     )

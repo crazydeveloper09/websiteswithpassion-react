@@ -78,6 +78,10 @@ export const selectUserServices = (state: RootState) => {
     return state.user.info.services;
 }
 
+export const selectUserTechnologies = (state: RootState) => {
+    return state.user.info.technologies;
+}
+
 export const { logInUser, logOutUser } = userSlice.actions;
 
 export default userSlice.reducer;
