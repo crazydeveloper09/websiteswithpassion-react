@@ -32,7 +32,7 @@ app.use(express_1.default.json());
 app.use((0, helmet_1.default)({
     crossOriginResourcePolicy: false
 }));
-app.use((0, cors_1.default)({ origin: 'http://localhost:3000', credentials: true }));
+app.use((0, cors_1.default)({ origin: 'https://api.websiteswithpassion.pl', credentials: true }));
 i18n_1.default.configure({
     locales: ["en", "de", "pl"],
     register: global,
