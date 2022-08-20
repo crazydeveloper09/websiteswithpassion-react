@@ -9,7 +9,7 @@ import { store } from './store';
 import Loading from './components/common/Loading/Loading';
 
 
-export const API_URL = 'http://localhost:5000';
+export const API_URL = 'https://api.websiteswithpassion.pl';
 export const USER_ID = '62288ade73a4284c9e93cea9';
 
 ReactDOM.render(
