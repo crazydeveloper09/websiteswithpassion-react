@@ -25,7 +25,7 @@ const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 require('dotenv').config();
 // Connecting to database
-mongoose_1.default.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@websites-with-passion.x2c9m.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true });
+mongoose_1.default.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
 // App configuration
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
