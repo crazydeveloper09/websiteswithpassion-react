@@ -6,39 +6,46 @@ import SubpageTitle from "../../components/common/SubpageTitle/SubpageTitle";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import "../projects/ProjectsIndex/ProjectsIndex.scss";
 import Project from "../../components/common/Project/Project";
-import { loadCategories, selectAllCategories } from "./categories";
+import { loadCategories, selectAllCategories } from "./categoriesSlice";
 import Alert, { ALERT_TYPES } from "../../components/common/Alert/Alert";
-import { getAll, selectAllProjects } from "../projects/projectsSlice";
+import { loadProjects } from "../projects/projectsSlice";
+import CategoryLinks from "./CategoryLinks/CategoryLinks";
+import Error from "../../components/common/Error/Error";
 
 const CategoryShow: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state) => state.categories);
+  const { isLoading, hasError, errMessage } = useAppSelector((state) => state.categories);
   const { category_link } = useParams();
   useEffect(() => {
     dispatch(loadCategories());
-    dispatch(getAll())
+    dispatch(loadProjects())
   }, [dispatch]);
 
   const categories = useSelector(selectAllCategories);
   const currentCategory = categories.find(({ link }) => link === category_link);
-  const currentCategoryProjects = useSelector(selectAllProjects).filter((project => project.categories.includes(currentCategory!)));
-  console.log(currentCategoryProjects)
   if (isLoading) {
     return <Loading />;
+  }
+  if(hasError) {
+    return <Error message={errMessage!} />;
   }
   return (
     currentCategory ? (
         <section className="projects">
             <SubpageTitle>Projekty w kategorii {currentCategory.title}</SubpageTitle>
-            <div className="projects-cards">
-                {currentCategoryProjects.map((project) => (
-                <Project
-                    project={project}
-                    key={project._id}
-                    category={currentCategory!}
-                />
-                ))}
+            <CategoryLinks categories={categories} activeCategory={currentCategory} />
+            <div className="projects-info">
+              <div className="projects-cards">
+                  {currentCategory.projects?.map((project) => (
+                  <Project
+                      project={project}
+                      key={project._id}
+                      category={currentCategory!}
+                  />
+                  ))}
+              </div>
             </div>
+            
         </section>
     ) : <Alert type={ALERT_TYPES.INFO} message="Nie znaleźliśmy takiej kategorii" />
     

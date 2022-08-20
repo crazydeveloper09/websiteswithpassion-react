@@ -1,29 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import Field from "../../components/common/Field/Field";
 import HeaderForm from "../../components/common/HeaderForm/HeaderForm";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { Technology } from "../../interfaces";
-import { selectUserTechnologies } from "../user/userSlice";
+import { editTechnology, loadTechnologies, selectAllTechnologies } from "./technologySlice";
 
 const EditTechnology: React.FC = () => {
-  const { register, handleSubmit } = useForm<Technology>();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { isLoading, hasError, errMessage } = useAppSelector((state) => state.technologies)
   const { technology_id } = useParams<string>();
-  const technologies = useSelector(selectUserTechnologies);
+
+  useEffect(() => {
+    dispatch(loadTechnologies());
+  }, [dispatch]);
+
+  const technologies = useSelector(selectAllTechnologies);
   const selectedTechnology = technologies.find(
     (technology) => technology._id === technology_id
   );
+  const { register, handleSubmit } = useForm<Technology>({
+    defaultValues: {
+      icon: selectedTechnology?.icon,
+      name: selectedTechnology?.name
+    }
+  });
   const onEditTechnology: SubmitHandler<Technology> = (data) => {
-    console.log(data);
+    dispatch(editTechnology({...data, _id: technology_id! }));
+    if(!isLoading && !hasError){
+      navigate("/");
+    }
   };
   return (
     <HeaderForm title={`Edytuj technologię ${selectedTechnology?.name}`}>
+        {hasError && <p className="error">{errMessage}</p>}
       <form onSubmit={handleSubmit(onEditTechnology)}>
         <Field label="Klasa ikony">
           <input
             type="text"
-            {...(register("icon"), { value: selectedTechnology?.icon })}
+            {...register("icon")}
             className="form-control"
             placeholder="Klasa ikony"
           />
@@ -31,7 +49,7 @@ const EditTechnology: React.FC = () => {
         <Field label="Nazwa technologii">
           <input
             type="text"
-            {...(register("name"), { value: selectedTechnology?.name })}
+            {...register("name")}
             className="form-control"
             placeholder="Nazwa technologii"
           />

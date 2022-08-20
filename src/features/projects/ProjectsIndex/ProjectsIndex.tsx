@@ -1,32 +1,53 @@
 import React from "react";
 import SubpageTitle from "../../../components/common/SubpageTitle/SubpageTitle";
 import { useSelector } from "react-redux";
-import { selectAllProjects } from "../projectsSlice";
+import { loadProjects, selectAllProjects } from "../projectsSlice";
 import { useEffect } from "react";
-import { getAll } from "../projectsSlice";
 import Project from "../../../components/common/Project/Project";
 import Loading from "../../../components/common/Loading/Loading";
 import { useAppSelector, useAppDispatch } from "../../../hooks";
 import "./ProjectsIndex.scss";
+import { selectLoggedInUser } from "../../user/userSlice";
+import Button from "../../../components/common/Button/Button";
+import CategoryLinks from "../../categories/CategoryLinks/CategoryLinks";
+import { loadCategories, selectAllCategories } from "../../categories/categoriesSlice";
+import Error from "../../../components/common/Error/Error";
 
 const ProjectsIndex = () => {
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state) => state.projects);
+  const { isLoading, hasError, errMessage } = useAppSelector((state) => state.projects);
   useEffect(() => {
-    dispatch(getAll());
+    dispatch(loadProjects());
+    dispatch(loadCategories());
   }, [dispatch]);
 
   const projects = useSelector(selectAllProjects);
+  const categories = useSelector(selectAllCategories);
+  const loggedInUser = useSelector(selectLoggedInUser);
 
   if (isLoading) {
     return <Loading />;
   }
+  if(hasError) {
+    return <Error message={errMessage!} />;
+  }
   return (
     <section className="projects">
       <SubpageTitle>Moje projekty</SubpageTitle>
+      {loggedInUser && (
+        <Button
+          type="link"
+          redirect={`/projects/new`}
+          class="button button-grey"
+        >
+          Dodaj projekt
+        </Button>
+      )}
+      <CategoryLinks categories={categories} />
+      
       <div className="projects-info">
         <div className="projects-cards">
-          {projects.map((project) => (
+          {projects?.map((project) => (
             <Project
               project={project}
               key={project._id}

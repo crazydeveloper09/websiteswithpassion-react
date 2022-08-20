@@ -1,0 +1,10 @@
+@import "../../mixins.scss";
+
+.achievements {
+    @include section_padding();
+}
+
+.achievement-div {
+    @include flex-justify-wrap(center, center, wrap);
+    gap: 20px;
+}

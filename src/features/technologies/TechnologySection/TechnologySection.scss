@@ -1,5 +1,14 @@
-@import '../../../index.scss';
+@import '../../../mixins.scss';
+@import '../../../palette.scss';
 
 .technology {
-    @include section_padding()
+    background-color: $secondary;
+   
+    @include section_padding();
+    & h2, p {
+        color: $nav-link-color;
+    }
+}
+.technology-cards {
+    @include flex-justify-wrap(center, space-between, wrap)
 }

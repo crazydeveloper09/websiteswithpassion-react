@@ -9,13 +9,12 @@ import { useAppSelector, useAppDispatch } from "../../../hooks";
 import './OrdersSection.scss';
 import Alert, { ALERT_TYPES } from "../../../components/common/Alert/Alert";
 import { Order as IOrder } from "../../../interfaces";
-import axios from "axios";
-import { API_URL } from "../../..";
+import Error from "../../../components/common/Error/Error";
 
 const OrdersSection: React.FC = () => {
     const dispatch = useAppDispatch();
     
-    const { isLoading } = useAppSelector((state) => state.orders);
+    const { isLoading, hasError, errMessage } = useAppSelector((state) => state.orders);
     useEffect(() => {
       dispatch(loadOrders())
     }, [dispatch]) 
@@ -23,18 +22,17 @@ const OrdersSection: React.FC = () => {
     const orders = useSelector(selectAllOrders);
 
     const handleDelete = (order: IOrder) => {
-      axios
-        .delete(`${API_URL}/website-orders/${order._id}`)
-        .then(res => dispatch(deleteOrder(order)))
-        .catch(err => dispatch(deleteOrder(err)))
+      dispatch(deleteOrder(order._id));
     }
-   
+  
     if(isLoading) {
       return (
         <Loading />
       )
     } 
-    
+    if(hasError) {
+      return <Error message={errMessage!} />;
+    }
     return (
       <section className="orders">
         

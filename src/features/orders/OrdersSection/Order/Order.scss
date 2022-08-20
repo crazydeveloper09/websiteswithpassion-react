@@ -1,4 +1,5 @@
-@import '../../../../index.scss';
+@import '../../../../palette.scss';
+@import '../../../../fonts.scss';
 
 .order-card {
     width: 33%;
@@ -19,5 +20,11 @@
         color: $nav-link-color;
         font-size: 20px;
         font-family: $inter;
+    }
+}
+
+@media (max-width: 576px) {
+    .order-card{
+        width: 100%;
     }
 }

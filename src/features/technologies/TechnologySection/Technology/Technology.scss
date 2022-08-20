@@ -1,0 +1,29 @@
+@import '../../../../palette';
+
+.technology-div {
+    width: 19%;
+    text-align: center;
+    color: $nav-link-color;
+    & i {
+        font-size: 25px;
+        color: $yellow;
+    }
+    & a {
+        font-size: 25px;
+        text-decoration: none;
+        color: $primary;
+        display: block;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 992px){
+    .technology-div {
+        width: 25%;
+    }
+}
+
+@media (max-width: 576px) {
+    .technology-div {
+        width: 33%;
+    }
+}

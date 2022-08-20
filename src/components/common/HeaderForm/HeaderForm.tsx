@@ -7,7 +7,7 @@ const HeaderForm: React.FC<{title: string, height?: string}> = (props) => {
         <section className="header-form" style={{ height: props.height }}>
             <div className="header-form__info">
                 <div className="header-form__info--logo">
-                    <img src="/logo_znak1.png" alt="logo" width={'100%'} />
+                    <img src="/logo.png" alt="logo" width={'100%'} />
                 </div>
                 <div className="header-form__info--form">
                     <h1>{props.title}</h1>

@@ -1,4 +1,6 @@
-@import '../../index.scss';
+@import '../../palette.scss';
+@import '../../fonts.scss';
+@import '../../mixins.scss';
 
 .footer {
     background: $headers-color;

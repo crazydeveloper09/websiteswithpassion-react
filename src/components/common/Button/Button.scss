@@ -1,4 +1,5 @@
-@import '../../../index.scss';
+@import '../../../palette.scss';
+@import '../../../fonts.scss';
   
 .button {
   text-align: center;
@@ -7,34 +8,45 @@
   border-radius: 7px;
   border: none;
   text-decoration: none;
-  margin-right: 20px;
   font-weight: 700;
+  &.margin {
+    margin-left: 10px;
+  }
+  
   &.button-blue {
     background-color: $primary;
     color: $secondary;
     &:hover {
-      background-color: $secondary;
-      color: $primary;
-      border: 1px solid $primary;
+      zoom: 1.1;
+    }
+  }
+  &.button-rock {
+    background: linear-gradient(to right, #5DA143, #1F41C1, #FF6666);
+    color: $nav-link-color;
+    &:hover {
+      zoom: 1.1;
     }
   }
   &.button-yellow {
     background-color: $headers-color;
-    color: $nav-link-color;
-    border: 1px solid $nav-link-color;
+    color: $secondary;
+    border: 1px solid $headers-color;
     &:hover {
-      background-color: $nav-link-color;
-      color: $headers-color;
-      border: 1px solid $headers-color;
+      zoom: 1.1;
     }
   }
   &.button-grey {
     background-color: $yellow;
     color: $secondary;
     &:hover {
-      background-color: $secondary;
-      color: $yellow;
-      border: 1px solid $yellow;
+      zoom: 1.1;
+    }
+  }
+  &.button-black {
+    background-color: $secondary;
+    color: $nav-link-color;
+    &:hover {
+      zoom: 1.1;
     }
   }
 }

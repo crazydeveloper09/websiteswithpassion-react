@@ -1,8 +1,11 @@
-@import '../../../../index.scss';
+@import '../../../../palette.scss';
+@import '../../../../fonts.scss';
+@import '../../../../mixins.scss';
+@import '../../../../variables.scss';
 
 .project-show {
     background-color: $secondary;
-    box-shadow: $box-shadow-blue;
+    border-top: 1px solid $yellow;
     @include flex-justify-wrap(space-between, none, wrap);
     @include section_padding();
     &--photo,
@@ -11,6 +14,15 @@
     &--reviews {
         width: 48%;
         margin-bottom: 20px;
+    }
+
+    &--reviews {
+        & h4 {
+            margin-bottom: 30px;
+        }
+        & div {
+            margin-top: 27px;
+        }
     }
     &__img {
         width: 100%;
@@ -41,6 +53,7 @@
             color: $yellow;
         }
     }
+
 }
 
 .pictures {
@@ -49,6 +62,11 @@
         width: 48%;
         margin: 15px 0;
     }
+}
+
+.description li a {
+    color: $yellow;
+    text-decoration: none;
 }
 
 @media (max-width: 572px) {

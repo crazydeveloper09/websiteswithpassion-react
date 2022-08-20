@@ -1,0 +1,25 @@
+@import '../../../palette';
+@import '../../../fonts';
+
+.error {
+    color: $primary;
+    font-family: $poppins;
+    text-align: center;
+    padding: 64px;
+    &__icon {
+        color: $nav-link-color;
+        background: $primary;
+        font-size: 75px;
+        padding: 10px;
+        border-radius: 50%;
+    }
+
+    &__title {
+        font-size: 40px;
+        margin-top: 30px;
+    }
+
+    &__message {
+        font-size: 30px;
+    }
+}

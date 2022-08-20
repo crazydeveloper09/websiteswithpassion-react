@@ -1,0 +1,38 @@
+@import '../../../fonts.scss';
+
+.category {
+    &__links {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+    }
+
+    &__link {
+        width: 23%;
+        text-align: center;
+        font-size: 20px;
+        font-family: $poppins;
+
+        & a {
+            text-decoration: none;
+
+            &.active {
+                font-weight: 700;
+            }
+        }
+
+        & i {
+            font-size: 30px;
+        }
+    }
+}
+
+@media (max-width: 572px) {
+    .category {
+        &__link {
+            width: 48%;
+            margin-bottom: 15px;
+        }
+    }
+}

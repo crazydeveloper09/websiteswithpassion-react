@@ -1,31 +1,54 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import Field from "../../components/common/Field/Field";
 import HeaderForm from "../../components/common/HeaderForm/HeaderForm";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { Service } from "../../interfaces";
-import { selectUserServices } from "../user/userSlice";
+import { editService, loadServices, selectAllServices } from "./serviceSlice";
 
 const EditService: React.FC = () => {
-  const { register, handleSubmit } = useForm<Service>();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { isLoading, hasError, errMessage } = useAppSelector((state) => state.services)
   const { service_id } = useParams<string>();
-  const services = useSelector(selectUserServices);
+
+  useEffect(() => {
+    dispatch(loadServices());
+  }, [dispatch]);
+
+  const services = useSelector(selectAllServices);
   const selectedService = services.find(
     (service) => service._id === service_id
   );
 
+  const { register, handleSubmit } = useForm<Service>({
+    defaultValues: {
+      icon: selectedService?.icon,
+      title: selectedService?.title,
+      titleEn: selectedService?.titleEn,
+      description: selectedService?.description,
+      descriptionEn: selectedService?.descriptionEn,
+    }
+  });
+
   const onEditService: SubmitHandler<Service> = (data) => {
-    console.log(data);
+    dispatch(editService({...data, _id: service_id!}));
+    if(!isLoading && !hasError){
+      navigate("/");
+    }
+    
   };
 
   return (
     <HeaderForm title={`Edytuj usługę ${selectedService?.title}`}>
+        {hasError && <p className="error">{errMessage}</p>}
       <form onSubmit={handleSubmit(onEditService)}>
         <Field label="Ikona">
           <input
             type="text"
-            {...register("icon", { value: selectedService?.icon })}
+            {...register("icon")}
             placeholder="Ikona"
             className="form-control"
           />
@@ -33,7 +56,7 @@ const EditService: React.FC = () => {
         <Field label="Nazwa">
           <input
             type="text"
-            {...register("title", { value: selectedService?.title })}
+            {...register("title")}
             placeholder="Nazwa"
             className="form-control"
           />
@@ -41,7 +64,7 @@ const EditService: React.FC = () => {
         <Field label="Nazwa po angielsku">
           <input
             type="text"
-            {...register("titleEn", { value: selectedService?.titleEn })}
+            {...register("titleEn")}
             placeholder="Nazwa po angielsku"
             className="form-control"
           />
@@ -49,9 +72,7 @@ const EditService: React.FC = () => {
         <Field label="Opis">
           <input
             type="text"
-            {...register("description", {
-              value: selectedService?.description,
-            })}
+            {...register("description")}
             placeholder="Opis"
             className="form-control"
           />
@@ -59,9 +80,7 @@ const EditService: React.FC = () => {
         <Field label="Opis po angielsku">
           <input
             type="text"
-            {...register("descriptionEn", {
-              value: selectedService?.descriptionEn,
-            })}
+            {...register("descriptionEn")}
             placeholder="Opis po angielsku"
             className="form-control"
           />

@@ -1,4 +1,5 @@
-@import '../../../index.scss';
+@import '../../../mixins.scss';
+@import '../../../palette.scss';
 
 .projects h1 {
     padding: 64px 64px 30px;
@@ -10,4 +11,11 @@
 .projects-cards {
     @include flex-justify-wrap(flex-start, none, wrap);
     gap: 30px;
+}
+
+
+@media (max-width: 992px) {
+    .projects h1 {
+        padding: 64px 15px;
+    }
 }

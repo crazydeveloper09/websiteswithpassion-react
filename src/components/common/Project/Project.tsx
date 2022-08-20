@@ -7,7 +7,7 @@ import { Project as IProject, Category } from "../../../interfaces";
 
 const Project: React.FC<{ project: IProject, category: Category }> = ({ project, category }) => {
   const link = `/projects/${project.subpageLink}`;
-  const categoryLink = `/projects/category/${category.link}`;
+  const categoryLink = `/projects/category/${category?.link}`;
 
   return (
     <div className="project-card">
@@ -25,15 +25,15 @@ const Project: React.FC<{ project: IProject, category: Category }> = ({ project,
           <Link
             to={categoryLink}
             style={{
-              color: category.color,
+              color: category?.color,
               textDecoration: "none",
             }}
           >
             <Icon
               class="fas fa-tag icon-project"
-              styles={{ color: category.color }}
+              styles={{ color: category?.color }}
             />
-            {category.title}
+            {category?.title}
           </Link>
         </div>
 

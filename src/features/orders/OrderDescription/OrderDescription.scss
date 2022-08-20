@@ -1,4 +1,6 @@
-@import '../../../index.scss';
+@import '../../../palette.scss';
+@import '../../../fonts.scss';
+@import '../../../mixins.scss';
 
 .website-orders {
     @include section_padding();
@@ -7,13 +9,14 @@
         font-family: $inter;
         font-size: 35px;
         font-family: 500;
+        
     }
     & h1 {
         color: $secondary;
         font-family: $poppins;
         font-size: 75px;
         font-weight: 700;
-        text-shadow: 5px 5px 8px $yellow;
+        text-shadow: 7-1px 0 $yellow, 0 1px $yellow, 1px 0 $yellow, 0 -1px $yellow;
         margin: 60px 0;
     }
     & ul {

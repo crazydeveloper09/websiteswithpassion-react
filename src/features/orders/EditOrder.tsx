@@ -9,18 +9,23 @@ import HeaderForm from "../../components/common/HeaderForm/HeaderForm";
 import Loading from "../../components/common/Loading/Loading";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { Order } from "../../interfaces";
-import { loadOrders, selectAllOrders } from "./ordersSlice";
+import { editOrder, loadOrders, selectAllOrders } from "./ordersSlice";
 
 
 const EditOrder: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { isLoading } = useAppSelector((state) => state.orders) 
+    const { isLoading, hasError, errMessage } = useAppSelector((state) => state.orders) 
     const navigate = useNavigate();
     const { order_id } = useParams<string>();
     const { register, handleSubmit } = useForm<Order>();
 
     const onEditOrder: SubmitHandler<Order> = (data) => {
-        console.log(data)
+        
+        dispatch(editOrder({...data, _id: order_id!}))
+        if(!isLoading && !hasError){
+            navigate("/website-orders");
+        }
+            
     }
 
     useEffect(() => {
@@ -32,31 +37,32 @@ const EditOrder: React.FC = () => {
 
     if(isLoading) {
         return (
-          <Loading />
+            <Loading />
         )
     } 
 
     return (
         <HeaderForm title={`Edytuj zamówienie ${selectedOrder?.websiteTitle}`}>
+            {hasError && <p className="error">{errMessage}</p>}
             <form onSubmit={handleSubmit(onEditOrder)}>
             <Field label="Nazwa strony">
-                    <input type="text" {...register("websiteTitle")} className="form-control" placeholder="Nazwa strony" />
+                    <input type="text" {...register("websiteTitle", { value: selectedOrder?.websiteTitle })} className="form-control" placeholder="Nazwa strony" />
                 </Field>
                 { (selectedOrder?.type === "Aktualizacja" || selectedOrder?.type === "update") && <Field label="Link do aktualnej wersji">
-                    <input type="text" {...register("previousWebsite")} className="form-control" placeholder="Link do aktualnej wersji" />
+                    <input type="text" {...register("previousWebsite", { value: selectedOrder?.previousWebsite })} className="form-control" placeholder="Link do aktualnej wersji" />
                 </Field>}
                 
                 <Field label="Czego oczekujesz po stronie">
-                    <textarea {...register("whatYouWish")} className="form-control" placeholder="Czego oczekujesz"></textarea>
+                    <textarea {...register("whatYouWish", { value: selectedOrder?.whatYouWish })} className="form-control" placeholder="Czego oczekujesz"></textarea>
                 </Field>
-                <Field label="Maksymalny budżet">
-                    <input type="number" {...register("budget")} className="form-control" placeholder="Maksymalny budżet" />
+                <Field label="Status">
+                    <input type="text" {...register("status", { value: selectedOrder?.status })} className="form-control" placeholder="Maksymalny budżet" />
                 </Field>
                 <Field label="Imię i nazwisko">
-                    <input type="text" {...register("name")} className="form-control" placeholder="Imię i nazwisko" />
+                    <input type="text" {...register("name", { value: selectedOrder?.name })} className="form-control" placeholder="Imię i nazwisko" />
                 </Field>
                 <Field label="Email kontaktowy">
-                    <input type="email" {...register("email")} className="form-control" placeholder="Email kontaktowy" />
+                    <input type="email" {...register("email", { value: selectedOrder?.email })} className="form-control" placeholder="Email kontaktowy" />
                 </Field>
                 <input type="submit" value="Edytuj zamówienie" className="button button-grey" />
             </form>

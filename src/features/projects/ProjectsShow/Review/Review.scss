@@ -1,14 +1,20 @@
 
-@import '../../../../index.scss';
+@import '../../../../palette.scss';
+@import '../../../../fonts.scss';
 
 .review {
-    font-family: $inter;
+    font-family: $montserrat;
     &__author {
         color: $headers-color;
         font-size: 22px;
         font-weight: 700px;
     }
-    
+    &__stars {
+        margin: 10px 0;
+        & svg {
+            font-size: 23px;
+        }
+    }
     &__text {
         font-size: 19px;
         color: $headers-color;

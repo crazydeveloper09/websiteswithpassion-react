@@ -8,22 +8,25 @@ import Field from "../../components/common/Field/Field";
 import HeaderForm from "../../components/common/HeaderForm/HeaderForm";
 import Loading from "../../components/common/Loading/Loading";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { loadOrders, selectAllOrders } from "./ordersSlice";
+import { loadOrders, selectAllOrders, sendOffer } from "./ordersSlice";
 
-interface SendO {
+export interface SendO {
     topic: string,
     text: string
 }
 
 const SendOffer: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { isLoading } = useAppSelector((state) => state.orders) 
+    const { isLoading, hasError, errMessage } = useAppSelector((state) => state.orders) 
     const navigate = useNavigate();
     const { order_id } = useParams<string>();
     const { register, handleSubmit } = useForm<SendO>();
 
     const onSendOffer: SubmitHandler<SendO> = (data) => {
-        console.log(data)
+      
+        dispatch(sendOffer(data))
+        navigate("/website-orders")
+          
     }
 
     useEffect(() => {
@@ -41,6 +44,7 @@ const SendOffer: React.FC = () => {
 
     return (
         <HeaderForm title={`Wyślij ofertę do zamówienia ${selectedOrder?.websiteTitle}`}>
+              {hasError && <p className="error">{errMessage}</p>}
             <form onSubmit={handleSubmit(onSendOffer)}>
                 <Field label="Temat maila">
                     <input type="text" {...register("text")}  className="form-control" placeholder="Temat maila" />

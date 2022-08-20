@@ -1,4 +1,5 @@
-@import '../../../index.scss';
+@import '../../../palette.scss';
+@import '../../../fonts.scss';
 
 .project-card {
     width: 23%;
@@ -33,6 +34,7 @@
     }
     &:hover {
       transform: scale(1.07);
+      border: 1px solid $yellow;
     }
 }
 

@@ -23,6 +23,9 @@ const Order: React.FC<{ order: IOrder; handleDelete: Function }> = ({
         <p className="order-card__description">
           Budżet: <strong>{order.budget}</strong>
         </p>
+        <p className="order-card__description">
+          typ: <strong>{order.type}</strong>
+        </p>
 
         <details className="order-card__description">
           <strong>{order.whatYouWish}</strong>
@@ -49,16 +52,30 @@ const Order: React.FC<{ order: IOrder; handleDelete: Function }> = ({
           >
             Edytuj
           </Button>
-          <Button
+          {order.status === "Zamówienie wysłane do mnie" &&  <Button
             type="link"
             redirect={`/website-orders/${order._id}/send`}
             class="button button-grey"
           >
             Wyślij ofertę
-          </Button>
+          </Button>}
+         
           <Button type="button" class="button button-blue" click={onDelete}>
             Usuń
           </Button>
+          <br />
+          <br />
+          {(order.status === "Oferta zaakceptowana" ||
+            order.statusEn === "Order has been accepted") && (
+            <a
+              href={order.rockLink}
+              className="button button-rock"
+              target={'_blank'}
+              rel={'noreferrer'}
+            >
+              Zobacz postępy
+            </a>
+          )}
         </div>
       </div>
     </div>

@@ -1,18 +1,39 @@
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import Field from "../../components/common/Field/Field";
 import HeaderForm from "../../components/common/HeaderForm/HeaderForm";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { Project } from "../../interfaces";
+import { addProject } from "./projectsSlice";
 
 const NewProject: React.FC = () => {
 
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const { isLoading, hasError, errMessage } = useAppSelector((state) => state.projects)
     const { register, handleSubmit } = useForm<Project>()
     const onAddProject: SubmitHandler<Project> = (data) => {
-        console.log(data);
+        const formData = new FormData();
+        formData.append("profile", (data.profile as unknown as FileList)[0]);
+        formData.append("title", data.title);
+        formData.append("description", data.description)
+        formData.append("en", data.en)
+        formData.append("status", data.status)
+        formData.append("statusEn", data.statusEn)
+        formData.append("link", data.link)
+        
+        dispatch(addProject(formData as unknown as Project));
+        
+        if(!isLoading && !hasError){
+            navigate("/projects");
+        }
+    
     }
 
     return (
         <HeaderForm title="Dodaj projekt" height="100%">
+              {hasError && <p className="error">{errMessage}</p>}
             <form onSubmit={handleSubmit(onAddProject)} encType="multipart/form-data">
                 <Field label="Nazwa">
                     <input type="text" {...register("title")} placeholder="Nazwa" className="form-control" />

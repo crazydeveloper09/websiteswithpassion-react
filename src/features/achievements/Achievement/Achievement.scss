@@ -1,0 +1,40 @@
+@import '../../../palette.scss';
+@import '../../../fonts.scss';
+
+.achievement {
+    width: 32%;
+    &__title {
+        font-family: $inter;
+        color: $secondary;
+        text-align: center;
+    }
+    &__img {
+        width: 100%;
+    }
+    &__editing a {
+      font-size: 25px;
+      text-decoration: none;
+      margin-right: 20px;
+      color: $primary;
+    }
+}
+
+
+@media (min-width: 576px) and (max-width: 992px) {
+    .achievement {
+      margin-bottom: 20px;
+    }
+  }
+  
+  @media (max-width: 992px){
+    .achievement {
+      width: 48%;
+    }
+  }
+  
+  @media (max-width: 576px){
+    .achievement {
+      width: 98%;
+      margin-bottom: 20px;
+    }
+  }

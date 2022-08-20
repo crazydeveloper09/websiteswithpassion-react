@@ -1,23 +1,22 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { API_URL } from "../../..";
 import { Order } from "../../../interfaces";
 import Field from "../../../components/common/Field/Field";
 import HeaderForm from "../../../components/common/HeaderForm/HeaderForm";
-import { useAppDispatch } from "../../../hooks";
-import { selectUserServices } from "../../user/userSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { addOrder } from "../ordersSlice";
 import { useSearchParams } from "react-router-dom";
+import { selectAllServices } from "../../services/serviceSlice";
 
 const NewOrder: React.FC = () => {
     const dispatch = useAppDispatch();
     const [type, setType] = useState<string>("Nowa strona");
+    const { isLoading, hasError, errMessage } = useAppSelector((state) => state.orders)
     const navigate = useNavigate()
     const { register, handleSubmit } = useForm<Order>();
-    const services = useSelector(selectUserServices);
+    const services = useSelector(selectAllServices);
     const [searchParams] = useSearchParams();
 
     const chosenService = searchParams.get('service');
@@ -31,20 +30,18 @@ const NewOrder: React.FC = () => {
     }
 
     const onSubmit: SubmitHandler<Order> = data => {
-        axios
-            .post(`${API_URL}/website-orders`, data)
-            .then((response) => {
-                console.log(response.data)
-                dispatch(addOrder(response.data));
-                navigate("/website-orders/description?success=true");
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        
+        dispatch(addOrder(data));
+        if(!isLoading && !hasError){
+            navigate("/website-orders/description?success=true");
+        }
+        
     } 
     return (
-        <HeaderForm title="Zamów usługę">
+        <HeaderForm title="Zamów usługę" height="100%">
+            {hasError && <p className="error">{errMessage}</p>}
             <form onSubmit={handleSubmit(onSubmit)}>
+                
                 <Field label="Wybierz usługę">
                     <select {...register("type")} className="form-select" onChange={changeType}>
                         { chosenService && <option value={chosenService}>{chosenService}</option> }

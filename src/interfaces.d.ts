@@ -1,10 +1,12 @@
 export interface Achievement {
+    _id: string,
     title: string,
     titleEn: string,
     picture: string
 }
 
 export interface Announcement {
+    _id: string,
     pl: string,
     en: string
 }
@@ -15,6 +17,7 @@ export interface Category {
     titleEn: string,
     color: string,
     link: string,
+    icon: string,
     projects?: Project[]
 }
 
@@ -37,7 +40,8 @@ export interface Order {
     websiteTitle: string,
     orderDate: Date,
     budget: number,
-    isSent: boolean
+    isSent: boolean,
+    rockLink: string | "https://space.new/34x8kq8ivvse",
 }
 
 export interface Project {
@@ -50,9 +54,20 @@ export interface Project {
     subpageLink: string,
     pictures: string[],
     reviews: Comment[],
-    categories: Category[] & string,
+    categories: Category[] & string & {},
     added: Date,
     edited?: Date | number,
+	en: string,
+	statusEn: string
+}
+
+export interface ProjectForm {
+    _id: string,
+    title: string,
+    description: string,
+    profile: string,
+    status: string,
+    link: string,
 	en: string,
 	statusEn: string
 }

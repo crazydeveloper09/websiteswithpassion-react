@@ -1,4 +1,6 @@
-@import '../../index.scss';
+@import '../../palette.scss';
+@import '../../fonts.scss';
+@import '../../mixins.scss';
 .header {
    
     height: 100vh;
@@ -7,7 +9,10 @@
     background-size: cover;
     text-align: center;
     border-bottom: 15px solid $nav-link-color;
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     &__info {
@@ -17,20 +22,21 @@
         color: $secondary;
         font-family: $montserrat;
         font-size: 80px;
-        padding-bottom: 64px;
-        font-weight: 700;
-        text-shadow: 5px 5px 8px $yellow;
+        padding-bottom: 6px;
+        font-weight: 500;
+        text-shadow: -2px 0 $yellow, 0 2px $yellow, 2px 0 $yellow, 0 -2px $yellow;
     }
     & p {
         font-size: 30px;
         color: $secondary;
         font-family: $inter;
-        padding-bottom: 34px;
-        font-weight: 700;
+        padding-bottom: 10px;
+        font-weight: 400;
     }
     &__links {
         text-align: center;
-        margin-top: 20px;
+        margin-top: 10px;
+        text-transform: uppercase;
     }
     & a:not(:last-child) {
         margin-right: 10px;

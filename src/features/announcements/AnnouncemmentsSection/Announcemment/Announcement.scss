@@ -1,0 +1,18 @@
+@import '../../../../mixins.scss';
+
+.announcement {
+    width: 100%;
+    padding: 15px;
+    background: lightblue;
+    border-radius: 10px;
+    @include flex-justify-wrap(space-between, baseline, nowrap);
+    border: 1px solid darkslateblue;
+    & .description,
+    & svg {
+        color: darkslateblue;
+    }
+
+    &__editing {
+        display: block;
+    }
+}

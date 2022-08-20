@@ -1,0 +1,15 @@
+@mixin section_padding(){
+    @media (min-width: 992px) {
+      padding: 64px;
+    }
+    @media (max-width: 992px) {
+      padding: 64px 15px;
+    }
+  }
+  
+  @mixin flex-justify-wrap($justify, $align, $wrap){
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    flex-wrap: $wrap;
+  }

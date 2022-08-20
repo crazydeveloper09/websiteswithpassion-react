@@ -1,78 +1,197 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchOrders } from "../../api";
-import { Order } from '../../interfaces';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { createAsyncThunk, createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
+import { Order } from "../../interfaces";
 import { RootState } from "../../store";
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
+import { API_URL } from "../..";
+import { SendO } from './SendOffer';
 
 export const loadOrders = createAsyncThunk(
-    'orders/loadOrders',
-    async (arg, thunkAPI) => {
-        return await fetchOrders();
+  "orders/loadOrders",
+  async (arg, thunkAPI) => {
+    try {
+      const orders = await axios.get(
+        `${API_URL}/website-orderss`
+      );
+      return orders.data; 
+    } catch(err: any) {
+      if(!err.response) {
+        throw err;
+      }
+      return thunkAPI.rejectWithValue(`${err.response.status} - ${err.response.statusText}`)
     }
-)
+  }
+);
 
+export const deleteOrder = createAsyncThunk(
+  "orders/deleteOrder",
+  async (orderID: string, thunkAPI) => {
+    try {
+      const order = await axios.delete(`${API_URL}/website-orders/${orderID}`, {
+        withCredentials: true,
+      });
+      return order.data;
+    } catch(err: any) {
+      if(!err.response) {
+        throw err;
+      }
+      return thunkAPI.rejectWithValue(`${err.response.status} - ${err.response.statusText}`)
+    }
+    
+  }
+);
+
+export const editOrder = createAsyncThunk(
+  "orders/editOrder",
+  async (order: Order, thunkAPI) => {
+    try {
+      const editedOrder = await axios.put(
+        `${API_URL}/website-orders/${order._id}`,
+        { order: order },
+        { withCredentials: true }
+      );
+      return editedOrder.data;
+    } catch(err: any) {
+      if(!err.response) {
+        throw err;
+      }
+      return thunkAPI.rejectWithValue(`${err.response.status} - ${err.response.statusText}`)
+    }
+  }
+);
+
+export const addOrder = createAsyncThunk(
+  "orders/editOrder",
+  async (order: Order, thunkAPI) => {
+    try {
+      const addedOrder = await axios.post(
+        `${API_URL}/website-orders`,
+        order,
+        { withCredentials: true }
+      );
+      return addedOrder.data; 
+    } catch(err: any) {
+      if(!err.response) {
+        throw err;
+      }
+      return thunkAPI.rejectWithValue(`${err.response.status} - ${err.response.statusText}`)
+    }
+  }
+);
+
+export const sendOffer = createAsyncThunk(
+  "orders/editOrder",
+  async (message: SendO, thunkAPI) => {
+    try {
+      const addedOrder = await axios.post(
+        `${API_URL}/website-orders/send`,
+        message,
+        { withCredentials: true }
+      );
+      return addedOrder.data;
+    } catch(err: any) {
+      if(!err.response) {
+        throw err;
+      }
+      return thunkAPI.rejectWithValue(`${err.response.status} - ${err.response.statusText}`)
+    }
+  }
+);
 
 interface OrdersState {
-    all: Order[],
-    isLoading: boolean,
-    hasError: boolean,
-    errMesage: string
+  all: Order[];
+  isLoading: boolean;
+  hasError: boolean;
+  errMessage: string;
 }
 
 const initialState: OrdersState = {
-    all: [],
-    isLoading: false,
-    hasError: false,
-    errMesage: ''
-}
+  all: [],
+  isLoading: false,
+  hasError: false,
+  errMessage: "",
+};
 
 const sliceOptions = {
-    name: 'orders',
-    initialState,
-    reducers: {
-        deleteOrder: (state: OrdersState, action: PayloadAction<Order | AxiosError>) => {
-           if((action.payload as AxiosError).message){
-               state.hasError = true;
-               state.errMesage = (action.payload as AxiosError).message;
-               return;
-           }
-           state.all = state.all.filter(order => order._id !== (action.payload as Order)._id);
-        },
-        editOrder: (state: OrdersState, action: PayloadAction<Order>) => {
-            let foundedOrder = state.all.find(order => order._id === action.payload._id);
-            foundedOrder = action.payload;
-            console.log(foundedOrder)
-        },
-        addOrder: (state: OrdersState, action: PayloadAction<Order>) => {
-            state.all.push(action.payload);
+  name: "orders",
+  initialState,
+  reducers: {},
+  extraReducers: (builder: any) => {
+    builder
+    .addCase(
+        loadOrders.fulfilled,
+        (state: OrdersState, action: PayloadAction<Order[]>) => {
+          state.all = action.payload;
+          state.isLoading = false;
+          state.hasError = false;
         }
-    },
-    extraReducers: (builder: any) => {
-        builder
-            .addCase(loadOrders.pending, (state: OrdersState) => {
-                state.isLoading = true;
-                state.hasError = false;
-            })
-            .addCase(loadOrders.fulfilled, (state: OrdersState, action: PayloadAction<Order[]>) => {
-                state.all = action.payload;
-                
-                state.isLoading = false;
-                state.hasError = false;
-            })
-            .addCase(loadOrders.rejected, (state: OrdersState) => {
-                state.isLoading = false;
-                state.hasError = true;
-            })
-    },
-}
+      )
+      .addCase(
+        addOrder.fulfilled,
+        (state: OrdersState, action: PayloadAction<Order>) => {
+          state.all.push(action.payload);
+          state.isLoading = false;
+          state.hasError = false;
+        }
+      )
+      .addCase(
+        deleteOrder.fulfilled,
+        (state: OrdersState, action: PayloadAction<Order>) => {
+          state.all = state.all.filter(
+            (order) =>
+              order._id !== (action.payload as Order)._id
+          );
+          state.isLoading = false;
+          state.hasError = false;
+        }
+      )
+      .addMatcher(
+        isAnyOf(editOrder.fulfilled, sendOffer.fulfilled),
+        (state: OrdersState, action: PayloadAction<Order>) => {
+          let foundedOrder = state.all.find(
+            (order) =>
+              order._id !== (action.payload as Order)._id
+          );
+          foundedOrder = action.payload;
+          state.isLoading = false;
+          state.hasError = false;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          loadOrders.pending,
+          addOrder.pending,
+          editOrder.pending,
+          deleteOrder.pending,
+          sendOffer.pending
+        ),
+        (state: OrdersState) => {
+          state.isLoading = true;
+          state.hasError = false;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          loadOrders.rejected,
+          addOrder.rejected,
+          editOrder.rejected,
+          deleteOrder.rejected,
+          sendOffer.rejected
+        ),
+        (state: OrdersState, action: PayloadAction<string>) => {
+          state.isLoading = false;
+          state.hasError = true;
+          state.errMessage = action.payload;
+        }
+      );
+  },
+};
 
 export const ordersSlice = createSlice(sliceOptions);
 
 export const selectAllOrders = (state: RootState) => {
-    return state.orders.all;
-}
+  return state.orders.all;
+};
 
-
-export const { deleteOrder, editOrder, addOrder } = ordersSlice.actions;
 
 export default ordersSlice.reducer;

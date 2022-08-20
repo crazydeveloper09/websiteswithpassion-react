@@ -1,9 +1,14 @@
-@import '../../index.scss';
+@import '../../palette.scss';
+@import '../../fonts.scss';
+@import '../../mixins.scss';
 
 nav {
   @include flex-justify-wrap(space-between, baseline, nowrap);
-  padding: 10px 64px;
+  padding: 20px 64px;
   background: $secondary;
+  & button {
+    background: none;
+  }
   & .nav-links {
     list-style-type: none;
     & li {
@@ -14,9 +19,12 @@ nav {
       text-transform: uppercase;
       border: none;
       color: $nav-link-color;
+      margin-left: 5px;
+      letter-spacing: 0.2em;
       &:hover {
         font-weight: 700;
         color: $headers-color;
+        padding: 7px 17px;
       }
       &.active {
         font-weight: 700;
@@ -109,19 +117,22 @@ nav {
     display: block;
     position: relative;
     overflow: hidden;
-    padding: 10px 15px;
+    padding: 20px 10px;
     & .nav-links {
       display: none;
       padding-inline-start: 0;
       & li {
         display: block;
+        margin-top: 15px;
       }
     }
     & #nav-icon4 {
       display: block;
+      margin-top: 10px;
     }
   }
   #logo {
     display: block;
+    width: 75%;
   }
 }

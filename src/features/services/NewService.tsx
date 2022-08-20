@@ -1,18 +1,28 @@
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import Field from "../../components/common/Field/Field";
 import HeaderForm from "../../components/common/HeaderForm/HeaderForm";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { Service } from "../../interfaces";
+import { addService } from "./serviceSlice";
 
 const NewService: React.FC = () => {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const { isLoading, hasError, errMessage } = useAppSelector((state) => state.services)
     const { register, handleSubmit } = useForm<Service>();
 
     const onAddService: SubmitHandler<Service> = (data) => {
-        console.log(data)
+        dispatch(addService(data));
+        if(!isLoading && !hasError){
+            navigate("/");
+        }
     }
 
     return (
         <HeaderForm title="Dodaj usługę">
+              {hasError && <p className="error">{errMessage}</p>}
             <form onSubmit={handleSubmit(onAddService)}>
                 <Field label="Ikona">
                     <input type="text" {...register("icon")} placeholder="Ikona" className="form-control" />
