@@ -2,7 +2,8 @@ import { RequestHandler } from "express";
 import ProjectModel, { Project } from "../models/project";
 import Category from "../models/category";
 import cloudinary from "cloudinary";
-import { CallbackError } from "mongoose";
+
+require('dotenv').config();
 
 cloudinary.v2.config({
   cloud_name: "syberiancats",
@@ -37,7 +38,7 @@ export const createProject: RequestHandler<unknown, unknown, Project> = (
   res,
   next
 ): void => {
-  cloudinary.v2.uploader.upload(req.file!.path, function (result) {
+  cloudinary.v2.uploader.upload(req.file!.path, function (err, result) {
     let newProject = new ProjectModel({
       title: req.body.title,
       description: req.body.description,
@@ -61,7 +62,7 @@ export const editProjectMainPhoto: RequestHandler<ProjectParams> = (
   res,
   next
 ): void => {
-  cloudinary.v2.uploader.upload(req.file!.path, function (result) {
+  cloudinary.v2.uploader.upload(req.file!.path, function (err, result) {
     ProjectModel.findById(req.params.project_id)
       .exec()
       .then((project) => {
@@ -79,7 +80,7 @@ export const addPictureToProjectGallery: RequestHandler<ProjectParams> = (
   res,
   next
 ): void => {
-  cloudinary.v2.uploader.upload(req.file!.path, function (result) {
+  cloudinary.v2.uploader.upload(req.file!.path, function (err, result) {
     ProjectModel.findById(req.params.project_id)
       .exec()
       .then((project) => {
@@ -97,7 +98,8 @@ export const editProject: RequestHandler<
   unknown,
   { project: Project }
 > = (req, res, next): void => {
-  ProjectModel.findByIdAndUpdate(req.params.project_id, req.body.project)
+  ProjectModel.findByIdAndUpdate(req.params.project_id, req.body.project, {new: true})
+    .populate("reviews")
     .exec()
     .then((updatedProject) => {
       updatedProject!.edited = Date.now();

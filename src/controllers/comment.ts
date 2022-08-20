@@ -8,10 +8,12 @@ type CommentParams = {
 }
 
 export const createComment: RequestHandler<CommentParams, unknown, Comment> = (req, res, next) => {
+    console.log(req.params)
     Project
-        .findById(req.params.project_id)
+        .findById(req.body.project._id)
         .exec()
         .then((project) => {
+            console.log(project)
             CommentModel
                 .create({
                     text: req.body.text,
@@ -20,9 +22,11 @@ export const createComment: RequestHandler<CommentParams, unknown, Comment> = (r
                     stars: req.body.stars
                 })
                 .then(createdComment => {
-                  
                     project!.reviews.push(createdComment._id);
                     project!.save();
+                    console.log(createdComment);
+                    console.log(project?.reviews)
+                    res.json(createdComment)
                 })
                 .catch(err => res.json(err))
         })

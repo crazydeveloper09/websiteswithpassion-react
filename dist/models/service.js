@@ -9,6 +9,10 @@ const serviceSchema = new mongoose_1.default.Schema({
     title: String,
     titleEn: String,
     description: String,
-    descriptionEn: String
+    descriptionEn: String,
+    user: {
+        type: mongoose_1.default.Schema.Types.ObjectId,
+        ref: "User"
+    }
 });
 exports.default = mongoose_1.default.model("Service", serviceSchema);

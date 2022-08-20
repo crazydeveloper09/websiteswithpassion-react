@@ -5,7 +5,7 @@ export interface Comment {
     author: string,
     text: string,
     written: Date,
-    project: mongoose.Schema.Types.ObjectId | Project,
+    project: Project,
     stars: number
 }
 

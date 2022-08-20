@@ -16,7 +16,7 @@ const index_1 = __importDefault(require("./routes/index"));
 const orders_1 = __importDefault(require("./routes/orders"));
 const project_1 = __importDefault(require("./routes/project"));
 const service_1 = __importDefault(require("./routes/service"));
-const routes_1 = __importDefault(require("./routes"));
+const technology_1 = __importDefault(require("./routes/technology"));
 const passport_local_1 = require("passport-local");
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const helmet_1 = __importDefault(require("helmet"));
@@ -25,15 +25,14 @@ const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 require('dotenv').config();
 // Connecting to database
-mongoose_1.default.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@websites-with-passion.x2c9m.mongodb.net/portfolio?retryWrites=true&w=majority`, { useNewUrlParser: true });
+mongoose_1.default.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
 // App configuration
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 app.use((0, helmet_1.default)({
     crossOriginResourcePolicy: false
 }));
-console.log(process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://silly-wiles-dbbbf9.netlify.app');
-app.use((0, cors_1.default)({ origin: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://silly-wiles-dbbbf9.netlify.app', credentials: true }));
+app.use((0, cors_1.default)({ origin: 'http://localhost:3000', credentials: true }));
 i18n_1.default.configure({
     locales: ["en", "de", "pl"],
     register: global,
@@ -60,6 +59,6 @@ app.use("/projects/:project_id/reviews", comment_1.default);
 app.use("/about", about_1.default);
 app.use("/about/:user_id/achievements", achievement_1.default);
 app.use("/about/:user_id/services", service_1.default);
-app.use("/about/:user_id/technologies", routes_1.default);
+app.use("/about/:user_id/technologies", technology_1.default);
 app.use("/announcements", announcement_1.default);
 app.listen(process.env.PORT);

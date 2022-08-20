@@ -6,6 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const technologySchema = new mongoose_1.default.Schema({
     icon: String,
-    name: String
+    name: String,
+    user: {
+        type: mongoose_1.default.Schema.Types.ObjectId,
+        ref: "User"
+    }
 });
-exports.default = mongoose_1.default.model("Technology");
+exports.default = mongoose_1.default.model("Technology", technologySchema);

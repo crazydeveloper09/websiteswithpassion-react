@@ -10,11 +10,10 @@ type AboutParams = {
 export const getUserInfo: RequestHandler = (req, res, next): void => {
   let admin_username = "Admin";
   UserModel.findOne({ username: admin_username })
-    .populate('achievements')
-    .populate('services')
+    .populate("achievements")
     .exec()
-    .then((user: User) => res.json(user))
-    .catch((err: CallbackError) => res.json(err));
+    .then((user) => res.json(user))
+    .catch((err) => res.json(err));
 };
 
 export const editUser: RequestHandler<AboutParams, unknown, { user: User }> = (
@@ -22,10 +21,10 @@ export const editUser: RequestHandler<AboutParams, unknown, { user: User }> = (
   res,
   next
 ): void => {
-  UserModel.findByIdAndUpdate(req.params.about_id, req.body.user)
+  UserModel.findByIdAndUpdate(req.params.about_id, req.body.user, {new: true})
     .exec()
-    .then((updatedUser: User) => res.json(updatedUser))
-    .catch((err: CallbackError) => res.json(err));
+    .then((updatedUser) => res.json(updatedUser))
+    .catch((err) => res.json(err));
 };
 
 export const deleteUser: RequestHandler<AboutParams> = (
@@ -35,6 +34,6 @@ export const deleteUser: RequestHandler<AboutParams> = (
 ): void => {
   UserModel.findByIdAndRemove(req.params.about_id)
     .exec()
-    .then((deletedUser: User) => res.json(deletedUser))
-    .catch((err: CallbackError) => res.json(err));
+    .then((deletedUser) => res.json(deletedUser))
+    .catch((err) => res.json(err));
 };

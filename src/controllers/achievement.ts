@@ -11,24 +11,41 @@ cloudinary.v2.config({
 });
 
 type AchievementParams = {
-  user_id: string,
+  user_id: string;
   achievement_id: string;
 };
 
-export const createAchievement: RequestHandler<AchievementParams, unknown, Achievement> = (req, res, next): void => {
-  cloudinary.v2.uploader.upload(req.file!.path, function (result) {
+export const fetchAllUserAchievements: RequestHandler<AchievementParams> = (
+  req,
+  res,
+  next
+): void => {
+  AchievementModel.find({ user: req.params.user_id })
+    .exec()
+    .then((achievements) => res.json(achievements))
+    .catch((err) => res.json(err));
+};
+
+export const createAchievement: RequestHandler<
+  AchievementParams,
+  unknown,
+  Achievement
+> = (req, res, next): void => {
+  cloudinary.v2.uploader.upload(req.file!.path, function (err, result) {
+    
     UserModel.findById(req.params.user_id)
       .exec()
-      .then((user: User) => {
+      .then((user) => {
         AchievementModel.create({
           title: req.body.title,
           titleEn: req.body.titleEn,
           picture: result!.secure_url,
+          user: req.params.user_id,
         })
           .then((achievement) => {
             user!.achievements.push(achievement._id);
             user!.save();
-            res.json(user);
+            res.json(achievement);
           })
           .catch((err) => res.json(err));
       })
@@ -41,39 +58,30 @@ export const editAchievementMainPicture: RequestHandler<AchievementParams> = (
   res,
   next
 ): void => {
-  cloudinary.v2.uploader.upload(req.file!.path, function (result) {
-    UserModel.findById(req.params.user_id)
-    .exec()
-    .then((user: User) => {
-      AchievementModel.findById(req.params.achievement_id)
+  cloudinary.v2.uploader.upload(req.file!.path, function (err, result) {
+    AchievementModel.findById(req.params.achievement_id)
       .exec()
       .then((achievement) => {
         achievement!.picture = result!.secure_url;
         achievement!.save();
-        res.json(user);
+        res.json(achievement);
       })
       .catch((err) => res.json(err));
-    })
-    .catch((err: CallbackError) => res.json(err));
-    
   });
 };
 
-export const editAchievement: RequestHandler<AchievementParams, unknown, { achievement: Achievement }> = (
-  req,
-  res,
-  next
-): void => {
-  UserModel.findById(req.params.user_id)
-  .exec()
-  .then((user: User) => {
-    AchievementModel.findByIdAndUpdate(req.params.achievement_id, req.body.achievement)
+export const editAchievement: RequestHandler<
+  AchievementParams,
+  unknown,
+  { achievement: Achievement }
+> = (req, res, next): void => {
+  AchievementModel.findByIdAndUpdate(
+    req.params.achievement_id,
+    req.body.achievement, {new: true}
+  )
     .exec()
-    .then((updatedAchievement) => res.json(user))
+    .then((updatedAchievement) => res.json(updatedAchievement))
     .catch((err) => res.json(err));
-  })
-  .catch((err: CallbackError) => res.json(err));
-
 };
 
 export const deleteAchievement: RequestHandler<AchievementParams> = (
@@ -81,14 +89,8 @@ export const deleteAchievement: RequestHandler<AchievementParams> = (
   res,
   next
 ): void => {
-  UserModel.findById(req.params.user_id)
-  .exec()
-  .then((user: User) => {
-    AchievementModel.findByIdAndDelete(req.params.achievement_id)
+  AchievementModel.findByIdAndDelete(req.params.achievement_id)
     .exec()
-    .then((deletedAchievement) => res.json(user))
+    .then((deletedAchievement) => res.json(deletedAchievement))
     .catch((err) => res.json(err));
-  })
-  .catch((err: CallbackError) => res.json(err));
- 
 };

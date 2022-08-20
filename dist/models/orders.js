@@ -18,6 +18,10 @@ const orderSchema = new mongoose_1.default.Schema({
         type: Date,
         default: Date.now()
     },
+    rockLink: {
+        type: String,
+        default: 'https://space.new/34x8kq8ivvse'
+    },
     budget: Number
 });
 exports.default = mongoose_1.default.model("Order", orderSchema);

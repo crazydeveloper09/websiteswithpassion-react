@@ -12,7 +12,9 @@ export const fetchAllCategories: RequestHandler<CategoryParams> = (
   res,
   next
 ) => {
-  CategoryModel.find({})
+  CategoryModel
+    .find({})
+    .populate('projects')
     .exec()
     .then((categories) => res.json(categories))
     .catch((err) => res.json(err));
@@ -23,11 +25,13 @@ export const createCategory: RequestHandler<
   unknown,
   Category
 > = (req, res, next) => {
+  console.log(req.body)
   let newCategory = new CategoryModel({
     title: req.body.title,
     titleEn: req.body.titleEn,
     color: req.body.color,
     link: req.body.titleEn.toLowerCase().split(" ").join("-"),
+    icon: req.body.icon
   });
   CategoryModel.create(newCategory)
     .then((createdCategory) => res.json(createdCategory))
@@ -61,7 +65,8 @@ export const editCategory: RequestHandler<
   unknown,
   { category: Category }
 > = (req, res, next) => {
-  CategoryModel.findByIdAndUpdate(req.params.category_id, req.body.category)
+  console.log(req.body)
+  CategoryModel.findByIdAndUpdate(req.params.category_id, req.body.category, {new: true})
     .exec()
     .then((updatedCategory) => {
       updatedCategory!.link = updatedCategory!.titleEn

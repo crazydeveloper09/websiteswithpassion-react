@@ -22,9 +22,12 @@ const createAnnouncement = (req, res, next) => {
 };
 exports.createAnnouncement = createAnnouncement;
 const editAnnouncement = (req, res, next) => {
-    announcement_1.default.findByIdAndUpdate(req.params.announcement_id, req.body.announcement)
+    announcement_1.default.findByIdAndUpdate(req.params.announcement_id, req.body.announcement, { new: true })
         .exec()
-        .then((updatedAnnouncement) => res.json(updatedAnnouncement))
+        .then((updatedAnnouncement) => {
+        console.log(req.body);
+        res.json(updatedAnnouncement);
+    })
         .catch((err) => res.json(err));
 };
 exports.editAnnouncement = editAnnouncement;

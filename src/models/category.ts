@@ -6,6 +6,7 @@ export interface Category {
     titleEn: string,
     color: string,
     link: string,
+    icon: string,
     projects?: mongoose.Schema.Types.ObjectId[] | Project[]
 }
 
@@ -14,6 +15,7 @@ const categorySchema = new mongoose.Schema<Category>({
     titleEn: String,
     color: String,
     link: String,
+    icon: String,
     projects: [
         {
             type: mongoose.Schema.Types.ObjectId,

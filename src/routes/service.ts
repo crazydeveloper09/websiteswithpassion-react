@@ -1,8 +1,10 @@
 import express from 'express';
-import { createService, editService, deleteService } from '../controllers/service';
+import { createService, editService, deleteService, fetchAllServices } from '../controllers/service';
 import { isLoggedIn } from '../helpers';
 
 const router = express.Router({ mergeParams: true })
+
+router.get("/", fetchAllServices)
 
 router.post("/", isLoggedIn, createService)
 

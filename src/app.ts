@@ -11,7 +11,7 @@ import indexRoutes from './routes/index';
 import ordersRoutes from './routes/orders';
 import projectRoutes from './routes/project';
 import serviceRoutes from './routes/service';
-import technologyRoutes from './routes'
+import technologyRoutes from './routes/technology'
 import { Strategy as LocalStrategy } from 'passport-local';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
@@ -23,7 +23,7 @@ const app = express();
 require('dotenv').config();
 
 // Connecting to database
-mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@websites-with-passion.x2c9m.mongodb.net/portfolio?retryWrites=true&w=majority`, {useNewUrlParser: true});
+mongoose.connect(process.env.DATABASE_URL!, {useNewUrlParser: true});
 
 // App configuration
 app.use(express.urlencoded({ extended: true }));
@@ -32,8 +32,7 @@ app.use(express.json())
 app.use(helmet({
     crossOriginResourcePolicy: false
 }))
-console.log(process.env.NODE_ENV === 'development' ? 'http://localhost:3000': 'https://silly-wiles-dbbbf9.netlify.app')
-app.use(cors({ origin: process.env.NODE_ENV === 'development' ? 'http://localhost:3000': 'https://silly-wiles-dbbbf9.netlify.app', credentials: true }));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 i18n.configure({
     locales: ["en", "de", "pl"],
    	register: global,

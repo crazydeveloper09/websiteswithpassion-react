@@ -8,6 +8,16 @@ type TechnologyParams = {
   technology_id: string;
 };
 
+export const fetchAllTechnologies: RequestHandler<TechnologyParams> = (
+  req,
+  res,
+  next
+): void => {
+  TechnologyModel.find({ user: req.params.user_id })
+    .then((technologies) => res.json(technologies))
+    .catch((err) => res.json(err));
+};
+
 export const createTechnology: RequestHandler<
   TechnologyParams,
   unknown,
@@ -16,14 +26,15 @@ export const createTechnology: RequestHandler<
   TechnologyModel.create({
     icon: req.body.icon,
     name: req.body.name,
+    user: req.params.user_id
   })
     .then((createdTechnology) => {
       UserModel.findById(req.params.user_id)
         .exec()
-        .then((user: User) => {
-          user.technologies.push(createdTechnology);
-          user.save();
-          res.json(user);
+        .then((user) => {
+          (user as User)!.technologies.push(createdTechnology);
+          (user as User)!.save();
+          res.json(createdTechnology);
         })
         .catch((err: CallbackError) => res.json(err));
     })
@@ -37,15 +48,10 @@ export const editTechnology: RequestHandler<
 > = (req, res, next): void => {
   TechnologyModel.findByIdAndUpdate(
     req.params.technology_id,
-    req.body.technology
+    req.body.technology, {new: true}
   )
     .exec()
-    .then((updatedTechnology) => {
-      UserModel.findById(req.params.user_id)
-        .exec()
-        .then((user: User) => res.json(user))
-        .catch((err: CallbackError) => res.json(err));
-    })
+    .then((updatedTechnology) => res.json(updatedTechnology))
     .catch((err) => res.json(err));
 };
 
@@ -56,11 +62,6 @@ export const deleteTechnology: RequestHandler<TechnologyParams> = (
 ): void => {
   TechnologyModel.findByIdAndRemove(req.params.technology_id)
     .exec()
-    .then((deletedTechnology) => {
-      UserModel.findById(req.params.user_id)
-        .exec()
-        .then((user: User) => res.json(user))
-        .catch((err: CallbackError) => res.json(err));
-    })
+    .then((deletedTechnology) => res.json(deletedTechnology))
     .catch((err) => res.json(err));
 };

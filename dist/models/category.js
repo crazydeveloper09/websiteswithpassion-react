@@ -9,6 +9,7 @@ const categorySchema = new mongoose_1.default.Schema({
     titleEn: String,
     color: String,
     link: String,
+    icon: String,
     projects: [
         {
             type: mongoose_1.default.Schema.Types.ObjectId,

@@ -14,7 +14,11 @@ const serviceSchema = new mongoose.Schema<Service>({
     title: String,
     titleEn: String,
     description: String,
-    descriptionEn: String
+    descriptionEn: String,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }
 });
 
 export default mongoose.model<Service>("Service", serviceSchema)

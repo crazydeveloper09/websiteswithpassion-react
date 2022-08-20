@@ -28,10 +28,13 @@ export const editAnnouncement: RequestHandler<AnnouncementParams, unknown, { ann
 ): void => {
   AnnouncementModel.findByIdAndUpdate(
     req.params.announcement_id,
-    req.body.announcement
+    req.body.announcement, {new: true}
   )
     .exec()
-    .then((updatedAnnouncement) => res.json(updatedAnnouncement))
+    .then((updatedAnnouncement) => {
+      console.log(req.body)
+      res.json(updatedAnnouncement)
+    })
     .catch((err) => res.json(err));
 };
 

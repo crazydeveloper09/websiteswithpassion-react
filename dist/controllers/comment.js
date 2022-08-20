@@ -7,10 +7,12 @@ exports.deleteComment = exports.createComment = void 0;
 const project_1 = __importDefault(require("../models/project"));
 const comment_1 = __importDefault(require("../models/comment"));
 const createComment = (req, res, next) => {
+    console.log(req.params);
     project_1.default
-        .findById(req.params.project_id)
+        .findById(req.body.project._id)
         .exec()
         .then((project) => {
+        console.log(project);
         comment_1.default
             .create({
             text: req.body.text,
@@ -21,6 +23,9 @@ const createComment = (req, res, next) => {
             .then(createdComment => {
             project.reviews.push(createdComment._id);
             project.save();
+            console.log(createdComment);
+            console.log(project === null || project === void 0 ? void 0 : project.reviews);
+            res.json(createdComment);
         })
             .catch(err => res.json(err));
     })

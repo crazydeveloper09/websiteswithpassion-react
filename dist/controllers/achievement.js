@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteAchievement = exports.editAchievement = exports.editAchievementMainPicture = exports.createAchievement = void 0;
+exports.deleteAchievement = exports.editAchievement = exports.editAchievementMainPicture = exports.createAchievement = exports.fetchAllUserAchievements = void 0;
 const achievement_1 = __importDefault(require("../models/achievement"));
 const user_1 = __importDefault(require("../models/user"));
 const cloudinary_1 = __importDefault(require("cloudinary"));
@@ -12,8 +12,15 @@ cloudinary_1.default.v2.config({
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+const fetchAllUserAchievements = (req, res, next) => {
+    achievement_1.default.find({ user: req.params.user_id })
+        .exec()
+        .then((achievements) => res.json(achievements))
+        .catch((err) => res.json(err));
+};
+exports.fetchAllUserAchievements = fetchAllUserAchievements;
 const createAchievement = (req, res, next) => {
-    cloudinary_1.default.v2.uploader.upload(req.file.path, function (result) {
+    cloudinary_1.default.v2.uploader.upload(req.file.path, function (err, result) {
         user_1.default.findById(req.params.user_id)
             .exec()
             .then((user) => {
@@ -21,11 +28,12 @@ const createAchievement = (req, res, next) => {
                 title: req.body.title,
                 titleEn: req.body.titleEn,
                 picture: result.secure_url,
+                user: req.params.user_id,
             })
                 .then((achievement) => {
                 user.achievements.push(achievement._id);
                 user.save();
-                res.json(user);
+                res.json(achievement);
             })
                 .catch((err) => res.json(err));
         })
@@ -34,44 +42,29 @@ const createAchievement = (req, res, next) => {
 };
 exports.createAchievement = createAchievement;
 const editAchievementMainPicture = (req, res, next) => {
-    cloudinary_1.default.v2.uploader.upload(req.file.path, function (result) {
-        user_1.default.findById(req.params.user_id)
+    cloudinary_1.default.v2.uploader.upload(req.file.path, function (err, result) {
+        achievement_1.default.findById(req.params.achievement_id)
             .exec()
-            .then((user) => {
-            achievement_1.default.findById(req.params.achievement_id)
-                .exec()
-                .then((achievement) => {
-                achievement.picture = result.secure_url;
-                achievement.save();
-                res.json(user);
-            })
-                .catch((err) => res.json(err));
+            .then((achievement) => {
+            achievement.picture = result.secure_url;
+            achievement.save();
+            res.json(achievement);
         })
             .catch((err) => res.json(err));
     });
 };
 exports.editAchievementMainPicture = editAchievementMainPicture;
 const editAchievement = (req, res, next) => {
-    user_1.default.findById(req.params.user_id)
+    achievement_1.default.findByIdAndUpdate(req.params.achievement_id, req.body.achievement, { new: true })
         .exec()
-        .then((user) => {
-        achievement_1.default.findByIdAndUpdate(req.params.achievement_id, req.body.achievement)
-            .exec()
-            .then((updatedAchievement) => res.json(user))
-            .catch((err) => res.json(err));
-    })
+        .then((updatedAchievement) => res.json(updatedAchievement))
         .catch((err) => res.json(err));
 };
 exports.editAchievement = editAchievement;
 const deleteAchievement = (req, res, next) => {
-    user_1.default.findById(req.params.user_id)
+    achievement_1.default.findByIdAndDelete(req.params.achievement_id)
         .exec()
-        .then((user) => {
-        achievement_1.default.findByIdAndDelete(req.params.achievement_id)
-            .exec()
-            .then((deletedAchievement) => res.json(user))
-            .catch((err) => res.json(err));
-    })
+        .then((deletedAchievement) => res.json(deletedAchievement))
         .catch((err) => res.json(err));
 };
 exports.deleteAchievement = deleteAchievement;

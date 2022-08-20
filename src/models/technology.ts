@@ -8,7 +8,11 @@ export interface Technology {
 
 const technologySchema = new mongoose.Schema<Technology>({
     icon: String,
-    name: String
+    name: String,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }
 })
 
-export default mongoose.model<Technology>("Technology");
+export default mongoose.model<Technology>("Technology", technologySchema);

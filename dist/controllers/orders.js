@@ -76,7 +76,7 @@ const sendOfferOrder = (req, res, next) => {
 };
 exports.sendOfferOrder = sendOfferOrder;
 const editOrder = (req, res, next) => {
-    orders_1.default.findByIdAndUpdate(req.params.order_id, req.body.order)
+    orders_1.default.findByIdAndUpdate(req.params.order_id, req.body.order, { new: true })
         .exec()
         .then((updatedOrder) => res.json(updatedOrder))
         .catch((err) => res.json(err));

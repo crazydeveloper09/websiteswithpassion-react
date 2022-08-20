@@ -8,6 +8,16 @@ type ServiceParams = {
   service_id: string;
 };
 
+export const fetchAllServices: RequestHandler<ServiceParams> = (
+  req,
+  res,
+  next
+): void => {
+  ServiceModel.find({ user: req.params.user_id })
+    .then((services) => res.json(services))
+    .catch((err) => res.json(err));
+};
+
 export const createService: RequestHandler<ServiceParams, unknown, Service> = (
   req,
   res,
@@ -19,14 +29,15 @@ export const createService: RequestHandler<ServiceParams, unknown, Service> = (
     titleEn: req.body.titleEn,
     description: req.body.description,
     descriptionEn: req.body.descriptionEn,
+    user: req.params.user_id
   })
     .then((createdService) => {
       UserModel.findById(req.params.user_id)
         .exec()
-        .then((user: User) => {
-          user.services.push(createdService);
-          user.save();
-          res.json(user);
+        .then((user) => {
+          (user as User)!.services.push(createdService);
+          (user as User)!.save();
+          res.json(createdService);
         })
         .catch((err: CallbackError) => res.json(err));
     })
@@ -38,14 +49,9 @@ export const editService: RequestHandler<
   unknown,
   { service: Service }
 > = (req, res, next): void => {
-  ServiceModel.findByIdAndUpdate(req.params.service_id, req.body.service)
+  ServiceModel.findByIdAndUpdate(req.params.service_id, req.body.service, {new: true})
     .exec()
-    .then((updatedService) => {
-      UserModel.findById(req.params.user_id)
-        .exec()
-        .then((user: User) => res.json(user))
-        .catch((err: CallbackError) => res.json(err));
-    })
+    .then((updatedService) => res.json(updatedService))
     .catch((err) => res.json(err));
 };
 
@@ -56,11 +62,6 @@ export const deleteService: RequestHandler<ServiceParams> = (
 ): void => {
   ServiceModel.findByIdAndRemove(req.params.service_id)
     .exec()
-    .then((deletedService) => {
-      UserModel.findById(req.params.user_id)
-        .exec()
-        .then((user: User) => res.json(user))
-        .catch((err: CallbackError) => res.json(err));
-    })
+    .then((deletedService) => res.json(deletedService))
     .catch((err) => res.json(err));
 };

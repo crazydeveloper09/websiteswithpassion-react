@@ -12,7 +12,8 @@ export interface Order {
     websiteTitle: string,
     orderDate: Date,
     budget: number,
-    isSent: boolean
+    isSent: boolean,
+    rockLink: string | "https://space.new/34x8kq8ivvse",
 }
 
 const orderSchema = new mongoose.Schema<Order>({
@@ -28,6 +29,10 @@ const orderSchema = new mongoose.Schema<Order>({
     orderDate: {
         type: Date,
         default: Date.now()
+    },
+    rockLink: {
+        type: String,
+        default: 'https://space.new/34x8kq8ivvse'
     },
     budget: Number
 });

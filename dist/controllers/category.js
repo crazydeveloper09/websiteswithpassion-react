@@ -7,18 +7,22 @@ exports.deleteCategory = exports.editCategory = exports.addProjectToCategory = e
 const category_1 = __importDefault(require("../models/category"));
 const project_1 = __importDefault(require("../models/project"));
 const fetchAllCategories = (req, res, next) => {
-    category_1.default.find({})
+    category_1.default
+        .find({})
+        .populate('projects')
         .exec()
         .then((categories) => res.json(categories))
         .catch((err) => res.json(err));
 };
 exports.fetchAllCategories = fetchAllCategories;
 const createCategory = (req, res, next) => {
+    console.log(req.body);
     let newCategory = new category_1.default({
         title: req.body.title,
         titleEn: req.body.titleEn,
         color: req.body.color,
         link: req.body.titleEn.toLowerCase().split(" ").join("-"),
+        icon: req.body.icon
     });
     category_1.default.create(newCategory)
         .then((createdCategory) => res.json(createdCategory))
@@ -44,7 +48,8 @@ const addProjectToCategory = (req, res, next) => {
 };
 exports.addProjectToCategory = addProjectToCategory;
 const editCategory = (req, res, next) => {
-    category_1.default.findByIdAndUpdate(req.params.category_id, req.body.category)
+    console.log(req.body);
+    category_1.default.findByIdAndUpdate(req.params.category_id, req.body.category, { new: true })
         .exec()
         .then((updatedCategory) => {
         updatedCategory.link = updatedCategory.titleEn

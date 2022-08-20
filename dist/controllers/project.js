@@ -7,6 +7,7 @@ exports.deleteProject = exports.editProject = exports.addPictureToProjectGallery
 const project_1 = __importDefault(require("../models/project"));
 const category_1 = __importDefault(require("../models/category"));
 const cloudinary_1 = __importDefault(require("cloudinary"));
+require('dotenv').config();
 cloudinary_1.default.v2.config({
     cloud_name: "syberiancats",
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -32,7 +33,7 @@ const fetchAllProjects = (req, res, next) => {
 };
 exports.fetchAllProjects = fetchAllProjects;
 const createProject = (req, res, next) => {
-    cloudinary_1.default.v2.uploader.upload(req.file.path, function (result) {
+    cloudinary_1.default.v2.uploader.upload(req.file.path, function (err, result) {
         let newProject = new project_1.default({
             title: req.body.title,
             description: req.body.description,
@@ -52,7 +53,7 @@ const createProject = (req, res, next) => {
 };
 exports.createProject = createProject;
 const editProjectMainPhoto = (req, res, next) => {
-    cloudinary_1.default.v2.uploader.upload(req.file.path, function (result) {
+    cloudinary_1.default.v2.uploader.upload(req.file.path, function (err, result) {
         project_1.default.findById(req.params.project_id)
             .exec()
             .then((project) => {
@@ -66,7 +67,7 @@ const editProjectMainPhoto = (req, res, next) => {
 };
 exports.editProjectMainPhoto = editProjectMainPhoto;
 const addPictureToProjectGallery = (req, res, next) => {
-    cloudinary_1.default.v2.uploader.upload(req.file.path, function (result) {
+    cloudinary_1.default.v2.uploader.upload(req.file.path, function (err, result) {
         project_1.default.findById(req.params.project_id)
             .exec()
             .then((project) => {
@@ -80,7 +81,8 @@ const addPictureToProjectGallery = (req, res, next) => {
 };
 exports.addPictureToProjectGallery = addPictureToProjectGallery;
 const editProject = (req, res, next) => {
-    project_1.default.findByIdAndUpdate(req.params.project_id, req.body.project)
+    project_1.default.findByIdAndUpdate(req.params.project_id, req.body.project, { new: true })
+        .populate("reviews")
         .exec()
         .then((updatedProject) => {
         updatedProject.edited = Date.now();

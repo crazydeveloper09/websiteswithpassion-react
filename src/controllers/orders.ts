@@ -16,7 +16,7 @@ async function sendEmail(
 ) {
   const DOMAIN = "websiteswithpassion.pl";
   const mg = mailgun({
-    apiKey: process.env!.API_KEY!,
+    apiKey: process.env.API_KEY!,
     domain: DOMAIN,
     host: "api.eu.mailgun.net",
   });
@@ -101,7 +101,7 @@ export const editOrder: RequestHandler<
   unknown,
   { order: Order }
 > = (req, res, next) => {
-  OrderModel.findByIdAndUpdate(req.params.order_id, req.body.order)
+  OrderModel.findByIdAndUpdate(req.params.order_id, req.body.order, {new: true})
     .exec()
     .then((updatedOrder) => res.json(updatedOrder))
     .catch((err) => res.json(err));
