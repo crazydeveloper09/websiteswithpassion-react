@@ -20,13 +20,13 @@ const Footer: React.FC = () => {
         <footer className="footer">
             <SectionHeader> Skontaktuj się ze mną </SectionHeader>
             <div className="footer__icons">
-                <a href={user.fbLink}>
+                <a href={user?.fbLink}>
                     <Icon class="fab fa-facebook fa-lg icon" />
                 </a>
-                <a href={user.igLink}>
+                <a href={user?.igLink}>
                     <Icon class="fab fa-instagram fa-lg icon" />
                 </a>
-                <a href={`mailto: ${user.email}`}>
+                <a href={`mailto: ${user?.email}`}>
                     <Icon class="fas fa-envelope fa-lg icon" />
                 </a>
             </div>
