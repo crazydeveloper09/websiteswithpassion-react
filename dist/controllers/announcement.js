@@ -25,7 +25,6 @@ const editAnnouncement = (req, res, next) => {
     announcement_1.default.findByIdAndUpdate(req.params.announcement_id, req.body.announcement, { new: true })
         .exec()
         .then((updatedAnnouncement) => {
-        console.log(req.body);
         res.json(updatedAnnouncement);
     })
         .catch((err) => res.json(err));
