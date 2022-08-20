@@ -20,7 +20,7 @@ const AboutSection: React.FC = () => {
     const currentUser = useSelector(selectLoggedInUser);
     
 
-    if(isLoading && !user!.achievements) {
+    if(isLoading) {
         return (
             <Loading />
         )
