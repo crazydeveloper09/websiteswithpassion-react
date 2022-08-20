@@ -31,7 +31,7 @@ const AboutSection: React.FC = () => {
     return (
         <section className="about">
             <SectionHeader>Poznaj mnie bliżej</SectionHeader>
-            <Description class="description">{user!.about}</Description>
+            <Description class="description">{user?.about}</Description>
             { currentUser && <Button class="button button-grey" type="link" redirect={`/about/${currentUser._id}/edit`}>Edytuj informacje</Button> }
         </section>
     )
