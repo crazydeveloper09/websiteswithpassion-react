@@ -32,7 +32,6 @@ export const editAnnouncement: RequestHandler<AnnouncementParams, unknown, { ann
   )
     .exec()
     .then((updatedAnnouncement) => {
-      console.log(req.body)
       res.json(updatedAnnouncement)
     })
     .catch((err) => res.json(err));
