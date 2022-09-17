@@ -1,7 +1,10 @@
 @import '../../../palette.scss';
 @import '../../../fonts.scss';
+@import '../../../mixins';
   
 .button {
+
+  @include margin();
   text-align: center;
   font-family: $inter;
   padding: 10px 25px;
@@ -9,9 +12,7 @@
   border: none;
   text-decoration: none;
   font-weight: 700;
-  &.margin {
-    margin-left: 10px;
-  }
+  
   
   &.button-blue {
     background-color: $primary;

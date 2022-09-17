@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
@@ -8,22 +8,29 @@ import HeaderForm from "../../../components/common/HeaderForm/HeaderForm";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { addOrder } from "../ordersSlice";
 import { useSearchParams } from "react-router-dom";
-import { selectAllServices } from "../../services/serviceSlice";
+import { loadServices, selectAllServices } from "../../services/serviceSlice";
+import { useTranslation } from "react-i18next";
+import LocaleContext from "../../../LocaleContext";
 
 const NewOrder: React.FC = () => {
     const dispatch = useAppDispatch();
+
+
     const [type, setType] = useState<string>("Nowa strona");
     const { isLoading, hasError, errMessage } = useAppSelector((state) => state.orders)
     const navigate = useNavigate()
     const { register, handleSubmit } = useForm<Order>();
-    const services = useSelector(selectAllServices);
+    const { t } = useTranslation();
+    const { locale } = useContext(LocaleContext)
     const [searchParams] = useSearchParams();
 
     const chosenService = searchParams.get('service');
 
     useEffect(() => {
+        dispatch(loadServices());
+    }, [dispatch])
 
-    }, [type])
+    const services = useSelector(selectAllServices);
 
     const changeType = (e: any) => {
         setType(e.target.value)
@@ -38,37 +45,37 @@ const NewOrder: React.FC = () => {
         
     } 
     return (
-        <HeaderForm title="Zamów usługę" height="100%">
+        <HeaderForm title={`${t('Zamów usługę')}`} height="100%">
             {hasError && <p className="error">{errMessage}</p>}
             <form onSubmit={handleSubmit(onSubmit)}>
                 
-                <Field label="Wybierz usługę">
+                <Field label={`${t('Wybierz usługę')}`}>
                     <select {...register("type")} className="form-select" onChange={changeType}>
                         { chosenService && <option value={chosenService}>{chosenService}</option> }
-                        { services && services.map(service => <option value={service.title} key={service._id}>{service.title}</option>) }
+                        { services && services.map(service => <option value={service.title} key={service._id}>{locale === 'pl' ? service.title : service.titleEn}</option>) }
                     </select>
                 </Field>
-                <Field label="Nazwa strony">
-                    <input type="text" {...register("websiteTitle")} className="form-control" placeholder="Nazwa strony" />
+                <Field label={`${t('Nazwa strony')}`}>
+                    <input type="text" {...register("websiteTitle")} className="form-control" placeholder={`${t('Nazwa strony')}`} />
                 </Field>
-                { (type === "Aktualizacja" || type === "update") && <Field label="Link do aktualnej wersji">
-                    <input type="text" {...register("previousWebsite")} className="form-control" placeholder="Link do aktualnej wersji" />
+                { (type === "Aktualizacja" || type === "update") && <Field label={`${t('Link do aktualnej wersji')}`}>
+                    <input type="text" {...register("previousWebsite")} className="form-control" placeholder={`${t('Link do aktualnej wersji')}`} />
                 </Field>}
                 
-                <Field label="Czego oczekujesz po stronie">
-                    <textarea {...register("whatYouWish")} className="form-control" placeholder="Czego oczekujesz"></textarea>
+                <Field label={`${t('Twoje oczekiwania')}`}>
+                    <textarea {...register("whatYouWish")} className="form-control" placeholder={`${t('Twoje oczekiwania')}`}></textarea>
                 </Field>
-                <Field label="Maksymalny budżet">
-                    <input type="number" {...register("budget")} className="form-control" placeholder="Maksymalny budżet" />
+                <Field label={`${t('Maksymalny budżet')}`}>
+                    <input type="number" {...register("budget")} className="form-control" placeholder={`${t('Maksymalny budżet')}`} />
                 </Field>
-                <Field label="Imię i nazwisko">
-                    <input type="text" {...register("name")} className="form-control" placeholder="Imię i nazwisko" />
+                <Field label={`${t('Imię i nazwisko')}`}>
+                    <input type="text" {...register("name")} className="form-control" placeholder={`${t('Imię i nazwisko')}`} />
                 </Field>
-                <Field label="Email kontaktowy">
-                    <input type="email" {...register("email")} className="form-control" placeholder="Email kontaktowy" />
+                <Field label={`${t('Email kontaktowy')}`}>
+                    <input type="email" {...register("email")} className="form-control" placeholder={`${t('Email kontaktowy')}`} />
                 </Field>
                 
-                <input type="submit" value="Zamów usługę" className="button button-grey" />
+                <input type="submit" value={`${t('Zamów usługę')}`} className="button button-grey" />
             </form>
         </HeaderForm>
     )

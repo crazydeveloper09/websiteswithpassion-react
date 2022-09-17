@@ -27,3 +27,12 @@
         margin: 25px 0;
     }
 }
+
+@media (max-width: 572px) {
+    .website-orders {
+        &__buttons a{
+            display: block;
+            margin-top: 15px;
+        }
+    }
+}

@@ -1,6 +1,7 @@
 import { Rating, styled } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import Field from "../../components/common/Field/Field";
@@ -28,6 +29,7 @@ export const StyledRating = styled(Rating)({
 const AddReview: React.FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const [stars, setStars] = useState<number>(0)
     const { isLoading, hasError, errMessage } = useAppSelector((state) => state.projects)
     const { project_id } = useParams();
@@ -50,7 +52,7 @@ const AddReview: React.FC = () => {
     console.log(projects)
 
     return (
-        <HeaderForm title={`Dodaj opinię do projektu ${selectedProject?.title}`} height="100%">
+        <HeaderForm title={`${t('Dodaj opinię do projektu')} ${selectedProject?.title}`} height="100%">
             {hasError && <p className="error">{errMessage}</p>}
             <form onSubmit={handleSubmit(onAddReview)}>
                 
@@ -66,13 +68,13 @@ const AddReview: React.FC = () => {
                 
                     
                 
-                <Field label="Imię autora">
-                    <input type="text" {...register("author")} placeholder="Nazwa" className="form-control" />
+                <Field label={t('Imię autora')}>
+                    <input type="text" {...register("author")} placeholder={t('Imię autora')} className="form-control" />
                 </Field>
-                <Field label="Opinia">
-                    <textarea {...register("text")} placeholder="Opis" className="form-control" />
+                <Field label={t('Opinia')}>
+                    <textarea {...register("text")} placeholder={t('Opinia')} className="form-control" />
                 </Field>
-                <input type="submit" value="Dodaj opinię" className="button button-grey" />
+                <input type="submit" value={t('Dodaj opinię')} className="button button-grey" />
             </form>
         </HeaderForm>
     )

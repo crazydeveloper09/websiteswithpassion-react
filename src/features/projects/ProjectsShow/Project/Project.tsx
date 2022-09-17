@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Description from "../../../../components/common/Description/Description";
 import Icon from "../../../../components/common/Icon/Icon";
@@ -11,10 +11,14 @@ import { useSelector } from "react-redux";
 import { selectLoggedInUser } from "../../../user/userSlice";
 import { deleteProject } from "../../projectsSlice";
 import Button from "../../../../components/common/Button/Button";
+import LocaleContext from "../../../../LocaleContext";
+import { useTranslation } from "react-i18next";
 
 
 const Project: React.FC<{ project: IProject }> = ({ project }) => {
   const dispatch = useAppDispatch()
+  const { locale } = useContext(LocaleContext);
+  const { t } = useTranslation();
   useEffect(() => {}, [dispatch]);
 
   const currentUser = useSelector(selectLoggedInUser);
@@ -34,7 +38,7 @@ const Project: React.FC<{ project: IProject }> = ({ project }) => {
                 to={`/projects/category/${category.link}`}
                 style={{ color: category.color, textDecoration: "none" }}
               >
-                {category.title},
+                { locale === 'pl' ? category.title : category.titleEn}, {" "}
               </Link>
             ))}
           </div>
@@ -43,7 +47,7 @@ const Project: React.FC<{ project: IProject }> = ({ project }) => {
             <Icon
               class="fas fa-tasks icon-project"
             />
-            Status: {project?.status}
+            Status: { locale === 'pl' ? project?.status : project?.statusEn }
           </div>
 
           <div>
@@ -57,13 +61,13 @@ const Project: React.FC<{ project: IProject }> = ({ project }) => {
             <Icon
               class="fas fa-clock icon-project"
             />
-            Ostatnia aktualizacja: {project?.edited ? new Date(project?.edited).toLocaleDateString() :new Date(project?.added).toLocaleDateString()}
+            {t('Ostatnia aktualizacja')}: {project?.edited ? new Date(project?.edited).toLocaleDateString() :new Date(project?.added).toLocaleDateString()}
           </div>
 
         </div>
 
         <Description class="description text-justify">
-          {project?.description}
+        { locale === 'pl' ? project?.description : project?.en}
         </Description>
 
         { currentUser && (
@@ -90,7 +94,7 @@ const Project: React.FC<{ project: IProject }> = ({ project }) => {
         ) }
       </div>
       <div className="project-show--gallery">
-        <h4>Galeria</h4>
+        <h4>{t('Galeria')}</h4>
         {project?.pictures?.length !== 0 ? (
           <div className="pictures">
           
@@ -106,7 +110,7 @@ const Project: React.FC<{ project: IProject }> = ({ project }) => {
         )}
       </div>
       <div className="project-show--reviews">
-        <h4>Opinie o {project?.title}</h4>
+        <h4>{t('Opinie o')} {project?.title}</h4>
         <Button type="link" redirect={`/projects/${project?._id}/reviews/new`} class="button button-grey project-show__addReview">Dodaj opinię</Button>
         {project?.reviews.length !== 0 ? (
           <div style={{ height: "400px", overflowY: "scroll" }}>

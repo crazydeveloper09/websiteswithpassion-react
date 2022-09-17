@@ -28,6 +28,7 @@ const Order: React.FC<{ order: IOrder; handleDelete: Function }> = ({
         </p>
 
         <details className="order-card__description">
+          
           <strong>{order.whatYouWish}</strong>
           <summary>Wymagania</summary>
         </details>

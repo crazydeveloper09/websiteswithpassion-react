@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import './SectionHeader.scss';
 
 interface SectionHeaderProps {
@@ -7,8 +8,9 @@ interface SectionHeaderProps {
 }
 
 const SectionHeader: React.FC<SectionHeaderProps> = props => { 
+    const { t } = useTranslation();
     return (
-        <h2 className="section-header" style={props.style}>{props.children}</h2>
+        <h2 className="section-header" style={props.style}>{t(props.children)}</h2>
     );
 }
 

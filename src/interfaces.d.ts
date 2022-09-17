@@ -69,7 +69,8 @@ export interface ProjectForm {
     status: string,
     link: string,
 	en: string,
-	statusEn: string
+	statusEn: string,
+    categories: string[]
 }
 
 export interface Service {

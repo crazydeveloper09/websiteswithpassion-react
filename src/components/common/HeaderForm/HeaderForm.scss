@@ -8,7 +8,7 @@
     padding: 30px 64px;
     &__info {
         @include flex-justify-wrap(space-between, center, wrap);
-        box-shadow: $box-shadow-blue;
+        border: 7px solid $yellow;
         background: $secondary;
         width: 98%;
         height: 100%;

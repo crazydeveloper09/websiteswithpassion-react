@@ -6,6 +6,12 @@
       padding: 64px 15px;
     }
   }
+
+@mixin margin() {
+  @media (min-width: 992px) {
+    margin-right: 10px;
+  }
+}
   
   @mixin flex-justify-wrap($justify, $align, $wrap){
     display: flex;

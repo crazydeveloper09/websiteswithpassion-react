@@ -186,6 +186,7 @@ const sliceOptions = {
           );
           foundedProject = (action.payload) as unknown as Project;
           foundedProject.reviews.push(action.payload as unknown as Comment);
+          state.all = state.all.map((project) => project._id === foundedProject!._id ? foundedProject! : project);
           state.isLoading = false;
           state.hasError = false;
         }

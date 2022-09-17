@@ -8,9 +8,11 @@ import { useAppDispatch } from "../../hooks";
 import './Footer.scss';
 import Icon from "../common/Icon/Icon";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Footer: React.FC = () => {
     const dispatch = useAppDispatch();
+    const { t } = useTranslation();
     useEffect(() => {
       dispatch(loadUser())
     }, [dispatch]) 
@@ -18,7 +20,7 @@ const Footer: React.FC = () => {
     const user = useSelector(selectUserInfo);
     return (
         <footer className="footer">
-            <SectionHeader> Skontaktuj się ze mną </SectionHeader>
+            <SectionHeader>{t('Skontaktuj się ze mną')}</SectionHeader>
             <div className="footer__icons">
                 <a href={user?.fbLink}>
                     <Icon class="fab fa-facebook fa-lg icon" />
@@ -31,10 +33,10 @@ const Footer: React.FC = () => {
                 </a>
             </div>
             <p className="footer_copyright">
-                Websites With Passion &copy; Wszelkie prawa zastrzeżone
+                Websites With Passion &copy; {t('Wszelkie prawa zastrzeżone')}
             </p>
             <Link to="/login" className="footer__panel">
-                panel administracyjny
+                {t('panel administracyjny')}
             </Link>
         </footer>
     )

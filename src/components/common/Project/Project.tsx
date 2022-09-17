@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Description from "../Description/Description";
 import Icon from "../Icon/Icon";
 import "./Project.scss";
 import { Project as IProject, Category } from "../../../interfaces";
+import LocaleContext from "../../../LocaleContext";
 
 const Project: React.FC<{ project: IProject, category: Category }> = ({ project, category }) => {
   const link = `/projects/${project.subpageLink}`;
   const categoryLink = `/projects/category/${category?.link}`;
+  const { locale } = useContext(LocaleContext)
 
   return (
     <div className="project-card">
@@ -33,12 +35,12 @@ const Project: React.FC<{ project: IProject, category: Category }> = ({ project,
               class="fas fa-tag icon-project"
               styles={{ color: category?.color }}
             />
-            {category?.title}
+            { locale === 'pl' ? category?.title : category?.titleEn}
           </Link>
         </div>
 
         <Description class="description text-justify">
-          {`${project.description.substring(0, 200)}...`}
+        { locale === 'pl' ? `${project.description.substring(0, 200)}...` : `${project.en.substring(0, 200)}...`}
         </Description>
 
         

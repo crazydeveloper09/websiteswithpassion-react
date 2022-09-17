@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation';
 import IndexView from './IndexView';
@@ -29,14 +29,20 @@ import EditachievementMainPhoto from './features/achievements/EditAchievementMai
 import NewCategory from './features/categories/NewCategory';
 import EditCategory from './features/categories/EditCategory';
 import AddReview from './features/projects/AddProjectReview';
+import Loading from './components/common/Loading/Loading';
+import LocaleContext from './LocaleContext';
+import i18n from './i18n';
 
 
 
 const App: React.FC = () => {
-  
+    const [locale, setLocale] = useState<string>(i18n.language);
+    i18n.on('languageChanged', (lng) => setLocale(i18n.language));
   
     return (
-      <Router>
+      <LocaleContext.Provider value={{locale, setLocale}}>
+        <Suspense fallback={<Loading />}>
+         <Router>
           <Navigation />
       
           <main>  
@@ -74,6 +80,10 @@ const App: React.FC = () => {
          
         
       </Router>
+      </Suspense>
+      </LocaleContext.Provider>
+      
+     
       
     );
   

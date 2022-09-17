@@ -1,4 +1,5 @@
 import React, { MouseEventHandler } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import './Button.scss';
 
@@ -11,10 +12,11 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
+    const { t } = useTranslation();
     if(props.type === "link"){
         return (
             <Link className={props.class} to={props.redirect!}>
-                {props.children}
+                {t(props.children)}
             </Link>
         );
        
