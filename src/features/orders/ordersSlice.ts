@@ -11,7 +11,7 @@ export const loadOrders = createAsyncThunk(
   async (arg, thunkAPI) => {
     try {
       const orders = await axios.get(
-        `${API_URL}/website-orderss`
+        `${API_URL}/website-orders`
       );
       return orders.data; 
     } catch(err: any) {
