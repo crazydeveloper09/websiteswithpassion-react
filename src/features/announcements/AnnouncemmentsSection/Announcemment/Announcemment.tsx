@@ -21,7 +21,7 @@ const Announcement: React.FC<{announcement: IAnnouncement, currentUser: User}> =
             <div className="announcement">
                 <Description class="description">{locale === 'pl' ? announcement.pl : announcement.en}</Description>
                 <FaTimes onClick={onClose} />
-                {currentUser.username && 
+                {currentUser?.username && 
                     <div className="announcement__editing">
                         <Link to={`/announcements/${announcement._id}/edit`}>Edytuj</Link>
                         <Link to="/" onClick={() => dispatch(deleteAnnouncement(announcement._id))}>Usuń</Link>
