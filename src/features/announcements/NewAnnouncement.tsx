@@ -19,6 +19,7 @@ const NewAnnouncement: React.FC = () => {
             navigate("/");
         }
     }
+    document.title = `Nowe ogłoszenie | Websites With Passion`;
     return (
         <HeaderForm title={`Dodaj ogłoszenie`}>
             {hasError && <p className="error">{errMessage}</p>}

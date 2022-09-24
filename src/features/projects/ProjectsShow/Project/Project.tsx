@@ -70,7 +70,7 @@ const Project: React.FC<{ project: IProject }> = ({ project }) => {
         { locale === 'pl' ? project?.description : project?.en}
         </Description>
 
-        { currentUser && (
+        { currentUser?.username && (
           <>
             <h4>Modyfikacja</h4>
             <ul className="description" style={{color: 'white'}}>

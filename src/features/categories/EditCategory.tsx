@@ -31,6 +31,7 @@ const EditCategory: React.FC = () => {
         }
         
     }
+    document.title = `Edytuj kategorię ${selectedCategory?.title} | Websites With Passion`;
     return (
         <HeaderForm title={`Edytuj kategorię`}>
             {hasError && <p className="error">{errMessage}</p>}

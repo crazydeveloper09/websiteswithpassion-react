@@ -40,7 +40,7 @@ const EditService: React.FC = () => {
     }
     
   };
-
+  document.title = `Edytuj usługę ${selectedService?.title} | Websites With Passion`;
   return (
     <HeaderForm title={`Edytuj usługę ${selectedService?.title}`}>
         {hasError && <p className="error">{errMessage}</p>}

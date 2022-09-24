@@ -16,6 +16,7 @@ const IndexView: React.FC = () => {
   })
 
   const lastAnnouncement = useSelector(selectLastAnnouncement);
+  document.title = `Home | Websites With Passion`;
   return (
     <>
       <Header />

@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Order as IOrder } from "../../../../interfaces";
 import Button from "../../../../components/common/Button/Button";
 import "./Order.scss";
+import { useSelector } from "react-redux";
+import { selectLoggedInUser } from "../../../user/userSlice";
+import { useTranslation } from "react-i18next";
+import LocaleContext from "../../../../LocaleContext";
 
-const Order: React.FC<{ order: IOrder; handleDelete: Function }> = ({
+const Order: React.FC<{ order: IOrder; handleDelete?: Function }> = ({
   order,
   handleDelete,
 }) => {
+  const { locale } = useContext(LocaleContext);
+  const { t } = useTranslation();
+  
   const onDelete = () => {
-    handleDelete(order);
+    handleDelete!(order);
   };
+
+  const isLoggedIn = useSelector(selectLoggedInUser);
   return (
     <div className="order-card">
       <div className="order-card--info">
@@ -21,32 +30,33 @@ const Order: React.FC<{ order: IOrder; handleDelete: Function }> = ({
           </p>
         )}
         <p className="order-card__description">
-          Budżet: <strong>{order.budget}</strong>
+         {t('Budżet')}: <strong>{order.budget}</strong>
         </p>
         <p className="order-card__description">
-          typ: <strong>{order.type}</strong>
+          {t('Typ')}: <strong>{order.type}</strong>
         </p>
 
         <details className="order-card__description">
           
           <strong>{order.whatYouWish}</strong>
-          <summary>Wymagania</summary>
+          <summary>{t('Wymagania')}</summary>
         </details>
         <br />
         <p className="order-card__description">
           Status:{" "}
           <strong>
-            {order.status} | {order.statusEn}
+          { locale === 'pl' ? order.status : order.statusEn}
           </strong>
         </p>
         <p className="order-card__description">
-          Imię i nazwisko: <strong> {order.name} </strong>
+          {t('Imię i nazwisko')}: <strong> {order.name} </strong>
         </p>
         <p className="order-card__description">
           Email: <strong>{order.email}</strong>
         </p>
         <div>
-          <Button
+          {isLoggedIn && <>
+            <Button
             type="link"
             redirect={`/website-orders/${order._id}/edit`}
             class="button button-yellow"
@@ -66,6 +76,8 @@ const Order: React.FC<{ order: IOrder; handleDelete: Function }> = ({
           </Button>
           <br />
           <br />
+          </>}
+          
           {(order.status === "Oferta zaakceptowana" ||
             order.statusEn === "Order has been accepted") && (
             <a
@@ -74,7 +86,7 @@ const Order: React.FC<{ order: IOrder; handleDelete: Function }> = ({
               target={'_blank'}
               rel={'noreferrer'}
             >
-              Zobacz postępy
+              {t('Zobacz postępy')}
             </a>
           )}
         </div>

@@ -26,7 +26,7 @@ const EditachievementMainPhoto: React.FC = () => {
             navigate("/");
         }
     }
-
+    document.title = `Edytuj zdjęcie główne osiągnięcia ${selectedAchievement?.title} | Websites With Passion`;
     return (
         <HeaderForm title={`Edytuj zdjęcie główne osiągnięcia ${selectedAchievement?.title}`}>
             {hasError && <p className="error">{errMessage}</p>}

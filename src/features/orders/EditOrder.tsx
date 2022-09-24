@@ -18,6 +18,7 @@ const EditOrder: React.FC = () => {
     const navigate = useNavigate();
     const { order_id } = useParams<string>();
     const { register, handleSubmit } = useForm<Order>();
+    
 
     const onEditOrder: SubmitHandler<Order> = (data) => {
         
@@ -34,6 +35,7 @@ const EditOrder: React.FC = () => {
 
     const orders = useSelector(selectAllOrders);
     const selectedOrder = orders.find(order => order._id === order_id);
+    document.title = `Edytuj zamówienie ${selectedOrder?.websiteTitle} | Websites With Passion`;
 
     if(isLoading) {
         return (

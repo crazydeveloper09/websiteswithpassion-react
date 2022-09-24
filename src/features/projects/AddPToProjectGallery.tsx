@@ -17,6 +17,7 @@ const AddPictureToProjectGallery: React.FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const selectedProject = projects.find(project => project._id === project_id);
     const { register, handleSubmit } = useForm<ProjectForm>();
+    document.title = `Dodaj zdjęcie do projektu ${selectedProject?.title} | Websites With Passion`;
     const onAddPictureToProjectGallery: SubmitHandler<ProjectForm> = (data) => {
         const formData = new FormData();
         formData.append("picture", data.profile[0])

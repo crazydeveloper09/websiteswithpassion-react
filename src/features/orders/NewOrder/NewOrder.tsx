@@ -25,6 +25,7 @@ const NewOrder: React.FC = () => {
     const [searchParams] = useSearchParams();
 
     const chosenService = searchParams.get('service');
+    document.title = `Nowe zamówienie | Websites With Passion`;
 
     useEffect(() => {
         dispatch(loadServices());

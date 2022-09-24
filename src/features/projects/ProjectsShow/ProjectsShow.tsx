@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
-import { selectAllProjects, loadProjects  } from "../projectsSlice";
+import { loadSingleProject, selectSingleProject  } from "../projectsSlice";
 import Project from './Project/Project';
 import Loading from '../../../components/common/Loading/Loading';
 import { useAppSelector, useAppDispatch } from '../../../hooks';
@@ -13,11 +13,11 @@ const ProjectsShow: React.FC = () => {
     const dispatch = useAppDispatch();
     const { isLoading, hasError, errMessage } = useAppSelector((state) => state.projects);
     useEffect(() => {
-      dispatch(loadProjects());
-    }, [dispatch]) ;
+      dispatch(loadSingleProject(projectLink!));
+    }, [dispatch, projectLink]) ;
     
-    const projects = useSelector(selectAllProjects);
-   
+    const project = useSelector(selectSingleProject);
+    document.title = `${project?.title} | Websites With Passion`;
    
     if(isLoading) {
       return (
@@ -27,13 +27,10 @@ const ProjectsShow: React.FC = () => {
     if(hasError) {
       return <Error message={errMessage!} />;
     }
-    const project = projects.find(({ subpageLink }) => subpageLink === projectLink);
-    console.log(project)
+
     return (
-        <div className="row">
-            <div className="col-lg-12">
-                <Project project={project!} />
-            </div>
+        <div className="project">
+          <Project project={project!} />
         </div>
     )
 }

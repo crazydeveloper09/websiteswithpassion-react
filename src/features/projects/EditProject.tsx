@@ -32,6 +32,7 @@ const EditProject: React.FC = () => {
       link: selectedProject?.link,
     },
   });
+  document.title = `Edytuj projekt ${selectedProject?.title} | Websites With Passion`;
   const onEditProject: SubmitHandler<ProjectForm> = (data) => {
     dispatch(editProject({ ...data, _id: project_id! }));
     if (!isLoading && !hasError) {
@@ -94,7 +95,7 @@ const EditProject: React.FC = () => {
         </Field>
         <Field label="Kategorie">
           <select {...register("categories")} className="form-select" multiple>
-            {categories.map((category) => (
+            {categories?.map((category) => (
               <option
                 value={category._id}
                 selected={

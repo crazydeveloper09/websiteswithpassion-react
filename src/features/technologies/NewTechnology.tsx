@@ -19,6 +19,7 @@ const NewTechnology: React.FC = () => {
             navigate("/");
         }
     }
+    document.title = `Nowa technologia | Websites With Passion`;
     return (
         <HeaderForm title={`Dodaj technologię`}>
             {hasError && <p className="error">{errMessage}</p>}

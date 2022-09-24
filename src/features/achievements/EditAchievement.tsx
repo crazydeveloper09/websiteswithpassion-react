@@ -28,7 +28,7 @@ const EditAchievement: React.FC = () => {
             navigate("/");
         }
     }
-
+    document.title = `Edytuj osiągnięcie ${selectedAchievement?.title} | Websites With Passion`;
     return (
         <HeaderForm title="Edytuj osiągnięcie">
             {hasError && <p className="error">{errMessage}</p>}

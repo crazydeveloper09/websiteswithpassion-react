@@ -14,6 +14,7 @@ const OrderDescription: React.FC = () => {
   let [searchParams] = useSearchParams();
   const { t } = useTranslation();
   const success = searchParams.get("success");
+  document.title = `Oferta | Websites With Passion`;
   return (
     <section className="website-orders">
       {success && (
@@ -24,7 +25,7 @@ const OrderDescription: React.FC = () => {
       )}
       <h2>{t("Szukasz kogoś do napisania strony?")}</h2>
       <h1>{t("Trafiłeś do właściwej osoby")}!</h1>
-      {currentUser && (
+      {currentUser?.username && (
         <Link to="/website-orders" className="button button-blue">
           Zobacz zamówienia
         </Link>

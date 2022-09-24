@@ -34,6 +34,7 @@ const EditTechnology: React.FC = () => {
       navigate("/");
     }
   };
+  document.title = `Edytuj technologię ${selectedTechnology?.name} | Websites With Passion`;
   return (
     <HeaderForm title={`Edytuj technologię ${selectedTechnology?.name}`}>
         {hasError && <p className="error">{errMessage}</p>}

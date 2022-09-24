@@ -24,6 +24,8 @@ const Login: React.FC = () => {
       }
     };
 
+    document.title = 'Logowanie | Websites With Passion';
+
     return (
       <HeaderForm title="Logowanie do panelu">
         {hasError && <p className="error">{errMessage}</p>}

@@ -24,6 +24,7 @@ const ProjectsIndex = () => {
   const projects = useSelector(selectAllProjects);
   const categories = useSelector(selectAllCategories);
   const loggedInUser = useSelector(selectLoggedInUser);
+  document.title = 'Moje projekty | Websites With Passion';
 
   if (isLoading) {
     return <Loading />;
@@ -34,7 +35,7 @@ const ProjectsIndex = () => {
   return (
     <section className="projects">
       <SubpageTitle>Moje projekty</SubpageTitle>
-      {loggedInUser && (
+      {loggedInUser?.username && (
         <Button
           type="link"
           redirect={`/projects/new`}

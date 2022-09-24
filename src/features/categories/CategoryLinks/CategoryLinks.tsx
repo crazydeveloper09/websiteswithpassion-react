@@ -22,7 +22,7 @@ const CategoryLinks: React.FC<CategoryLinksProps> = ({
   const { locale } = useContext(LocaleContext)
   return (
     <div className="category__links">
-      {currentUser && (
+      {currentUser?.username && (
         <div className="category__link">
           <Link to={`/projects/category/new`}>
             <i className="fas fa-plus"></i>
@@ -31,7 +31,7 @@ const CategoryLinks: React.FC<CategoryLinksProps> = ({
           </Link>
         </div>
       )}
-      {categories.map((category) => (
+      {categories?.map((category) => (
         <div className="category__link">
           <Link
             to={`/projects/category/${category.link}`}
@@ -44,7 +44,7 @@ const CategoryLinks: React.FC<CategoryLinksProps> = ({
           </Link>
         </div>
       ))}
-      {currentUser && activeCategory && (
+      {currentUser?.username && activeCategory && (
         <>
           <div className="category__link">
             <Link to={`/projects/category/${activeCategory._id}/edit`}>

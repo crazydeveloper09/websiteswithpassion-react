@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { API_URL } from "../..";
 import { logOutUser, selectLoggedInUser } from "../../features/user/userSlice";
 import { useAppDispatch } from "../../hooks";
 import "./Navigation.scss";
@@ -29,7 +30,7 @@ const Navigation: React.FC = () => {
 
   const handleLogOut = () => {
     axios
-      .post("http://localhost:5000/logout")
+      .post(`${API_URL}/logout`)
       .then((res) => dispatch(logOutUser()))
       .catch((err) => console.log(err.message));
   };
@@ -47,7 +48,7 @@ const Navigation: React.FC = () => {
   return (
     <nav>
       <NavLink to="/">
-        <img src="/yellow500.png" alt="logo" id="logo" />
+        <img src="/wwpyellow.svg" alt="logo" id="logo" />
       </NavLink>
       <ul className="nav-links" ref={menuRef}>
         <li>
@@ -64,7 +65,7 @@ const Navigation: React.FC = () => {
 
         <li>
           <NavLink className="nav-link" to="/website-orders/description" onClick={collapseMenu}>
-            {t('Zamówienia')}
+            {t('Oferta')}
           </NavLink>
         </li>
 
@@ -73,7 +74,7 @@ const Navigation: React.FC = () => {
             {t('Wesprzyj')}
           </a>
         </li>
-        {isLoggedIn && (
+        {isLoggedIn?.username && (
           <li>
             <button className="nav-link" onClick={handleLogOut}>
               Wyloguj

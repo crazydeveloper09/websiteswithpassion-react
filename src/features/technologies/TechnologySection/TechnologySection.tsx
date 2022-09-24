@@ -31,7 +31,7 @@ const TechnologySection: React.FC = () => {
   return (
     <section className="technology">
       <SectionHeader>Poznaj technologie, które używam</SectionHeader>
-      {loggedInUser && (
+      {loggedInUser?.username && (
         <Button
           type="link"
           redirect={`/about/${loggedInUser._id}/technologies/new`}

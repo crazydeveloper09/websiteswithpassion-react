@@ -16,6 +16,7 @@ const NewProject: React.FC = () => {
     const categories = useSelector(selectAllCategories);
     const { isLoading, hasError, errMessage } = useAppSelector((state) => state.projects)
     const { register, handleSubmit } = useForm<Project>()
+    document.title = `Dodaj projekt | Websites With Passion`;
     const onAddProject: SubmitHandler<Project> = (data) => {
         const formData = new FormData();
         formData.append("profile", (data.profile as unknown as FileList)[0]);

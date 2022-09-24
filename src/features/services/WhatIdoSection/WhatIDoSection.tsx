@@ -23,7 +23,7 @@ const WhatIDoSection: React.FC = () => {
       <SectionHeader style={{ display: "block" }}>
         Zobacz czym się zajmuję
       </SectionHeader>
-      {currentUser && (
+      {currentUser?.username && (
         <Button
           type="link"
           redirect={`/about/${currentUser._id}/services/new`}

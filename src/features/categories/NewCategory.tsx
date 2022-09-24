@@ -20,6 +20,7 @@ const NewCategory: React.FC = () => {
         }
         
     }
+    document.title = `Nowa kategoria | Websites With Passion`;
     return (
         <HeaderForm title={`Dodaj kategorię`}>
               {hasError && <p className="error">{errMessage}</p>}

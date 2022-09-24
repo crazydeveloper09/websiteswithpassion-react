@@ -18,7 +18,7 @@ const Technology: React.FC<TechnologyProps> = ({ technology, currentUser }) => {
             <div className="technology-div">
                 <Icon class={technology.icon} />
                 <Description class="description">{technology.name}</Description>
-                { currentUser && <>
+                { currentUser?.username && <>
                     <Link to={`/about/${currentUser._id}/technologies/${technology._id}/edit`}>Edytuj</Link>
                     <Link to="/" onClick={() => dispatch(deleteTechnology(technology._id))}>Usuń</Link>
                 </> }

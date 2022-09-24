@@ -35,6 +35,7 @@ const SendOffer: React.FC = () => {
 
     const orders = useSelector(selectAllOrders);
     const selectedOrder = orders.find(order => order._id === order_id);
+    document.title = 'Wyślij ofertę | Websites With Passion';
 
     if(isLoading) {
         return (

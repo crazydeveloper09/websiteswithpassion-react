@@ -6,9 +6,8 @@ import SubpageTitle from "../../components/common/SubpageTitle/SubpageTitle";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import "../projects/ProjectsIndex/ProjectsIndex.scss";
 import Project from "../../components/common/Project/Project";
-import { loadCategories, selectAllCategories } from "./categoriesSlice";
+import { loadCategories, loadProjectsFromGivenCategory, selectAllCategories, selectAllProjectsFromGivenCategory } from "./categoriesSlice";
 import Alert, { ALERT_TYPES } from "../../components/common/Alert/Alert";
-import { loadProjects } from "../projects/projectsSlice";
 import CategoryLinks from "./CategoryLinks/CategoryLinks";
 import Error from "../../components/common/Error/Error";
 
@@ -18,11 +17,17 @@ const CategoryShow: React.FC = () => {
   const { category_link } = useParams();
   useEffect(() => {
     dispatch(loadCategories());
-    dispatch(loadProjects())
   }, [dispatch]);
 
   const categories = useSelector(selectAllCategories);
   const currentCategory = categories.find(({ link }) => link === category_link);
+  document.title = `Projekty w kategorii ${currentCategory?.title} | Websites With Passion`;
+
+  useEffect(() => {
+    dispatch(loadProjectsFromGivenCategory(currentCategory?._id!))
+  }, [dispatch, currentCategory])
+
+  const projects = useSelector(selectAllProjectsFromGivenCategory)
   if (isLoading) {
     return <Loading />;
   }
@@ -36,7 +41,7 @@ const CategoryShow: React.FC = () => {
             <CategoryLinks categories={categories} activeCategory={currentCategory} />
             <div className="projects-info">
               <div className="projects-cards">
-                  {currentCategory.projects?.map((project) => (
+                  {projects && projects?.map((project) => (
                   <Project
                       project={project}
                       key={project._id}

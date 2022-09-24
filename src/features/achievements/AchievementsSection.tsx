@@ -20,7 +20,7 @@ const AchievementsSection: React.FC = () => {
     return (
         <section className="achievements">
             <SectionHeader>Zobacz moje osiągnięcia</SectionHeader>
-            {currentUser && <Button type="link" class="button button-grey" redirect="/achievements/new">Dodaj osiągnięcie</Button>}
+            {currentUser?.username && <Button type="link" class="button button-grey" redirect="/achievements/new">Dodaj osiągnięcie</Button>}
             <div className="achievement-div">
                 {achievements && achievements.length && achievements.map((achievement) => 
                     <Achievement achievement={achievement} />

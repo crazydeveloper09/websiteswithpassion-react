@@ -28,6 +28,7 @@ const EditAnnouncement: React.FC = () => {
             navigate("/");
         }
     }
+    document.title = `Edytuj ogłoszenie | Websites With Passion`;
     return (
         <HeaderForm title={`Edytuj ogłoszenie`}>
             {hasError && <p className="error">{errMessage}</p>}

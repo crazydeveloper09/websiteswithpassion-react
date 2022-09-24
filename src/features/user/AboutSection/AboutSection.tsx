@@ -34,7 +34,7 @@ const AboutSection: React.FC = () => {
         <section className="about">
             <SectionHeader>Poznaj mnie bliżej</SectionHeader>
             <Description class="description">{locale === 'pl' ? user.about : user.en}</Description>
-            { currentUser && <Button class="button button-grey" type="link" redirect={`/about/${currentUser._id}/edit`}>Edytuj informacje</Button> }
+            { currentUser?.username && <Button class="button button-grey" type="link" redirect={`/about/${currentUser._id}/edit`}>Edytuj informacje</Button> }
         </section>
     )
 }

@@ -15,7 +15,7 @@ const Header: React.FC = () => {
                         {t('O mnie')}
                     </a>
                     <Link to={'/projects'} className="button button-black margin">
-                        {t('Projects')}
+                        {t('Projekty')}
                     </Link>
                     <Link to={'/website-orders/description'} className="button button-black margin">
                         {t('Oferta')}

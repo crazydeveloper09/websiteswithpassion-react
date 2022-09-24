@@ -98,11 +98,29 @@ export const sendOffer = createAsyncThunk(
   }
 );
 
+export const checkStatus = createAsyncThunk(
+  "orders/checkStatus",
+  async (email: string, thunkAPI) => {
+    try {
+      const foundOrders = await axios.get(
+        `${API_URL}/website-orders/check-status?email=${email}`
+      );
+      return foundOrders.data;
+    } catch(err: any) {
+      if(!err.response) {
+        throw err;
+      }
+      return thunkAPI.rejectWithValue(`${err.response.status} - ${err.response.statusText}`)
+    }
+  }
+);
+
 interface OrdersState {
   all: Order[];
   isLoading: boolean;
   hasError: boolean;
   errMessage: string;
+  checkedOrders?: Order[]; 
 }
 
 const initialState: OrdersState = {
@@ -145,6 +163,14 @@ const sliceOptions = {
           state.hasError = false;
         }
       )
+      .addCase(
+        checkStatus.fulfilled,
+        (state: OrdersState, action: PayloadAction<Order[]>) => {
+          state.checkedOrders = action.payload;
+          state.isLoading = false;
+          state.hasError = false;
+        }
+      )
       .addMatcher(
         isAnyOf(editOrder.fulfilled, sendOffer.fulfilled),
         (state: OrdersState, action: PayloadAction<Order>) => {
@@ -163,7 +189,8 @@ const sliceOptions = {
           addOrder.pending,
           editOrder.pending,
           deleteOrder.pending,
-          sendOffer.pending
+          sendOffer.pending,
+          checkStatus.pending
         ),
         (state: OrdersState) => {
           state.isLoading = true;
@@ -176,7 +203,8 @@ const sliceOptions = {
           addOrder.rejected,
           editOrder.rejected,
           deleteOrder.rejected,
-          sendOffer.rejected
+          sendOffer.rejected,
+          checkStatus.rejected
         ),
         (state: OrdersState, action: PayloadAction<string>) => {
           state.isLoading = false;
@@ -191,6 +219,10 @@ export const ordersSlice = createSlice(sliceOptions);
 
 export const selectAllOrders = (state: RootState) => {
   return state.orders.all;
+};
+
+export const selectCheckedOrders = (state: RootState) => {
+  return state.orders.checkedOrders;
 };
 
 

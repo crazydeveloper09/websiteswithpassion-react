@@ -1,0 +1,47 @@
+@import '../../../mixins';
+@import '../../../palette';
+@import '../../../fonts';
+
+.check-status {
+    @include section_padding();
+
+    &__orders {
+        margin-top: 20px;
+        @include flex-justify-wrap(flex-start, center, wrap);
+        gap: 20px;
+    }
+
+    &__form {
+        @include flex-justify-wrap(space-between, center, nowrap);
+
+        & button {
+            padding: 7px 12px;
+            text-align: center;
+            background: $headers-color;
+            color: $nav-link-color;
+            border: none;
+            border-radius: 0px 5px 5px 0px;
+        }
+    }
+
+    &__empty {
+        color: $secondary;
+        font-family: $poppins;
+        text-align: center;
+        padding: 64px;
+        &--icon {
+            color: $nav-link-color;
+            background: $secondary;
+            font-size: 75px;
+            padding: 15px;
+            border-radius: 50%;
+        }
+
+       
+
+        &--message {
+            margin-top: 30px;
+            font-size: 30px;
+        }
+    }
+}

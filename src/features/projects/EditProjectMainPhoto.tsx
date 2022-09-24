@@ -17,6 +17,7 @@ const EditProjectMainPhoto: React.FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const selectedProject = projects.find(project => project._id === project_id);
     const { register, handleSubmit } = useForm<ProjectForm>();
+    document.title = `Edytuj zdjęcie główne projektu ${selectedProject?.title} | Websites With Passion`;
     const onEditProjectMainPhoto: SubmitHandler<ProjectForm> = (data) => {
         const formData = new FormData();
         formData.append("picture", data.profile[0])

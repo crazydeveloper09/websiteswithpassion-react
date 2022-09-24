@@ -11,7 +11,7 @@ const AnnouncementSection: React.FC<{lastAnnouncement: IAnnouncement}> = ({ last
     return (
         <section className="announcements">
             <Announcement announcement={lastAnnouncement} currentUser={currentUser!} />
-            {currentUser && <Button type="link" class="button button-grey" redirect="/announcements/new">Dodaj ogłoszenie</Button>}
+            {currentUser?.username && <Button type="link" class="button button-grey" redirect="/announcements/new">Dodaj ogłoszenie</Button>}
         </section>
     )
 }

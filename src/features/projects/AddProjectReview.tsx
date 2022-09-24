@@ -49,7 +49,7 @@ const AddReview: React.FC = () => {
     const projects = useSelector(selectAllProjects);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const selectedProject = projects.find(project => project._id === project_id);
-    console.log(projects)
+    document.title = `Dodaj opinię do projektu ${selectedProject?.title} | Websites With Passion`;
 
     return (
         <HeaderForm title={`${t('Dodaj opinię do projektu')} ${selectedProject?.title}`} height="100%">

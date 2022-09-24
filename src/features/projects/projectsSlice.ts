@@ -22,6 +22,22 @@ export const loadProjects = createAsyncThunk(
   }
 );
 
+export const loadSingleProject = createAsyncThunk(
+  "projects/loadSingleProject",
+  async (subpageLink: string, thunkAPI) => {
+    try {
+      const project = await axios.get(`${API_URL}/projects/${subpageLink}`);
+      return project.data;
+    } catch(err: any) {
+      if(!err.response) {
+        throw err;
+      }
+      console.log(err.response)
+      return thunkAPI.rejectWithValue(`${err.response.status} - ${err.response.statusText}`)
+    }
+  }
+);
+
 export const deleteProject = createAsyncThunk(
   "projects/deleteProject",
   async (projectID: string, thunkAPI) => {
@@ -138,6 +154,7 @@ interface ProjectState {
   all: Project[];
   isLoading: boolean;
   hasError: boolean;
+  single?: Project;
   errMessage?: string;
 }
 
@@ -170,9 +187,17 @@ const sliceOptions = {
         }
       )
       .addCase(
+        loadSingleProject.fulfilled,
+        (state: ProjectState, action: PayloadAction<Project>) => {
+          state.single = action.payload;
+          state.isLoading = false;
+          state.hasError = false;
+        }
+      )
+      .addCase(
         editProject.fulfilled,
         (state: ProjectState, action: PayloadAction<Project>) => {
-          state.all = state.all.map((project) => project._id === action.payload._id ? action.payload : project)
+          state.single = action.payload;
           state.isLoading = false;
           state.hasError = false;
         }
@@ -195,8 +220,8 @@ const sliceOptions = {
         deleteProject.fulfilled,
         (state: ProjectState, action: PayloadAction<Project>) => {
           state.all = state.all.filter(
-            (Project) =>
-              Project._id !== (action.payload as Project)._id
+            (project) =>
+              project._id !== (action.payload as Project)._id
           );
           state.isLoading = false;
           state.hasError = false;
@@ -208,7 +233,8 @@ const sliceOptions = {
           addProject.pending,
           editProject.pending,
           deleteProject.pending,
-          addReview.pending
+          addReview.pending,
+          loadSingleProject.pending
         ),
         (state: ProjectState) => {
           state.isLoading = true;
@@ -221,7 +247,8 @@ const sliceOptions = {
           addProject.rejected,
           editProject.rejected,
           deleteProject.rejected,
-          addReview.rejected
+          addReview.rejected,
+          loadSingleProject.rejected
         ),
         (state: ProjectState, action: PayloadAction<string>) => {
           console.log(action)
@@ -237,6 +264,10 @@ export const projectsSlice = createSlice(sliceOptions);
 
 export const selectAllProjects = (state: RootState) => {
   return state.projects.all;
+};
+
+export const selectSingleProject = (state: RootState) => {
+  return state.projects.single;
 };
 
 export default projectsSlice.reducer;

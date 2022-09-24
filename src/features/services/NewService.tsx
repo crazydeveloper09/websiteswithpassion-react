@@ -19,7 +19,7 @@ const NewService: React.FC = () => {
             navigate("/");
         }
     }
-
+    document.title = `Nowa usługa | Websites With Passion`;
     return (
         <HeaderForm title="Dodaj usługę">
               {hasError && <p className="error">{errMessage}</p>}

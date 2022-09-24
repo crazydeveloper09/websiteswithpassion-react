@@ -30,7 +30,7 @@ const WhatIdo: React.FC<WhatIDoProps> = ({ service, currentUser }) => {
         <Link to={`/website-orders/new?service=${locale === 'pl' ? service.title : service.titleEn}`}>
             {t('Zamów usługę')} &#8594;
         </Link>
-        {currentUser && (
+        {currentUser?.username && (
             <>
             <br />
                 <Link

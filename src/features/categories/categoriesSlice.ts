@@ -2,7 +2,7 @@
 import { createAsyncThunk, createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 import { API_URL } from "../..";
-import { Category } from "../../interfaces";
+import { Category, Project } from "../../interfaces";
 import { RootState } from "../../store";
 
 export const loadCategories = createAsyncThunk(
@@ -10,8 +10,9 @@ export const loadCategories = createAsyncThunk(
     async (arg, thunkAPI) => {
       try {
         const categories = await axios.get(
-          `${API_URL}/projects/category`
+          `${API_URL}/projects/category/all`
         );
+        console.log(categories)
         return categories.data; 
       } catch(err: any) {
         if(!err.response) {
@@ -20,6 +21,23 @@ export const loadCategories = createAsyncThunk(
         return thunkAPI.rejectWithValue(`${err.response.status} - ${err.response.statusText}`)
       }
     }
+)
+
+export const loadProjectsFromGivenCategory = createAsyncThunk(
+  'categories/loadProjectsFromGivenCategory',
+  async (categoryID: string, thunkAPI) => {
+    try {
+      const projects = await axios.get(
+        `${API_URL}/projects/category/${categoryID}`
+      );
+      return projects.data; 
+    } catch(err: any) {
+      if(!err.response) {
+        throw err;
+      }
+      return thunkAPI.rejectWithValue(`${err.response.status} - ${err.response.statusText}`)
+    }
+  }
 )
 
 export const deleteCategory = createAsyncThunk(
@@ -87,6 +105,7 @@ interface CategoryState {
     all: Category[],
     hasError: boolean,
     isLoading: boolean,
+    projects?: Project[];
     errMessage?: string,
 }
 
@@ -106,6 +125,14 @@ const sliceOptions = {
             loadCategories.fulfilled,
             (state: CategoryState, action: PayloadAction<Category[]>) => {
               state.all = action.payload;
+              state.isLoading = false;
+              state.hasError = false;
+            }
+          )
+          .addCase(
+            loadProjectsFromGivenCategory.fulfilled,
+            (state: CategoryState, action: PayloadAction<Project[]>) => {
+              state.projects = action.payload;
               state.isLoading = false;
               state.hasError = false;
             }
@@ -146,7 +173,8 @@ const sliceOptions = {
               loadCategories.pending,
               addCategory.pending,
               editCategory.pending,
-              deleteCategory.pending
+              deleteCategory.pending,
+              loadProjectsFromGivenCategory.pending
             ),
             (state: CategoryState) => {
               state.isLoading = true;
@@ -158,7 +186,8 @@ const sliceOptions = {
               loadCategories.rejected,
               addCategory.rejected,
               editCategory.rejected,
-              deleteCategory.rejected
+              deleteCategory.rejected,
+              loadProjectsFromGivenCategory.rejected
             ),
             (state: CategoryState, action: PayloadAction<string>) => {
               state.isLoading = false;
@@ -173,7 +202,11 @@ export const categoriesSlice = createSlice(sliceOptions);
 
 
 export const selectAllCategories = (state: RootState) => {
-    return state.categories.all
+  return state.categories.all;
 };
+
+export const selectAllProjectsFromGivenCategory = (state: RootState) => {
+  return state.categories.projects
+}
 
 export default categoriesSlice.reducer;
