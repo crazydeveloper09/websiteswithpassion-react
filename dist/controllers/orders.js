@@ -30,9 +30,9 @@ const fetchAllOrders = (req, res, next) => {
 };
 exports.fetchAllOrders = fetchAllOrders;
 const checkStatusOrder = (req, res, next) => {
-    orders_1.default.findOne({ email: req.query.email })
+    orders_1.default.find({ email: req.query.email })
         .exec()
-        .then((order) => res.json(order))
+        .then((orders) => res.json(orders))
         .catch((err) => res.json(err));
 };
 exports.checkStatusOrder = checkStatusOrder;

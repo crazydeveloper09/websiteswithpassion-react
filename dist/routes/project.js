@@ -8,6 +8,7 @@ const project_1 = require("../controllers/project");
 const helpers_1 = require("../helpers");
 const router = express_1.default.Router();
 router.get("/", project_1.fetchAllProjects);
+router.get("/:project_link", project_1.fetchSingleProject);
 router.post("/", helpers_1.upload.single("profile"), project_1.createProject);
 router.post("/:project_id/edit/picture", helpers_1.upload.single("picture"), project_1.editProjectMainPhoto);
 router.post("/:project_id/add/picture", helpers_1.upload.single("picture"), project_1.addPictureToProjectGallery);

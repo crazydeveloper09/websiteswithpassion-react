@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCategory = exports.editCategory = exports.addProjectToCategory = exports.createCategory = exports.fetchAllCategories = void 0;
+exports.deleteCategory = exports.editCategory = exports.addProjectToCategory = exports.createCategory = exports.fetchAllProjectsFromGivenCategory = exports.fetchAllCategories = void 0;
 const category_1 = __importDefault(require("../models/category"));
 const project_1 = __importDefault(require("../models/project"));
 const fetchAllCategories = (req, res, next) => {
@@ -11,10 +11,24 @@ const fetchAllCategories = (req, res, next) => {
         .find({})
         .populate('projects')
         .exec()
-        .then((categories) => res.json(categories))
+        .then((categories) => {
+        console.log(categories);
+        res.json(categories);
+    })
         .catch((err) => res.json(err));
 };
 exports.fetchAllCategories = fetchAllCategories;
+const fetchAllProjectsFromGivenCategory = (req, res, next) => {
+    project_1.default
+        .find({ categories: req.params.category_id })
+        .populate('categories')
+        .exec()
+        .then((projects) => {
+        res.json(projects);
+    })
+        .catch((err) => res.json(err));
+};
+exports.fetchAllProjectsFromGivenCategory = fetchAllProjectsFromGivenCategory;
 const createCategory = (req, res, next) => {
     console.log(req.body);
     let newCategory = new category_1.default({

@@ -13,7 +13,7 @@ export interface Order {
     orderDate: Date,
     budget: number,
     isSent: boolean,
-    rockLink: string | "https://space.new/34x8kq8ivvse",
+    rockLink: string | "https://space.new/websiteswithpassion",
 }
 
 const orderSchema = new mongoose.Schema<Order>({
@@ -32,7 +32,7 @@ const orderSchema = new mongoose.Schema<Order>({
     },
     rockLink: {
         type: String,
-        default: 'https://space.new/34x8kq8ivvse'
+        default: 'https://space.new/websiteswithpassion'
     },
     budget: Number
 });

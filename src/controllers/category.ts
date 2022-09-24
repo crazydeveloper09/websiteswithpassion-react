@@ -7,7 +7,7 @@ type CategoryParams = {
   project_id?: string;
 };
 
-export const fetchAllCategories: RequestHandler<CategoryParams> = (
+export const fetchAllCategories: RequestHandler = (
   req,
   res,
   next
@@ -16,7 +16,25 @@ export const fetchAllCategories: RequestHandler<CategoryParams> = (
     .find({})
     .populate('projects')
     .exec()
-    .then((categories) => res.json(categories))
+    .then((categories) => {
+      console.log(categories);
+      res.json(categories)
+    })
+    .catch((err) => res.json(err));
+};
+export const fetchAllProjectsFromGivenCategory: RequestHandler = (
+  req,
+  res,
+  next
+) => {
+  Project
+    .find({categories: req.params.category_id as unknown as Category[]})
+    .populate('categories')
+    .exec()
+    .then((projects) => {
+      
+      res.json(projects)
+    })
     .catch((err) => res.json(err));
 };
 

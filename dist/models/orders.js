@@ -20,7 +20,7 @@ const orderSchema = new mongoose_1.default.Schema({
     },
     rockLink: {
         type: String,
-        default: 'https://space.new/34x8kq8ivvse'
+        default: 'https://space.new/websiteswithpassion'
     },
     budget: Number
 });

@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import ProjectModel, { Project } from "../models/project";
-import Category from "../models/category";
+import Category, { Category as CategoryI } from "../models/category";
 import cloudinary from "cloudinary";
 
 require('dotenv').config();
@@ -33,6 +33,20 @@ export const fetchAllProjects: RequestHandler = (req, res, next): void => {
     });
 };
 
+export const fetchSingleProject: RequestHandler = (req, res, next): void => {
+  ProjectModel.findOne({subpageLink: req.params.project_link})
+    .populate(["categories", "reviews"])
+    .exec(function (err, project) {
+      if (err) {
+        console.log(err);
+      } else {
+        
+          res.json(project);
+        
+      }
+    });
+};
+
 export const createProject: RequestHandler<unknown, unknown, Project> = (
   req,
   res,
@@ -52,7 +66,12 @@ export const createProject: RequestHandler<unknown, unknown, Project> = (
       statusEn: req.body.statusEn,
     });
     ProjectModel.create(newProject)
-      .then((createdProject) => res.json(createdProject))
+      .then((createdProject) => {
+        const categories = (req.body.categories as unknown as string).split(',');
+        createdProject.categories = [...categories as unknown as CategoryI[]];
+        createdProject.save();
+        res.json(createdProject)
+      })
       .catch((err) => res.json(err));
   });
 };

@@ -37,9 +37,9 @@ export const fetchAllOrders: RequestHandler = (req, res, next) => {
 };
 
 export const checkStatusOrder: RequestHandler = (req, res, next) => {
-  OrderModel.findOne({ email: req.query.email as string })
+  OrderModel.find({ email: req.query.email as string })
     .exec()
-    .then((order) => res.json(order))
+    .then((orders) => res.json(orders))
     .catch((err) => res.json(err));
 };
 

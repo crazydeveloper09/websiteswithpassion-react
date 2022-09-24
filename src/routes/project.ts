@@ -1,10 +1,11 @@
 import express from 'express';
-import { addPictureToProjectGallery, createProject, deleteProject, editProject, editProjectMainPhoto, fetchAllProjects } from '../controllers/project';
+import { addPictureToProjectGallery, createProject, deleteProject, editProject, editProjectMainPhoto, fetchAllProjects, fetchSingleProject } from '../controllers/project';
 import { isLoggedIn, upload } from '../helpers';
 
 const router = express.Router();
 
 router.get("/", fetchAllProjects)
+router.get("/:project_link", fetchSingleProject)
 
 router.post("/", upload.single("profile"), createProject)
 

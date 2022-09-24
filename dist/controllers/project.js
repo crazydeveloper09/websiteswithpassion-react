@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteProject = exports.editProject = exports.addPictureToProjectGallery = exports.editProjectMainPhoto = exports.createProject = exports.fetchAllProjects = void 0;
+exports.deleteProject = exports.editProject = exports.addPictureToProjectGallery = exports.editProjectMainPhoto = exports.createProject = exports.fetchSingleProject = exports.fetchAllProjects = void 0;
 const project_1 = __importDefault(require("../models/project"));
 const category_1 = __importDefault(require("../models/category"));
 const cloudinary_1 = __importDefault(require("cloudinary"));
@@ -32,6 +32,19 @@ const fetchAllProjects = (req, res, next) => {
     });
 };
 exports.fetchAllProjects = fetchAllProjects;
+const fetchSingleProject = (req, res, next) => {
+    project_1.default.findOne({ subpageLink: req.params.project_link })
+        .populate(["categories", "reviews"])
+        .exec(function (err, project) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.json(project);
+        }
+    });
+};
+exports.fetchSingleProject = fetchSingleProject;
 const createProject = (req, res, next) => {
     cloudinary_1.default.v2.uploader.upload(req.file.path, function (err, result) {
         let newProject = new project_1.default({
@@ -47,7 +60,12 @@ const createProject = (req, res, next) => {
             statusEn: req.body.statusEn,
         });
         project_1.default.create(newProject)
-            .then((createdProject) => res.json(createdProject))
+            .then((createdProject) => {
+            const categories = req.body.categories.split(',');
+            createdProject.categories = [...categories];
+            createdProject.save();
+            res.json(createdProject);
+        })
             .catch((err) => res.json(err));
     });
 };
