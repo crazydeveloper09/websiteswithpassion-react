@@ -34,6 +34,7 @@
         font-weight: 400;
     }
     &__links {
+
         text-align: center;
         margin-top: 10px;
         text-transform: uppercase;
@@ -49,6 +50,7 @@
 @media (max-width: 576px){
     .header {
         height: auto;
+        width: 100%;
         & a {
             display: block;
             width: 100%;
