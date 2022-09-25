@@ -17,6 +17,7 @@ const Project: React.FC<{ project: IProject, category: Category }> = ({ project,
         src={project.profile}
         alt={project.title}
         className="project-card__img"
+        crossOrigin='anonymous'
       />
 
       <div className="project-card--body">

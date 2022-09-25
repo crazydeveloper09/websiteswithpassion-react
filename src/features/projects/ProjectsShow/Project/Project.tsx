@@ -25,7 +25,7 @@ const Project: React.FC<{ project: IProject }> = ({ project }) => {
   return (
     <div className="project-show">
       <div className="project-show--photo">
-        <img src={project?.profile} alt={project?.title} className="projects-show__img" style={{ width: '100%'}} />
+        <img src={project?.profile} alt={project?.title} className="projects-show__img" style={{ width: '100%'}} crossOrigin='anonymous' />
       </div>
 
       <div className="project-show--informations">

@@ -19,7 +19,7 @@ const Achievement: React.FC<{ achievement: IAchievement }> = ({ achievement }) =
     return (
             <div className="achievement">
                 <h3 className='achievement__title'>{ locale === 'pl' ? achievement.title : achievement.titleEn }</h3>
-                <img src={achievement.picture} alt={achievement.title} className="achievement__img" />
+                <img src={achievement.picture} alt={achievement.title} className="achievement__img" crossOrigin='anonymous' />
                 {currentUser?.username && 
                     <div className="achievement__editing">
                         <Link to={`/achievements/${achievement._id}/edit`}>Edytuj</Link>
