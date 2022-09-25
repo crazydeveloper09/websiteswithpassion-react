@@ -112,7 +112,7 @@ const Project: React.FC<{ project: IProject }> = ({ project }) => {
       <div className="project-show--reviews">
         <h4>{t('Opinie o')} {project?.title}</h4>
         <Button type="link" redirect={`/projects/${project?._id}/reviews/new`} class="button button-grey project-show__addReview">Dodaj opinię</Button>
-        {project?.reviews.length !== 0 ? (
+        {project?.reviews?.length !== 0 ? (
           <div style={{ height: "400px", overflowY: "scroll" }}>
             {(project?.reviews as Comment[])?.map((review) => (
               <Review

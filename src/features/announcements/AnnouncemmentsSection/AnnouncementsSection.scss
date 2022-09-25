@@ -2,3 +2,10 @@
 .announcements {
     padding: 15px 64px;
 }
+
+@media (max-width: 992px) {
+    .announcements {
+        padding: 15px;
+    }
+    
+}
