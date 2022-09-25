@@ -30,6 +30,9 @@
 
 @media (max-width: 572px) {
     .website-orders {
+        & h1 {
+            font-size: 55px;
+        }
         &__buttons a{
             display: block;
             margin-top: 15px;

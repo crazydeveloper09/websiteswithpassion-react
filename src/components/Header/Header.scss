@@ -51,6 +51,9 @@
     .header {
         height: auto;
         width: 100%;
+        & h1 {
+            font-size: 60px;
+        }
         & a {
             display: block;
             width: 100%;
@@ -59,5 +62,4 @@
             padding: 64px 15px;
         }
     }
-       
 }
