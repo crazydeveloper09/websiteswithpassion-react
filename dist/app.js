@@ -32,7 +32,7 @@ app.use(express_1.default.json());
 app.use((0, helmet_1.default)({
     crossOriginResourcePolicy: false
 }));
-app.use((0, cors_1.default)({ origin: 'https://silly-wiles-dbbbf9.netlify.app', credentials: true }));
+app.use((0, cors_1.default)({ origin: 'https://www.websiteswithpassion.pl', credentials: true }));
 i18n_1.default.configure({
     locales: ["en", "de", "pl"],
     register: global,
