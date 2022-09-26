@@ -36,6 +36,7 @@ const Login: React.FC = () => {
               {...register("username")}
               className="form-control"
               placeholder="Nazwa użytkownika"
+              required
             />
           </Field>
           <Field label="Hasło">
@@ -44,6 +45,7 @@ const Login: React.FC = () => {
               {...register("password")}
               className="form-control"
               placeholder="Hasło"
+              required
             />
           </Field>
         

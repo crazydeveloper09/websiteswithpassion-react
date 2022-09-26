@@ -41,28 +41,28 @@ const NewProject: React.FC = () => {
               {hasError && <p className="error">{errMessage}</p>}
             <form onSubmit={handleSubmit(onAddProject)} encType="multipart/form-data">
                 <Field label="Nazwa">
-                    <input type="text" {...register("title")} placeholder="Nazwa" className="form-control" />
+                    <input type="text" {...register("title")} placeholder="Nazwa" className="form-control" required />
                 </Field>
                 <Field label="Opis">
-                    <textarea {...register("description")} placeholder="Opis" className="form-control" />
+                    <textarea {...register("description")} placeholder="Opis" className="form-control" required />
                 </Field>
                 <Field label="Opis po angielsku">
-                    <textarea {...register("en")} placeholder="Opis" className="form-control" />
+                    <textarea {...register("en")} placeholder="Opis" className="form-control" required />
                 </Field>
                 <Field label="Status">
-                    <input type="text" {...register("status")} placeholder="Status" className="form-control" />
+                    <input type="text" {...register("status")} placeholder="Status" className="form-control" required />
                 </Field>
                 <Field label="Status po angielsku">
-                    <input type="text" {...register("statusEn")} placeholder="Angielski status" className="form-control" />
+                    <input type="text" {...register("statusEn")} placeholder="Angielski status" className="form-control" required />
                 </Field>
                 <Field label="Link">
-                    <input type="text" {...register("link")} placeholder="Link" className="form-control" />
+                    <input type="text" {...register("link")} placeholder="Link" className="form-control" required />
                 </Field>
                 <Field label="Zdjęcie główne">
                     <input type="file" {...register("profile")} className="form-control" />
                 </Field>
                 <Field label="Kategorie">
-                    <select {...register("categories")} className="form-select" multiple>
+                    <select {...register("categories")} className="form-select" multiple required>
                         { categories.map((category) => <option value={category._id}>{category.title}</option>) }
                     </select>
                 </Field>

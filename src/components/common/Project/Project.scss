@@ -35,6 +35,7 @@
     &:hover {
       transform: scale(1.07);
       border: 1px solid $yellow;
+      overflow: hidden;
     }
 }
 

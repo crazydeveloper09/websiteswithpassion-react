@@ -30,7 +30,7 @@ const Order: React.FC<{ order: IOrder; handleDelete?: Function }> = ({
           </p>
         )}
         <p className="order-card__description">
-         {t('Budżet')}: <strong>{order.budget}</strong>
+         {t('Telefon')}: <a href={`tel:${order.phone}`}> <strong>{order.phone}</strong></a> 
         </p>
         <p className="order-card__description">
           {t('Typ')}: <strong>{order.type}</strong>

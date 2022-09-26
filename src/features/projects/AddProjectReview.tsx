@@ -69,10 +69,10 @@ const AddReview: React.FC = () => {
                     
                 
                 <Field label={t('Imię autora')}>
-                    <input type="text" {...register("author")} placeholder={t('Imię autora')} className="form-control" />
+                    <input type="text" {...register("author")} placeholder={t('Imię autora')} className="form-control" required />
                 </Field>
                 <Field label={t('Opinia')}>
-                    <textarea {...register("text")} placeholder={t('Opinia')} className="form-control" />
+                    <textarea {...register("text")} placeholder={t('Opinia')} className="form-control" required />
                 </Field>
                 <input type="submit" value={t('Dodaj opinię')} className="button button-grey" />
             </form>

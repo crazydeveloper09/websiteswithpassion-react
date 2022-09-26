@@ -48,10 +48,10 @@ const SendOffer: React.FC = () => {
               {hasError && <p className="error">{errMessage}</p>}
             <form onSubmit={handleSubmit(onSendOffer)}>
                 <Field label="Temat maila">
-                    <input type="text" {...register("text")}  className="form-control" placeholder="Temat maila" />
+                    <input type="text" {...register("text")}  className="form-control" placeholder="Temat maila" required />
                 </Field>
                 <Field label="Treść maila">
-                    <textarea {...register("topic")} rows={70} className="form-control" placeholder="Treść"></textarea>
+                    <textarea {...register("topic")} rows={70} className="form-control" placeholder="Treść" required></textarea>
                 </Field>
                 <input type="submit" value="Wyślij ofertę" className="button button-grey"/>
             </form>

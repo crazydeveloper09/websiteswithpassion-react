@@ -25,19 +25,19 @@ const NewService: React.FC = () => {
               {hasError && <p className="error">{errMessage}</p>}
             <form onSubmit={handleSubmit(onAddService)}>
                 <Field label="Ikona">
-                    <input type="text" {...register("icon")} placeholder="Ikona" className="form-control" />
+                    <input type="text" {...register("icon")} placeholder="Ikona" className="form-control" required />
                 </Field>
                 <Field label="Nazwa">
-                    <input type="text" {...register("title")} placeholder="Nazwa" className="form-control" />
+                    <input type="text" {...register("title")} placeholder="Nazwa" className="form-control" required />
                 </Field>
                 <Field label="Nazwa po angielsku">
-                    <input type="text" {...register("titleEn")} placeholder="Nazwa po angielsku" className="form-control" />
+                    <input type="text" {...register("titleEn")} placeholder="Nazwa po angielsku" className="form-control" required />
                 </Field>
                 <Field label="Opis">
-                    <input type="text" {...register("description")} placeholder="Opis" className="form-control" />
+                    <input type="text" {...register("description")} placeholder="Opis" className="form-control" required />
                 </Field>
                 <Field label="Opis po angielsku">
-                    <input type="text" {...register("descriptionEn")} placeholder="Opis po angielsku" className="form-control" />
+                    <input type="text" {...register("descriptionEn")} placeholder="Opis po angielsku" className="form-control" required />
                 </Field>
                 <input type="submit" value="Dodaj usługę" className="button button-grey" />
             </form>

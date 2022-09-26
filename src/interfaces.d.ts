@@ -39,7 +39,7 @@ export interface Order {
     type: string,
     websiteTitle: string,
     orderDate: Date,
-    budget: number,
+    phone:string,
     isSent: boolean,
     rockLink: string | "https://space.new/34x8kq8ivvse",
 }

@@ -51,29 +51,29 @@ const NewOrder: React.FC = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 
                 <Field label={`${t('Wybierz usługę')}`}>
-                    <select {...register("type")} className="form-select" onChange={changeType}>
+                    <select {...register("type")} className="form-select" onChange={changeType} required>
                         { chosenService && <option value={chosenService}>{chosenService}</option> }
                         { services && services.map(service => <option value={service.title} key={service._id}>{locale === 'pl' ? service.title : service.titleEn}</option>) }
                     </select>
                 </Field>
                 <Field label={`${t('Nazwa strony')}`}>
-                    <input type="text" {...register("websiteTitle")} className="form-control" placeholder={`${t('Nazwa strony')}`} />
+                    <input type="text" {...register("websiteTitle")} className="form-control" placeholder={`${t('Nazwa strony')}`} required />
                 </Field>
                 { (type === "Aktualizacja" || type === "update") && <Field label={`${t('Link do aktualnej wersji')}`}>
-                    <input type="text" {...register("previousWebsite")} className="form-control" placeholder={`${t('Link do aktualnej wersji')}`} />
+                    <input type="text" {...register("previousWebsite")} className="form-control" placeholder={`${t('Link do aktualnej wersji')}`}  required />
                 </Field>}
                 
                 <Field label={`${t('Twoje oczekiwania')}`}>
-                    <textarea {...register("whatYouWish")} className="form-control" placeholder={`${t('Twoje oczekiwania')}`}></textarea>
+                    <textarea {...register("whatYouWish")} className="form-control" placeholder={`${t('Twoje oczekiwania')}`} required></textarea>
                 </Field>
-                <Field label={`${t('Maksymalny budżet')}`}>
-                    <input type="number" {...register("budget")} className="form-control" placeholder={`${t('Maksymalny budżet')}`} />
+                <Field label={`${t('Telefon kontaktowy')}`}>
+                    <input type="tel" {...register("phone")} className="form-control" placeholder={`${t('Telefon kontaktowy')}`} required />
                 </Field>
                 <Field label={`${t('Imię i nazwisko')}`}>
-                    <input type="text" {...register("name")} className="form-control" placeholder={`${t('Imię i nazwisko')}`} />
+                    <input type="text" {...register("name")} className="form-control" placeholder={`${t('Imię i nazwisko')}`} required />
                 </Field>
                 <Field label={`${t('Email kontaktowy')}`}>
-                    <input type="email" {...register("email")} className="form-control" placeholder={`${t('Email kontaktowy')}`} />
+                    <input type="email" {...register("email")} className="form-control" placeholder={`${t('Email kontaktowy')}`} required />
                 </Field>
                 
                 <input type="submit" value={`${t('Zamów usługę')}`} className="button button-grey" />

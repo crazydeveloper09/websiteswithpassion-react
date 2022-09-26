@@ -37,22 +37,22 @@ const EditUser: React.FC = () => {
             {hasError && <p className="error">{errMessage}</p>}
             <form onSubmit={handleSubmit(onEditUser)}>
                 <Field label="Nazwa użytkownika">
-                    <input type="text" {...register("username")} placeholder="Nazwa użytkownika" className="form-control" />
+                    <input type="text" {...register("username")} placeholder="Nazwa użytkownika" className="form-control" required />
                 </Field>
                 <Field label="Opis">
-                    <textarea {...register("about")} placeholder="Opis" className="form-control" />
+                    <textarea {...register("about")} placeholder="Opis" className="form-control" required />
                 </Field>
                 <Field label="Opis po angielsku">
-                    <textarea {...register("en")} placeholder="Opis po angielsku" className="form-control" />
+                    <textarea {...register("en")} placeholder="Opis po angielsku" className="form-control" required />
                 </Field>
                 <Field label="Email">
-                    <input type="text" {...register("email")} placeholder="Email" className="form-control" />
+                    <input type="text" {...register("email")} placeholder="Email" className="form-control" required />
                 </Field>
                 <Field label="Status po angielsku">
-                    <input type="text" {...register("fbLink")} placeholder="Angielski status" className="form-control" />
+                    <input type="text" {...register("fbLink")} placeholder="Angielski status" className="form-control" required />
                 </Field>
                 <Field label="Link">
-                    <input type="text" {...register("igLink")} placeholder="Link" className="form-control" />
+                    <input type="text" {...register("igLink")} placeholder="Link" className="form-control" required/>
                 </Field>
                 <input type="submit" value="Edytuj użytkownika" className="button button-grey" />
             </form>

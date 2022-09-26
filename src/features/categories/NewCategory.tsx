@@ -26,16 +26,16 @@ const NewCategory: React.FC = () => {
               {hasError && <p className="error">{errMessage}</p>}
             <form onSubmit={handleSubmit(onAddCategory)}>
                 <Field label="Nazwa po polsku">
-                    <textarea {...register("title")} className="form-control" placeholder="Nazwa po polsku"></textarea>
+                    <textarea {...register("title")} className="form-control" placeholder="Nazwa po polsku" required></textarea>
                 </Field>
                 <Field label="Nazwa po angielsku">
-                    <textarea {...register("titleEn")} className="form-control" placeholder="Nazwa po angielsku"></textarea>
+                    <textarea {...register("titleEn")} className="form-control" placeholder="Nazwa po angielsku" required></textarea>
                 </Field>
                 <Field label="Kolor">
-                    <input type="color" {...register("color")} className="form-control" placeholder="Kolor" />
+                    <input type="color" {...register("color")} className="form-control" placeholder="Kolor" required />
                 </Field>
                 <Field label="Ikona">
-                    <input type="text" {...register("icon")} className="form-control" placeholder="Ikona" />
+                    <input type="text" {...register("icon")} className="form-control" placeholder="Ikona" required />
                 </Field>
                 <input type="submit" value="Dodaj kategorię" className="button button-grey" />
             </form>

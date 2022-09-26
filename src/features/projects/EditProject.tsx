@@ -53,6 +53,7 @@ const EditProject: React.FC = () => {
             {...register("title")}
             placeholder="Nazwa"
             className="form-control"
+            required
           />
         </Field>
         <Field label="Opis">
@@ -60,6 +61,7 @@ const EditProject: React.FC = () => {
             {...register("description")}
             placeholder="Opis"
             className="form-control"
+            required
           />
         </Field>
         <Field label="Opis po angielsku">
@@ -67,6 +69,7 @@ const EditProject: React.FC = () => {
             {...register("en")}
             placeholder="Opis"
             className="form-control"
+            required
           />
         </Field>
         <Field label="Status">
@@ -75,6 +78,7 @@ const EditProject: React.FC = () => {
             {...register("status")}
             placeholder="Status"
             className="form-control"
+            required
           />
         </Field>
         <Field label="Status po angielsku">
@@ -83,6 +87,7 @@ const EditProject: React.FC = () => {
             {...register("statusEn")}
             placeholder="Angielski status"
             className="form-control"
+            required
           />
         </Field>
         <Field label="Link">
@@ -91,10 +96,11 @@ const EditProject: React.FC = () => {
             {...register("link")}
             placeholder="Link"
             className="form-control"
+            required
           />
         </Field>
         <Field label="Kategorie">
-          <select {...register("categories")} className="form-select" multiple>
+          <select {...register("categories")} className="form-select" multiple required>
             {categories?.map((category) => (
               <option
                 value={category._id}

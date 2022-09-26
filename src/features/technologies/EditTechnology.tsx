@@ -45,6 +45,7 @@ const EditTechnology: React.FC = () => {
             {...register("icon")}
             className="form-control"
             placeholder="Klasa ikony"
+            required
           />
         </Field>
         <Field label="Nazwa technologii">
@@ -53,6 +54,7 @@ const EditTechnology: React.FC = () => {
             {...register("name")}
             className="form-control"
             placeholder="Nazwa technologii"
+            required
           />
         </Field>
         <input

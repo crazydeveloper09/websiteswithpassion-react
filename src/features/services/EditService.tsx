@@ -51,6 +51,7 @@ const EditService: React.FC = () => {
             {...register("icon")}
             placeholder="Ikona"
             className="form-control"
+            required
           />
         </Field>
         <Field label="Nazwa">
@@ -59,6 +60,7 @@ const EditService: React.FC = () => {
             {...register("title")}
             placeholder="Nazwa"
             className="form-control"
+            required
           />
         </Field>
         <Field label="Nazwa po angielsku">
@@ -67,6 +69,7 @@ const EditService: React.FC = () => {
             {...register("titleEn")}
             placeholder="Nazwa po angielsku"
             className="form-control"
+            required
           />
         </Field>
         <Field label="Opis">
@@ -75,6 +78,7 @@ const EditService: React.FC = () => {
             {...register("description")}
             placeholder="Opis"
             className="form-control"
+            required
           />
         </Field>
         <Field label="Opis po angielsku">
@@ -83,6 +87,7 @@ const EditService: React.FC = () => {
             {...register("descriptionEn")}
             placeholder="Opis po angielsku"
             className="form-control"
+            required
           />
         </Field>
         <input

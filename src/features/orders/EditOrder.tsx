@@ -48,23 +48,29 @@ const EditOrder: React.FC = () => {
             {hasError && <p className="error">{errMessage}</p>}
             <form onSubmit={handleSubmit(onEditOrder)}>
             <Field label="Nazwa strony">
-                    <input type="text" {...register("websiteTitle", { value: selectedOrder?.websiteTitle })} className="form-control" placeholder="Nazwa strony" />
+                    <input type="text" {...register("websiteTitle", { value: selectedOrder?.websiteTitle })} className="form-control" placeholder="Nazwa strony" required />
                 </Field>
                 { (selectedOrder?.type === "Aktualizacja" || selectedOrder?.type === "update") && <Field label="Link do aktualnej wersji">
-                    <input type="text" {...register("previousWebsite", { value: selectedOrder?.previousWebsite })} className="form-control" placeholder="Link do aktualnej wersji" />
+                    <input type="text" {...register("previousWebsite", { value: selectedOrder?.previousWebsite })} className="form-control" placeholder="Link do aktualnej wersji" required />
                 </Field>}
                 
                 <Field label="Czego oczekujesz po stronie">
-                    <textarea {...register("whatYouWish", { value: selectedOrder?.whatYouWish })} className="form-control" placeholder="Czego oczekujesz"></textarea>
+                    <textarea {...register("whatYouWish", { value: selectedOrder?.whatYouWish })} className="form-control" placeholder="Czego oczekujesz" required></textarea>
                 </Field>
                 <Field label="Status">
-                    <input type="text" {...register("status", { value: selectedOrder?.status })} className="form-control" placeholder="Maksymalny budżet" />
+                    <input type="text" {...register("status", { value: selectedOrder?.status })} className="form-control" placeholder="Maksymalny budżet" required />
+                </Field>
+                <Field label="Status po angielsku">
+                    <input type="text" {...register("statusEn", { value: selectedOrder?.statusEn })} className="form-control" placeholder="Maksymalny budżet" required />
+                </Field>
+                <Field label="Link do Rocka">
+                    <input type="text" {...register("rockLink", { value: selectedOrder?.rockLink })} className="form-control" placeholder="Maksymalny budżet" required />
                 </Field>
                 <Field label="Imię i nazwisko">
-                    <input type="text" {...register("name", { value: selectedOrder?.name })} className="form-control" placeholder="Imię i nazwisko" />
+                    <input type="text" {...register("name", { value: selectedOrder?.name })} className="form-control" placeholder="Imię i nazwisko" required />
                 </Field>
                 <Field label="Email kontaktowy">
-                    <input type="email" {...register("email", { value: selectedOrder?.email })} className="form-control" placeholder="Email kontaktowy" />
+                    <input type="email" {...register("email", { value: selectedOrder?.email })} className="form-control" placeholder="Email kontaktowy" required />
                 </Field>
                 <input type="submit" value="Edytuj zamówienie" className="button button-grey" />
             </form>

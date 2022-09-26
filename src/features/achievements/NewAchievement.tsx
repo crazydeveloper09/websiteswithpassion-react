@@ -30,10 +30,10 @@ const NewAchievement: React.FC = () => {
             {hasError && <p className="error">{errMessage}</p>}
             <form onSubmit={handleSubmit(onAddAchievement)} encType="multipart/form-data">
                 <Field label="Nazwa">
-                    <input type="text" {...register("title")} placeholder="Nazwa" className="form-control" />
+                    <input type="text" {...register("title")} placeholder="Nazwa" className="form-control" required />
                 </Field>
                 <Field label="Nazwa po angielsku">
-                    <input type="text" {...register("titleEn")} placeholder="Nazwa po angielsku" className="form-control" />
+                    <input type="text" {...register("titleEn")} placeholder="Nazwa po angielsku" className="form-control" required />
                 </Field>
                 <Field label="Zdjęcie główne">
                     <input type="file" {...register("picture")} className="form-control" />

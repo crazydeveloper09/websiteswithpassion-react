@@ -25,10 +25,10 @@ const NewTechnology: React.FC = () => {
             {hasError && <p className="error">{errMessage}</p>}
             <form onSubmit={handleSubmit(onAddTechnology)}>
                 <Field label="Klasa ikony">
-                    <input type="text" {...register("icon")} className="form-control" placeholder="Klasa ikony" />
+                    <input type="text" {...register("icon")} className="form-control" placeholder="Klasa ikony" required />
                 </Field>
                 <Field label="Nazwa technologii">
-                    <input type="text" {...register("name")} className="form-control" placeholder="Nazwa technologii" />
+                    <input type="text" {...register("name")} className="form-control" placeholder="Nazwa technologii" required />
                 </Field>
                 <input type="submit" value="Dodaj technologię" className="button button-grey" />
             </form>

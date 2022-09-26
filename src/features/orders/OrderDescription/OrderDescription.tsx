@@ -20,7 +20,7 @@ const OrderDescription: React.FC = () => {
       {success && (
         <Alert
           type={ALERT_TYPES.SUCCESS}
-          message="Zamówienie zostało wysłane pomyślnie"
+          message={t("Zamówienie zostało wysłane pomyślnie")}
         />
       )}
       <h2>{t("Szukasz kogoś do napisania strony?")}</h2>

@@ -34,10 +34,10 @@ const EditAnnouncement: React.FC = () => {
             {hasError && <p className="error">{errMessage}</p>}
             <form onSubmit={handleSubmit(onEditAnnouncement)}>
                 <Field label="Tekst po polsku">
-                    <textarea {...register("pl")} className="form-control" placeholder="Tekst po polsku"></textarea>
+                    <textarea {...register("pl")} className="form-control" placeholder="Tekst po polsku" required></textarea>
                 </Field>
                 <Field label="Tekst po angielsku">
-                    <textarea {...register("en")} className="form-control" placeholder="Tekst po angielsku"></textarea>
+                    <textarea {...register("en")} className="form-control" placeholder="Tekst po angielsku" required></textarea>
                 </Field>
                 <input type="submit" value="Edytuj ogłoszenie" className="button button-grey" />
             </form>
