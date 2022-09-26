@@ -9,9 +9,9 @@ export interface Order {
     statusEn: string,
     previousWebsite: string,
     type: string,
+    phone: string,
     websiteTitle: string,
     orderDate: Date,
-    budget: number,
     isSent: boolean,
     rockLink: string | "https://space.new/websiteswithpassion",
 }
@@ -24,6 +24,7 @@ const orderSchema = new mongoose.Schema<Order>({
     statusEn: String,
     previousWebsite: String,
     type: String,
+    phone: String,
     isSent: Boolean,
     websiteTitle: String,
     orderDate: {
@@ -33,8 +34,7 @@ const orderSchema = new mongoose.Schema<Order>({
     rockLink: {
         type: String,
         default: 'https://space.new/websiteswithpassion'
-    },
-    budget: Number
+    }
 });
 
 export default mongoose.model<Order>("Order", orderSchema)

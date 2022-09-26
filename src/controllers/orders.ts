@@ -56,8 +56,8 @@ export const createOrder: RequestHandler<unknown, unknown, Order> = (
     status: "Zamówienie wysłane do mnie",
     statusEn: "Order has been sent to me",
     type: req.body.type,
-    websiteTitle: req.body.websiteTitle,
-    budget: req.body.budget,
+    phone: req.body.phone,
+    websiteTitle: req.body.websiteTitle
   });
   OrderModel.create(newOrder)
     .then((createdOrder) => {

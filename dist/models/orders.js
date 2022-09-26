@@ -12,6 +12,7 @@ const orderSchema = new mongoose_1.default.Schema({
     statusEn: String,
     previousWebsite: String,
     type: String,
+    phone: String,
     isSent: Boolean,
     websiteTitle: String,
     orderDate: {
@@ -21,7 +22,6 @@ const orderSchema = new mongoose_1.default.Schema({
     rockLink: {
         type: String,
         default: 'https://space.new/websiteswithpassion'
-    },
-    budget: Number
+    }
 });
 exports.default = mongoose_1.default.model("Order", orderSchema);

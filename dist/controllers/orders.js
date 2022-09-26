@@ -45,8 +45,8 @@ const createOrder = (req, res, next) => {
         status: "Zamówienie wysłane do mnie",
         statusEn: "Order has been sent to me",
         type: req.body.type,
-        websiteTitle: req.body.websiteTitle,
-        budget: req.body.budget,
+        phone: req.body.phone,
+        websiteTitle: req.body.websiteTitle
     });
     orders_1.default.create(newOrder)
         .then((createdOrder) => {
