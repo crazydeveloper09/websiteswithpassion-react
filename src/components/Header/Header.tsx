@@ -9,7 +9,7 @@ const Header: React.FC = () => {
         <header className="header">
             <div className="header__info">
                 <h1>{t('Witaj na moim portfolio!')}</h1>
-                <p>Maciej Kuta, Junior UI Engineer</p>
+                <p>Maciej Kuta, UI Engineer</p>
                 <div className="header__links">
                     <a href="#whatIdo" className="button button-black">
                         {t('O mnie')}
