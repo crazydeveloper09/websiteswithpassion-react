@@ -32,7 +32,19 @@ app.use(express.json())
 app.use(helmet({
     crossOriginResourcePolicy: false
 }))
-app.use(cors({ origin: 'https://www.websiteswithpassion.pl', credentials: true }));
+
+const whitelist = ['http://localhost:3000', 'https://www.websiteswithpassion.pl', 'https://silly-wiles-dbbbf9.netlify.app']
+const corsOptions = {
+    origin: function (origin: any, callback: any) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    },
+    credentials: true
+}
+app.use(cors(corsOptions));
 i18n.configure({
     locales: ["en", "de", "pl"],
    	register: global,

@@ -32,7 +32,19 @@ app.use(express_1.default.json());
 app.use((0, helmet_1.default)({
     crossOriginResourcePolicy: false
 }));
-app.use((0, cors_1.default)({ origin: 'https://www.websiteswithpassion.pl', credentials: true }));
+const whitelist = ['http://localhost:3000', 'https://www.websiteswithpassion.pl', 'https://silly-wiles-dbbbf9.netlify.app'];
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+};
+app.use((0, cors_1.default)(corsOptions));
 i18n_1.default.configure({
     locales: ["en", "de", "pl"],
     register: global,
