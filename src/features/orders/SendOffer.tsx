@@ -12,7 +12,8 @@ import { loadOrders, selectAllOrders, sendOffer } from "./ordersSlice";
 
 export interface SendO {
     topic: string,
-    text: string
+    text: string,
+    orderID: string,
 }
 
 const SendOffer: React.FC = () => {
@@ -24,7 +25,7 @@ const SendOffer: React.FC = () => {
 
     const onSendOffer: SubmitHandler<SendO> = (data) => {
       
-        dispatch(sendOffer(data))
+        dispatch(sendOffer({...data, orderID: selectedOrder!._id}))
         navigate("/website-orders")
           
     }

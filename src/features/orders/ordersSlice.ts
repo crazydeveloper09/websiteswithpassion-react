@@ -84,7 +84,7 @@ export const sendOffer = createAsyncThunk(
   async (message: SendO, thunkAPI) => {
     try {
       const addedOrder = await axios.post(
-        `${API_URL}/website-orders/send`,
+        `${API_URL}/website-orders/${message.orderID}/send`,
         message,
         { withCredentials: true }
       );

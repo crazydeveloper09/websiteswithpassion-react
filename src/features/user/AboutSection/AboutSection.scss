@@ -2,4 +2,10 @@
 
 .about {
     @include section_padding();
+
+    &__link {
+        background: -webkit-linear-gradient(#eee, #333);
+        -webkit-background-clip: text;
+        
+    }
 }
