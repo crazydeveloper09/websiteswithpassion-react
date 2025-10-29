@@ -35,7 +35,7 @@ app.use((0, helmet_1.default)({
 const whitelist = ['http://localhost:3000', 'https://www.websiteswithpassion.pl', 'https://silly-wiles-dbbbf9.netlify.app'];
 const corsOptions = {
     origin: function (origin, callback) {
-        console.log(origin);
+        console.log(whitelist.indexOf(origin));
         if (whitelist.indexOf(origin) !== -1) {
             callback(null, true);
         }
