@@ -32,7 +32,7 @@ app.use(express_1.default.json());
 app.use((0, helmet_1.default)({
     crossOriginResourcePolicy: false
 }));
-const whitelist = ['http://localhost:3000', 'https://www.websiteswithpassion.pl', 'https://silly-wiles-dbbbf9.netlify.app'];
+const whitelist = ['http://localhost:3000', 'https://www.websiteswithpassion.pl', 'https://silly-wiles-dbbbf9.netlify.app', 'https://wwp-api-production.up.railway.app'];
 const corsOptions = {
     origin: function (origin, callback) {
         console.log(whitelist.indexOf(origin));
