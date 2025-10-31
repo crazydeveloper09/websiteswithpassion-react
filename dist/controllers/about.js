@@ -10,7 +10,10 @@ const getUserInfo = (req, res, next) => {
     user_1.default.findOne({ username: admin_username })
         .populate("achievements")
         .exec()
-        .then((user) => res.json(user))
+        .then((user) => {
+            console.log(user);
+            res.json(user)
+        })
         .catch((err) => res.json(err));
 };
 exports.getUserInfo = getUserInfo;
