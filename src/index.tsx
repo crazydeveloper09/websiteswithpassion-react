@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 
 
-export const API_URL = 'https://api.websiteswithpassion.pl';
+export const API_URL = 'https://wwp-api-production.up.railway.app';
 
 export const USER_ID = '62288ade73a4284c9e93cea9';
 
