@@ -29,6 +29,7 @@ const AboutSection: React.FC = () => {
   if (hasError) {
     return <Error message={errMessage!} />;
   }
+  console.log(user)
   return (
     <section className="about">
       <SectionHeader>Poznaj mnie bliżej</SectionHeader>
