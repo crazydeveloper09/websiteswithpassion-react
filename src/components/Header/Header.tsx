@@ -11,13 +11,13 @@ const Header: React.FC = () => {
                 <h1>{t('Witaj na moim portfolio!')}</h1>
                 <p>Maciej Kuta, UI Engineer</p>
                 <div className="header__links">
-                    <a href="#whatIdo" className="button button-black">
+                    <a href="#whatIdo" className="button button-grey">
                         {t('O mnie')}
                     </a>
-                    <Link to={'/projects'} className="button button-black margin">
+                    <Link to={'/projects'} className="button button-grey margin">
                         {t('Projekty')}
                     </Link>
-                    <Link to={'/website-orders/description'} className="button button-black margin">
+                    <Link to={'/website-orders/description'} className="button button-grey margin">
                         {t('Oferta')}
                     </Link>
                 </div>
